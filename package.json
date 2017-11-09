@@ -1,0 +1,26 @@
+{
+  "name": "dextrose",
+  "version": "1.0.0",
+  "main": "setup.dextrose.js",
+  "author": "NewsUk",
+  "license": "MIT",
+  "scripts": {
+    "android": "react-native run-android",
+    "babel": "babel src --out-dir lib"
+  },
+  "dependencies": {
+    "@times-components/fructose": "2.2.15",
+    "babel-core": "6.26.0",
+    "babel-preset-react-native": "4.0.0",
+    "react": "16.0.0-alpha.6",
+    "react-native": "0.44.1",
+    "socket.io": "^2.0.4",
+    "socket.io-client": "^2.0.4",
+    "wd": "1.4.1"
+  },
+  "devDependencies": {
+    "express": "^4.16.2",
+    "http": "^0.0.0",
+    "jest": "^21.2.1"
+  }
+}
