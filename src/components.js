@@ -6,7 +6,7 @@
 
 function loadStories() {
   
-  require('./componentsToLoad.js').default;
+  require('./componentsToLoad.js');
   
 }
 

@@ -1,12 +1,9 @@
-import {
-    spawn
-} from "child_process";
+
 import Snapper from "./snapshots/snapper";
 import path from "path";
 import wd from "wd";
 import fructose from "@times-components/fructose/setup";
-import React from "react";
-import { StyleSheet, Text } from "react-native";
+import dextroseClient from "./client/index"
 
 const setUpAppium = async() => {
     const driver = wd.promiseChainRemote({
@@ -42,6 +39,7 @@ const setUpAppium = async() => {
 export default async (platform) => {
     await fructose.hooks.mobile.setup();
     await setUpAppium();
+    const client = dextroseClient(7811)
     const snapper = new Snapper(platform);
 }
 

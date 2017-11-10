@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "android": "react-native run-android",
-    "babel": "babel src --out-dir lib"
+    "prepare": "babel src --out-dir lib"
   },
   "dependencies": {
     "@times-components/fructose": "2.2.15",
