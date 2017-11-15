@@ -1,21 +1,10 @@
-# !/bin/bash
+LOCAL=true npx fructose-tunnel
 emulator @Nexus_5X_API_25 -no-boot-anim &
 EMU_PID=$!
 adb wait-for-device
-yarn android
-
-echo "Setting up socket connections..."
-echo "...Packager"
 adb reverse tcp:8081 tcp:8081
-
-echo "...Websocket Server"
 adb reverse tcp:7811 tcp:7811
+adb reverse tcp:4723 tcp:4723
 
-appium &
-APPIUM_PID=$!
-
-# LOGLEVEL=verbose node .lib/setup.dextrose.js
-
-# kill -9 $APPIUM_PID
-# kill -9 $EMU_PID
-
+react-native run-android --no-packager
+LOGLEVEL=verbose NODE_ENV=LOCAL  node ./lib/setup.dextrose.js

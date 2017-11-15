@@ -9,9 +9,10 @@
     "prepare": "babel src --out-dir lib"
   },
   "dependencies": {
-    "@times-components/fructose": "2.2.15",
+    "@times-components/fructose": "../fructose",
     "babel-core": "6.26.0",
     "babel-preset-react-native": "4.0.0",
+    "npmlog": "4.1.2",
     "react": "16.0.0-alpha.6",
     "react-native": "0.44.1",
     "socket.io": "^2.0.4",

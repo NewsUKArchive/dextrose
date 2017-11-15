@@ -1,9 +1,10 @@
 
-import Snapper from "./snapshots/snapper";
+import Snapper from "./snapper";
 import path from "path";
 import wd from "wd";
 import fructose from "@times-components/fructose/setup";
 import dextroseClient from "./client/index"
+import log from "./logger"
 
 const setUpAppium = async() => {
     const driver = wd.promiseChainRemote({
@@ -28,20 +29,29 @@ const setUpAppium = async() => {
       };
       global.driver = driver;
       await driver.init(options.desiredCapabilities).setImplicitWaitTimeout(300000);
-
-      await global.driver.waitForElementsByXPath(
+      global.asserter = wd.asserters;
+      return global.driver.waitForElementsByXPath(
         '//*[@text="Fructose"]',
         global.asserter.isDisplayed,
         1800000
       );
 }
 
-export default async (platform) => {
-    await fructose.hooks.mobile.setup();
-    await setUpAppium();
-    const client = dextroseClient(7811)
-    const snapper = new Snapper(platform);
+const setup = async () => {
+  await fructose.hooks.mobile.setup()
+  const client = dextroseClient(7811)
+  await setUpAppium();
+  const snapper = new Snapper("android");
+  const componentsLoaded = await client.getLoadedComponents();
+  log.info('setup', componentsLoaded)
+  componentsLoaded.map( async (component) => {
+    await client.loadComponent(component);
+    snapper.snap(__dirname + component);
+  })
 }
+
+setup();
+
 
 
 
