@@ -37,6 +37,7 @@ const setUpAppium = async() => {
       );
 }
 
+
 const setup = async () => {
   await fructose.hooks.mobile.setup()
   const client = dextroseClient(7811)
@@ -44,10 +45,11 @@ const setup = async () => {
   const snapper = new Snapper("android");
   const componentsLoaded = await client.getLoadedComponents();
   log.info('setup', componentsLoaded)
-  componentsLoaded.map( async (component) => {
-    await client.loadComponent(component);
-    snapper.snap(__dirname + component);
-  })
+
+  for( let i = 0; i < componentsLoaded.length; i++ ) {
+    await client.loadComponent(componentsLoaded[i]);
+    await snapper.snap(__dirname + componentsLoaded[i]);
+  }
 }
 
 setup();

@@ -9,7 +9,7 @@ withComponent(
 )
 
 withComponent(
-    <Hello1 fructoseID="helloWorld1"> </Hello1>,
+    <Hello1 fructoseID="bounitful"> </Hello1>,
     "description",
     () => {}
 )
