@@ -9,40 +9,24 @@ let deviceName;
 let app;
 
 
-export default async () => {
+export default async (config) => {
+    if (!config) {
+        throw new Error(`expected appium config but got: ${config}`)
+    }
+    
     const driver = wd.promiseChainRemote({
         host,
         port
     });
 
-    if (process.env.DEVICETYPE === "android") {
-        platformName = "Android";
-        platformVersion = "7.1.1";
-        deviceName = "Android Emulator";
-        app = path.join(
-            __dirname,
-            "../e2eTests/android/app/build/outputs/apk/app-debug.apk"
-        )
-    } else if (process.env.DEVICETYPE === "ios") {
-        platformName = "Ios";
-        platformVersion = "7.1.1";
-        deviceName = "Android Emulator";
-        app = path.join(
-            __dirname,
-            "."
-        )
-    } else {
-        throw new Error('please set DEVICETYPE env variable')
-    }
-
     const options = {
         desiredCapabilities: {
             autoGrantPermissions: true,
             browserName: "",
-            platformName,
-            platformVersion,
-            deviceName,
-            app
+            platformName: config.platformName,
+            platformVersion: config.platformVersion,
+            deviceName: config.deviceName,
+            app: config.app
         },
         host,
         port

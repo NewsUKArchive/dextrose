@@ -19,7 +19,7 @@ module.exports = class Snapper {
     }
 
     return new Promise (resolve => {
-      const outputPathWithExtension = `/${outputPath}.${this.platform}.png`
+      const outputPathWithExtension = `${outputPath}.${this.platform}.png`
       log.verbose('snapper', `taking snapshot at path: ${outputPathWithExtension}`)
       execSync(`npx osnap ${this.platform} -f ${outputPathWithExtension}`);
       resolve();
