@@ -1,5 +1,5 @@
 import Hello from "./helloWorldComponent";
-import Hello1 from "./helloWorldComponent1";
+import Hello1 from "./goodbyeWorldComponent";
 import React from "react";
 
 withComponent(
@@ -9,7 +9,7 @@ withComponent(
 )
 
 withComponent(
-    <Hello1 fructoseID="bounitful"> </Hello1>,
+    <Hello1 fructoseID="goodbyeWorld"> </Hello1>,
     "description",
     () => {}
 )

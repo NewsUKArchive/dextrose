@@ -5,9 +5,12 @@ import log from "./logger"
 import setUpAppium from "./setup.appium"
 
 
-export default setup = async () => {
+export default setup = async() => {
+  if (process.env.DEVICETYPE ==="ios" | process.env.DEVICETYPE === "android") {
     await fructose.hooks.mobile.setup()
-    const client = dextroseClient(7811)
-    await setUpAppium();
-    return client;
+  }
+  
+  await setUpAppium();
+  const client = dextroseClient(7811)
+  return client;
 }
