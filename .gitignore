@@ -40,28 +40,10 @@ node_modules/
 npm-debug.log
 yarn-error.log
 
-# BUCK
-buck-out/
-\.buckd/
-
-# fastlane
-#
-# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
-# screenshots whenever they are needed.
-# For more information about the recommended setup visit:
-# https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Gitignore.md
-
-fastlane/report.xml
-fastlane/Preview.html
-fastlane/screenshots
-
 #coverage
 **/coverage
 .nyc_output/**
 sandbox 
 
 # babeled stuff
-packages/test-helpers/lib/**
-
-# ejs template
-packages/web/templates/**
+lib/

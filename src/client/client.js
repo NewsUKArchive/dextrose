@@ -11,7 +11,7 @@ class DextroseClient {
                 resolve(componentList)
             });
 
-            log.info('Dextrose Client', 'emitting get app components');
+            log.verbose('Dextrose Client', 'emitting get app components');
             this.socket.emit('getAppComponents');
         });
     }
