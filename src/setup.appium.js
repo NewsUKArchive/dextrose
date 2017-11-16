@@ -21,7 +21,7 @@ export default async () => {
         deviceName = "Android Emulator";
         app = path.join(
             __dirname,
-            "../android/app/build/outputs/apk/app-debug.apk"
+            "../e2eTests/android/app/build/outputs/apk/app-debug.apk"
         )
     } else if (process.env.DEVICETYPE === "ios") {
         platformName = "Ios";
@@ -29,7 +29,7 @@ export default async () => {
         deviceName = "Android Emulator";
         app = path.join(
             __dirname,
-            "../android/app/build/outputs/apk/app-debug.apk"
+            "."
         )
     } else {
         throw new Error('please set DEVICETYPE env variable')

@@ -2,9 +2,9 @@ import setupDextrose from "./setup.dextrose";
 import snapBatcher from "./snapBatcher";
 import path from "path";
 
-const outputFolder = path.join(__dirname, "../output/")
+export default async (snapPath) => {
+    const dextrose = await setupDextrose();
+    await snapBatcher(dextrose, snapPath);
 
-setupDextrose()
-    .then(async dextrose => {
-        await snapBatcher(dextrose, outputFolder)
-    })
+    //tear down
+}

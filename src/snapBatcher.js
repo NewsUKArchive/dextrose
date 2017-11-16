@@ -7,7 +7,7 @@ export default async (client, outputPath) => {
 
     for (let i = 0; i < componentsLoaded.length; i++) {
       await client.loadComponent(componentsLoaded[i]);
-      await snapper.snap(`${outputPath}${componentsLoaded[i]}`);
+      await snapper.snap(`${outputPath}/${componentsLoaded[i]}`);
       log.info('snapBatcher', `Snapped component: ${componentsLoaded[i]}`)
     }
 }

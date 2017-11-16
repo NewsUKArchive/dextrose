@@ -1,11 +1,10 @@
 {
   "name": "dextrose",
   "version": "1.0.0",
-  "main": "setup.dextrose.js",
+  "main": "index.js",
   "author": "NewsUk",
   "license": "MIT",
   "scripts": {
-    "android": "react-native run-android",
     "prepare": "babel src --out-dir lib"
   },
   "dependencies": {
