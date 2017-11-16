@@ -12,7 +12,7 @@ describe('snapper', () => {
         expect(snapper.platform).toMatch(platform);
     })
 
-    it("snaps", async () => {
+    it("snaps android", async () => {
         const outpath = `${__dirname}-test`;
         const deviceType = 'android'
         const snapper = new Snapper(deviceType);
@@ -20,6 +20,18 @@ describe('snapper', () => {
         await snapper.snap(outpath);
 
         expect(execSync.mock.calls[0]).toEqual(
+            [`npx osnap ${deviceType} -f ${outpath}.png`]
+        );
+    });
+
+    it("snaps ios", async () => {
+        const outpath = `${__dirname}-test`;
+        const deviceType = 'ios'
+        const snapper = new Snapper(deviceType);
+
+        await snapper.snap(outpath);
+
+        expect(execSync.mock.calls[1]).toEqual(
             [`npx osnap ${deviceType} -f ${outpath}.png`]
         );
     });
