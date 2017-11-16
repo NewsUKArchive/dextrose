@@ -44,8 +44,6 @@ const setup = async () => {
   await setUpAppium();
   const snapper = new Snapper("android");
   const componentsLoaded = await client.getLoadedComponents();
-  log.info('setup', componentsLoaded)
-
   for( let i = 0; i < componentsLoaded.length; i++ ) {
     await client.loadComponent(componentsLoaded[i]);
     await snapper.snap(__dirname + componentsLoaded[i]);

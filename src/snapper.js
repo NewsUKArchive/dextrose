@@ -7,19 +7,20 @@ module.exports = class Snapper {
 
   setPlatform(platform) {
     if (!(platform === "ios" || platform === "android")) {
-      throw Error(`platform ${platform} is not either ios or android`);
+      throw Error(`platform ${platform} is not either 'ios' or 'android'`);
     }
     this.platform = platform;
   }
 
-  snap(outpath) {
-    return new Promise (resolve => {
-      if (typeof outpath !== "string") {
-        throw Error("path must be string");
-      }
-      const outpathWithExtension = `${outpath}.png`
+  snap(outputPath) {
+    if (typeof outputPath !== 'string') {
+      throw Error(`Output path should be a string recieved: ${outputPath}`);
+    }
 
-      execSync(`npx osnap ${this.platform} -f ${outpathWithExtension}`);
+    return new Promise (resolve => {
+      const outputPathWithExtension = `${outputPath}.png`
+
+      execSync(`npx osnap ${this.platform} -f ${outputPathWithExtension}`);
       resolve();
       });
     }
