@@ -42,9 +42,4 @@ describe('snapper', () => {
         const snapper = new Snapper(deviceType);
         expect(() => snapper.snap(outpath)).toThrow();
     })
-
-    it("throws if platform is not ios or android", () => {
-        const platform = "rubbish";
-        expect(() => new Snapper(platform)).toThrow();
-    })
 })

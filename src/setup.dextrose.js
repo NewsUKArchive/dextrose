@@ -7,10 +7,7 @@ import setUpAppium from "./setup.appium"
 let client;
 
 const setupMobile = async (config) => {
-  if (process.env.DEVICETYPE === "ios" | process.env.DEVICETYPE === "android") {
-    await fructose.hooks.mobile.setup()
-  }
-
+  await fructose.hooks.mobile.setup()
   await setUpAppium(config);
   client = dextroseClient(7811)
   return client;
