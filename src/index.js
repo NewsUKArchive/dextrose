@@ -1,10 +1,12 @@
-import setupDextrose from "./setup.dextrose";
+import { setup, tearDown } from "./setup.dextrose";
 import snapBatcher from "./snapBatcher";
 import path from "path";
+import log from "./logger";
 
 export default async (config) => {
-    const dextrose = await setupDextrose(config);
+    const dextrose = await setup(config);
     await snapBatcher(dextrose, config.snapPath);
-
-    //tear down
+    log.info('Dextrose Index', 'All components snapped 🤙')
+    
+    tearDown();
 }
