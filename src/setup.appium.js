@@ -13,7 +13,7 @@ export default async (config) => {
     if (!config) {
         throw new Error(`expected appium config but got: ${config}`)
     }
-    
+
     const driver = wd.promiseChainRemote({
         host,
         port
@@ -26,7 +26,8 @@ export default async (config) => {
             platformName: config.platformName,
             platformVersion: config.platformVersion,
             deviceName: config.deviceName,
-            app: config.app
+            app: config.app,
+            automationName:  config.automationName || null
         },
         host,
         port
@@ -35,8 +36,9 @@ export default async (config) => {
     global.driver = driver;
     await driver.init(options.desiredCapabilities).setImplicitWaitTimeout(300000);
     global.asserter = wd.asserters;
-    return global.driver.waitForElementsByXPath(
-        '//*[@text="Fructose"]',
+    return global.driver.waitForElementsByAccessibilityId(
+       // '//*[@text="Fructose"]',
+       'fructose',
         global.asserter.isDisplayed,
         1800000
     );
