@@ -6,7 +6,7 @@ import setUpAppium from "./setup.appium"
 
 let client;
 
-const setup = async (config) => {
+const setupMobile = async (config) => {
   if (process.env.DEVICETYPE === "ios" | process.env.DEVICETYPE === "android") {
     await fructose.hooks.mobile.setup()
   }
@@ -25,4 +25,6 @@ const tearDown = async () => {
 
 }
 
-export { setup, tearDown }
+export { setupMobile, tearDown }
+
+//await fructose.hooks.web.setup(3000, 60000);

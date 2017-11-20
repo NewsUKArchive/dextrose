@@ -1,16 +1,11 @@
 import log from "./logger";
-const { execSync } = require("child_process");
+const {
+  execSync
+} = require("child_process");
 
 module.exports = class Snapper {
   constructor(platform) {
-    this.setPlatform(platform);
-  }
-
-  setPlatform(platform) {
-    if (!(platform === "ios" || platform === "android")) {
-      throw Error(`platform ${platform} is not either 'ios' or 'android'`);
-    }
-    this.platform = platform;
+    this.platform = platform.toLowerCase();
   }
 
   snap(outputPath) {
@@ -18,11 +13,11 @@ module.exports = class Snapper {
       throw Error(`Output path should be a string recieved: ${outputPath}`);
     }
 
-    return new Promise (resolve => {
+    return new Promise(resolve => {
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`
       log.verbose('snapper', `taking snapshot at path: ${outputPathWithExtension}`)
       execSync(`npx osnap ${this.platform} -f ${outputPathWithExtension}`);
       resolve();
-      });
-    }
+    });
+  }
 };
