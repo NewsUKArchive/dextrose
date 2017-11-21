@@ -8,7 +8,7 @@ let platformVersion;
 let deviceName;
 let app;
 
-
+//TODO: proper handling of errors with reject
 export default async(config) => {
     if (!config) {
         throw new Error(`expected appium config but got: ${config}`)
@@ -37,13 +37,13 @@ export default async(config) => {
     await driver.init(options.desiredCapabilities).setImplicitWaitTimeout(300000);
     global.asserter = wd.asserters;
 
-    if (config.platformName.toLowerCase() === "ios") {
+    if (process.env.DEVICETYPE === "ios") {
         return global.driver.waitForElementsByAccessibilityId(
             'fructose',
             global.asserter.isDisplayed,
             1800000
         );
-    } else if (config.platformName.toLowerCase() === "android") {
+    } else if (process.env.DEVICETYPE === "android") {
         return global.driver.waitForElementsByXPath(
             '//*[@text="Fructose"]',
             global.asserter.isDisplayed,

@@ -7,4 +7,6 @@ adb reverse tcp:7811 tcp:7811
 adb reverse tcp:4723 tcp:4723
 
 # react-native run-android --no-packager
+# LOGLEVEL=verbose node run-dextrose.android.js
+
 LOGLEVEL=verbose DEVICETYPE=android node run-dextrose.android.js

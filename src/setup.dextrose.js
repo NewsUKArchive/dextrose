@@ -13,6 +13,13 @@ const setupMobile = async (config) => {
   return client;
 }
 
+const setupWeb = async (config) => {
+  await fructose.hooks.web.setup(3000, 60000);
+  await setUpAppium(config);
+  client = dextroseClient(7811)
+  return client;
+}
+
 const tearDown = async () => {
   client.disconnect()
   log.verbose('Dextrose', 'torn down client')
@@ -22,6 +29,4 @@ const tearDown = async () => {
 
 }
 
-export { setupMobile, tearDown }
-
-//await fructose.hooks.web.setup(3000, 60000);
+export { setupMobile, tearDown, setupWeb }
