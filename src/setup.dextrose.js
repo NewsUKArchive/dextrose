@@ -13,9 +13,8 @@ const setupMobile = async (config) => {
   return client;
 }
 
-const setupWeb = async (config) => {
+const setupWeb = async () => {
   await fructose.hooks.web.setup(3000, 60000);
-  await setUpAppium(config);
   client = dextroseClient(7811)
   return client;
 }

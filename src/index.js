@@ -23,25 +23,22 @@ export default async(config) => {
     console.log(process.env.DEVICETYPE)
     console.log(process.env.NATIVE)
 
+
     if (process.env.NATIVE) {
         log.info('Dextrose Index', 'Running Native Config 📱')
         dextrose = await setupMobile(config);
 
-        snapConfig = {
-            snapPath: config.snapPath,
-            deviceType: config.platformName
-        }
-
     } else if (process.env.WEB) {
         log.info('Dextrose Index', 'Running Web Config 💻')
         //ned to build webpack and get all that jazz working 
-        dextrose = await setupWeb(config);
-        // snapConfig = {
-        //     snapPath: config.snapPath,
-        //     deviceType: config.platformName
-        // }
+        dextrose = await setupWeb();
     } else {
         throw new Error('Please set a valid platformName "Web | Android | iOS"');
+    }
+
+    snapConfig = {
+        snapPath: config.snapPath,
+        deviceType: config.platformName
     }
 
     await snapBatcher(dextrose, snapConfig);
