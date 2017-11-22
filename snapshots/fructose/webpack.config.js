@@ -4,7 +4,7 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    app: path.join(__dirname, "./index.web.js")
+    app: path.join(__dirname, "../index.web.js")
   },
   resolve: {
     alias: {
@@ -16,7 +16,7 @@ module.exports = {
       // Use the DLL in development.
       new webpack.DllReferencePlugin({
         context: __dirname,
-        manifest: require("./dist/public/vendor-manifest.json") // eslint-disable-line import/no-unresolved
+        manifest: require("../dist/public/vendor-manifest.json") // eslint-disable-line import/no-unresolved
       })
     ]
   },

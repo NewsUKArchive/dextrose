@@ -1,10 +1,10 @@
 
  
-  const dextrose = require("../index").default;
+  const dextrose = require("../../index").default;
   const path = require("path");
   
   const config = {
-      snapPath: __dirname,
+      snapPath: path.join(__dirname, '../snaps'),
       platformName: "web"
   }
 

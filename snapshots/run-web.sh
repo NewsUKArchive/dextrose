@@ -1,3 +1,7 @@
-npx webpack --config .fructose/vendor.webpack.config.js
+npx selenium-standalone install &&
+npx selenium-standalone start & 
+react-native start --reset-cache &
+npx webpack --config ./fructose/vendor.webpack.config.js
+npx fructose-web -d fructose &
 
-LOGLEVEL=verbose node ./run-dextrose.web
+LOGLEVEL=verbose node ./fructose/run-dextrose.web.js

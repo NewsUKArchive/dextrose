@@ -1,4 +1,4 @@
-import Snapper from "./snapper";
+import Snapper from "./native-snapper";
 
 jest.mock("child_process");
 

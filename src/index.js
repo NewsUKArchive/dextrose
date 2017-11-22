@@ -15,14 +15,10 @@ export default async(config) => {
     if (config.platformName.toLowerCase() === "ios" || config.platformName.toLowerCase() === "android") {
         process.env.NATIVE = true;
     } else if (config.platformName === "web") {
-        process.env.NATIVE = false;
+        process.env.WEB = true;
     }
 
     process.env.DEVICETYPE = config.platformName.toLowerCase();
-
-    console.log(process.env.DEVICETYPE)
-    console.log(process.env.NATIVE)
-
 
     if (process.env.NATIVE) {
         log.info('Dextrose Index', 'Running Native Config 📱')
@@ -30,7 +26,6 @@ export default async(config) => {
 
     } else if (process.env.WEB) {
         log.info('Dextrose Index', 'Running Web Config 💻')
-        //ned to build webpack and get all that jazz working 
         dextrose = await setupWeb();
     } else {
         throw new Error('Please set a valid platformName "Web | Android | iOS"');
@@ -41,7 +36,7 @@ export default async(config) => {
         deviceType: config.platformName
     }
 
-    await snapBatcher(dextrose, snapConfig);
+    //await snapBatcher(dextrose, snapConfig);
     log.info('Dextrose Index', 'All components snapped 🤙')
     tearDown();
 }
