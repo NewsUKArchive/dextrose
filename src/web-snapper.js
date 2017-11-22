@@ -1,8 +1,9 @@
 import log from "./logger";
 import fs from "fs";
-module.exports = class Snapper {
-    constructor(platform) {
+module.exports = class WebSnapper {
+    constructor(platform, browser) {
         this.platform = platform.toLowerCase();
+        this.browser = browser;
     }
 
     snap(outputPath) {
@@ -11,11 +12,11 @@ module.exports = class Snapper {
         }
 
         return new Promise((resolve, reject) => {
-            log.info('web-snapper')
 
             const outputPathWithExtension = `${outputPath}.${this.platform}.png`
             log.verbose('web-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
-            global.browser.takeScreenshot((err, screenshot) => {
+            log.info('web-snapper', browser)
+            this.browser.takeScreenshot((err, screenshot) => {
                 if (err) {
                     reject(err);
                 }

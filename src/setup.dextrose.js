@@ -5,19 +5,20 @@ import wd from "wd"
 import setUpAppium from "./setup.appium"
 
 let client;
+let browser;
 
 const setupMobile = async(config) => {
   await fructose.hooks.mobile.setup()
   await setUpAppium(config);
   client = dextroseClient(7811)
-  return client;
+  return { client };
 }
 
 const setupWeb = async() => {
   log.verbose('Dextrose', 'starting web')
   await fructose.hooks.web.setup(3000, 10000);
   client = dextroseClient(7811)
-  global.browser = wd.promiseChainRemote();
+  browser = wd.promiseChainRemote();
 
   await browser
     .init({
@@ -26,7 +27,7 @@ const setupWeb = async() => {
     .get("http://localhost:3000")
 
     log.verbose('Dextrose', 'Browser open')
-    return client;
+    return { client, browser };
 }
 
 const tearDownMobile = async () => {
@@ -44,7 +45,7 @@ const tearDownWeb = async () => {
   await fructose.hooks.web.cleanup();
   log.verbose('Dextrose', 'fructose server torn down')
 
-  await global.browser.quit();
+  await browser.quit();
 }
 
 export {

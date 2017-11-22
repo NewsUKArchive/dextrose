@@ -34,7 +34,7 @@ export default async(config) => {
 
     } else if (process.env.WEB) {
         log.info('Dextrose Index', 'Running Web Config 💻')
-        dextrose = await setupWeb();
+        dextrose  = await setupWeb();
         await snapBatcher(dextrose, snapConfig, tearDownWeb);
 
     } else {
