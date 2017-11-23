@@ -15,7 +15,6 @@ module.exports = class WebSnapper {
 
             const outputPathWithExtension = `${outputPath}.${this.platform}.png`
             log.verbose('web-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
-            log.info('web-snapper', browser)
             this.browser.takeScreenshot((err, screenshot) => {
                 if (err) {
                     reject(err);
