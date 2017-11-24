@@ -7,11 +7,12 @@ import {
 import snapBatcher from "./snap-batcher";
 import path from "path";
 import log from "./logger";
+import NativeSnapper from "./native-snapper"
+import WebSnapper from "./web-snapper"
 
 export default async(config) => {
 
     let dextrose;
-    let snapConfig;
 
     if (config.platformName.toLowerCase() === "ios" || config.platformName.toLowerCase() === "android") {
         process.env.NATIVE = true;
@@ -21,21 +22,17 @@ export default async(config) => {
 
     process.env.DEVICETYPE = config.platformName.toLowerCase();
 
-    snapConfig = {
-        snapPath: config.snapPath,
-        deviceType: config.platformName
-    }
-
-
     if (process.env.NATIVE) {
         log.info('Dextrose Index', 'Running Native Config 📱')
         dextrose = await setupMobile(config);
-        await snapBatcher(dextrose, snapConfig, tearDownMobile);
+        dextrose.snapper = new NativeSnapper(config.platformName)
+        await snapBatcher(dextrose, config.snapPath, tearDownMobile);
 
     } else if (process.env.WEB) {
         log.info('Dextrose Index', 'Running Web Config 💻')
         dextrose  = await setupWeb();
-        await snapBatcher(dextrose, snapConfig, tearDownWeb);
+        dextrose.snapper = new WebSnapper(config.platformName, dextrose.browser)
+        await snapBatcher(dextrose, config.snapPath, tearDownWeb);
 
     } else {
         throw new Error('Please set a valid platformName "Web | Android | iOS"');
