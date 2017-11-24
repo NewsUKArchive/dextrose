@@ -20,7 +20,7 @@ describe('snapper', () => {
         await snapper.snap(outpath);
 
         expect(execSync.mock.calls[0]).toEqual(
-            [`npx osnap ${deviceType} -f ${outpath}.png`]
+            [`npx osnap ${deviceType} -f ${outpath}.${deviceType}.png`]
         );
     });
 
@@ -32,7 +32,7 @@ describe('snapper', () => {
         await snapper.snap(outpath);
 
         expect(execSync.mock.calls[1]).toEqual(
-            [`npx osnap ${deviceType} -f ${outpath}.png`]
+            [`npx osnap ${deviceType} -f ${outpath}.${deviceType}.png`]
         );
     });
 

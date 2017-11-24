@@ -5,7 +5,8 @@
   "author": "NewsUk",
   "license": "MIT",
   "scripts": {
-    "prepare": "babel src --out-dir lib"
+    "prepare": "babel src --out-dir lib",
+    "test": "jest src"
   },
   "dependencies": {
     "@times-components/fructose": "../fructose",
