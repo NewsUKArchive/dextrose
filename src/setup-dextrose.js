@@ -2,7 +2,7 @@ import fructose from "@times-components/fructose/setup";
 import dextroseClient from "./client/index"
 import log from "./logger"
 import wd from "wd"
-import setUpAppium from "./setup.appium"
+import setUpAppium from "./setup-appium"
 
 let client;
 let browser;

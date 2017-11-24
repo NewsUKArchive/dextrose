@@ -1,4 +1,4 @@
-import { setupWeb } from "./setup.dextrose";
+import { setupWeb } from "./setup-dextrose";
 
 describe('dextrose setup', () => {
     it("starts a browser", async () => {
