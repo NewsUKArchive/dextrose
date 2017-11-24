@@ -3,7 +3,7 @@ import {
     setupWeb,
     tearDownMobile,
     tearDownWeb
-} from "./setup-dextrose";
+} from "./dextrose";
 import snapBatcher from "./snap-batcher";
 import path from "path";
 import log from "./logger";
