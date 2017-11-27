@@ -4,7 +4,7 @@ const DextroseClient = require("./client");
 const config = {
   transports: ["websocket"],
   query: {
-    clientType: "tests"
+    clientType: "snapper"
   }
 };
 

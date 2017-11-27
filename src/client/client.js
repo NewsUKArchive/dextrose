@@ -8,9 +8,9 @@ class DextroseClient {
     getLoadedComponents() {
         return new Promise(resolve => {
             this.socket.on('bundled-components', componentList => {
+                log.verbose('Dextrose Client', `recieved components from app: ${componentList}`);
                 resolve(componentList)
             });
-
             log.verbose('Dextrose Client', 'emitting get app components');
             this.socket.emit('getAppComponents');
         });

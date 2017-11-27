@@ -9,4 +9,4 @@ adb reverse tcp:4723 tcp:4723
 # react-native run-android --no-packager
 # LOGLEVEL=verbose node run-dextrose.android.js
 
-LOGLEVEL=verbose ./../bin/run.js -c /Users/mattlowry/dev/news/dextrose/snapshots/fructose/dextrose.android.js
+LOGLEVEL=verbose dextrose --config ./fructose/dextrose.android.js
