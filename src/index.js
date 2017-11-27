@@ -10,10 +10,21 @@ import log from "./logger";
 import NativeSnapper from "./native-snapper"
 import WebSnapper from "./web-snapper"
 
+const expectedFieldsWeb = ['snapPath', 'platformName']
+const expectedFieldsNative = ['snapPath', 'platformName', 'platformVersion', 'deviceName', 'app']
+
+const isConfigValid = (config) => {
+    const expectedFields = process.env.NATIVE ? expectedFieldsNative : expectedFieldsWeb;
+    expectedFields.map((property) => {
+        if (config.hasOwnProperty(property)) {
+            return;
+        } else {
+            throw new Error(`You are missing the property: ${property} in your config`)
+        }
+    });
+}
+
 export default async(config) => {
-    console.log('------------------------------------');
-    console.log(config);
-    console.log('------------------------------------');
     let dextrose;
 
     if (config.platformName.toLowerCase() === "ios" || config.platformName.toLowerCase() === "android") {
@@ -21,6 +32,8 @@ export default async(config) => {
     } else if (config.platformName === "web") {
         process.env.WEB = true;
     }
+
+    isConfigValid(config);
 
     process.env.DEVICETYPE = config.platformName.toLowerCase();
 
