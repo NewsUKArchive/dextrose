@@ -1,7 +1,6 @@
-const dextrose = require("../../index").default;
 const path = require("path");
 
-const config = {
+module.exports = {
     snapPath: path.join(__dirname, '../snaps'),
     platformName: "Android",
     platformVersion: "7.1.1",
@@ -11,5 +10,3 @@ const config = {
         "../android/app/build/outputs/apk/app-debug.apk"
     )
 }
-
-dextrose(config);

@@ -1,7 +1,6 @@
-const dextrose = require("../../index").default;
 const path = require("path");
 
-const config = {
+module.exports = {
     snapPath: path.join(__dirname, '../snaps'),    
     automationName: "XCUITest",
     platformName: "iOS",
@@ -13,4 +12,4 @@ const config = {
     )
 }
 
-dextrose(config);
+

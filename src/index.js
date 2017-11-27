@@ -11,7 +11,9 @@ import NativeSnapper from "./native-snapper"
 import WebSnapper from "./web-snapper"
 
 export default async(config) => {
-
+    console.log('------------------------------------');
+    console.log(config);
+    console.log('------------------------------------');
     let dextrose;
 
     if (config.platformName.toLowerCase() === "ios" || config.platformName.toLowerCase() === "android") {

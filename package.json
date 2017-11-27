@@ -1,14 +1,15 @@
 {
   "name": "dextrose",
   "version": "1.0.0",
-  "main": "index.js",
   "author": "NewsUk",
   "license": "MIT",
+  "bin" :"./bin/run.js",
   "scripts": {
     "prepare": "babel src --out-dir lib",
     "test": "jest src"
   },
   "dependencies": {
+    "commander":" 2.12.1",
     "@times-components/fructose": "../fructose",
     "babel-core": "6.26.0",
     "babel-preset-react-native": "4.0.0",
