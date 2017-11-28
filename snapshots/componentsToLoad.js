@@ -3,7 +3,7 @@ import Hello1 from "./components/goodbyeWorldComponent";
 import React from "react";
 
 withComponent(
-    <Hello fructoseID="helloWorld"> </Hello>,
+    <Hello fructoseID="hello world's"> </Hello>,
     "description",
     () => {}
 )

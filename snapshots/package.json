@@ -11,9 +11,10 @@
         "appium": "1.7.1",
         "babel-loader": "^7.0.0",
         "chromeless": "^1.3.0",
+        "dextrose": "../",
         "react": "16.0.0",
         "react-dom": "16.1.1",
-        "react-native": "0.50.3",
+        "react-native": "^0.50.4",
         "react-native-web": "0.1.14",
         "selenium-standalone": "^6.11.0",
         "webpack": "^2.4.1"
