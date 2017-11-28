@@ -41,13 +41,13 @@ export default async(config) => {
         log.info('Dextrose Index', 'Running Native Config 📱')
         dextrose = await setupMobile(config);
         dextrose.snapper = new NativeSnapper(config.platformName)
-        await snapBatcher(dextrose, config.snapPath, tearDownMobile);
+        await snapBatcher(dextrose, config, tearDownMobile);
 
     } else if (process.env.WEB) {
         log.info('Dextrose Index', 'Running Web Config 💻')
         dextrose  = await setupWeb();
         dextrose.snapper = new WebSnapper(config.platformName, dextrose.browser)
-        await snapBatcher(dextrose, config.snapPath, tearDownWeb);
+        await snapBatcher(dextrose, config, tearDownWeb);
 
     } else {
         throw new Error('Please set a valid platformName "Web | Android | iOS"');

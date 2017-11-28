@@ -8,5 +8,8 @@ module.exports = {
     app: path.join(
         __dirname,
         "../android/app/build/outputs/apk/app-debug.apk"
-    )
+    ),
+    ignoredStories: [
+        "brightcove"
+    ]
 }
