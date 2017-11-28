@@ -6,11 +6,10 @@ export default async(dextrose, config, teardown) => {
     const ignoredStories = config.ignoredStories;
 
     const filteredComponents = componentsLoaded.filter(component => ignoredStories.some(ignored => !component.includes(ignored)));
-    
-    console.log()
-    log.info('snapBatcher', `Found Loaded components in the App: ${componentsLoaded}`)
-    log.info('snapBatcher', `Will Load Components: ${filteredComponents}`)
-    
+
+    log.verbose('snapBatcher', `Found Loaded components in the App: ${componentsLoaded}`)
+    log.info('snapBatcher', `Will Load App Components: ${filteredComponents}`)
+
     for (let i = 0; i < filteredComponents.length; i++) {
       await dextrose.client.loadComponent(filteredComponents[i]);
       await dextrose.snapper.snap(`${config.snapPath}/${filteredComponents[i]}`)

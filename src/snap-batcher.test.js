@@ -50,9 +50,8 @@ describe("Snap batcher", () => {
     });
 
     it("ignores components defined in config", async () => {
-        dextroseMock.client.getLoadedComponents = jest.fn().mockReturnValue( ["1", "2", "3", "I am a banana", "I am a rat", "I am a"]);
-        config.ignoredStories = ["I am a"];
+        config.ignoredStories = ["component2"];
         await snapBatcher(dextroseMock, config, teardown);    
-        expect(dextroseMock.snapper.snap.mock.calls.length).toBe(3);
+        expect(dextroseMock.snapper.snap.mock.calls.length).toBe(2);
     });
 })
