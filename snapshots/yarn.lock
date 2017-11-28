@@ -651,7 +651,7 @@ archiver-utils@^1.3.0:
     normalize-path "^2.0.0"
     readable-stream "^2.0.0"
 
-archiver@^1.3.0:
+archiver@1.3.0, archiver@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/archiver/-/archiver-1.3.0.tgz#4f2194d6d8f99df3f531e6881f14f15d55faaf22"
   dependencies:
@@ -822,6 +822,12 @@ async@1.5.2, async@^1.4.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
+async@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.0.1.tgz#b709cc0280a9c36f09f4536be823c838a9049e25"
+  dependencies:
+    lodash "^4.8.0"
+
 async@^2.0.0, async@^2.1.2, async@^2.1.4, async@^2.3.0, async@^2.4.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.0.tgz#61a29abb6fcc026fea77e56d1c6ec53a795951f4"
@@ -887,7 +893,7 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.0.0, babel-core@^6.24.1, babel-core@^6.26.0, babel-core@^6.7.2:
+babel-core@6.26.0, babel-core@^6.0.0, babel-core@^6.24.1, babel-core@^6.26.0, babel-core@^6.7.2:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -2176,6 +2182,10 @@ combined-stream@^1.0.5, combined-stream@~1.0.5:
   dependencies:
     delayed-stream "~1.0.0"
 
+"commander@ 2.12.1":
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.12.1.tgz#468635c4168d06145b9323356d1da84d14ac4a7a"
+
 commander@2.1.x:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.1.0.tgz#d121bbae860d9992a3d517ba96f56588e47c6781"
@@ -2749,6 +2759,18 @@ detox@5.8.1:
     npmlog "^4.0.2"
     telnet-client "0.15.3"
     ws "^1.1.1"
+
+dextrose@../:
+  version "1.0.0"
+  dependencies:
+    "@times-components/fructose" "3.1.3"
+    babel-core "6.26.0"
+    babel-preset-react-native "4.0.0"
+    commander " 2.12.1"
+    npmlog "4.1.2"
+    socket.io "^2.0.4"
+    socket.io-client "^2.0.4"
+    wd "1.4.1"
 
 diff@^3.2.0:
   version "3.4.0"
@@ -5120,6 +5142,10 @@ lodash.templatesettings@^3.0.0:
     lodash._reinterpolate "^3.0.0"
     lodash.escape "^3.0.0"
 
+lodash@4.16.2:
+  version "4.16.2"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.2.tgz#3e626db827048a699281a8a125226326cfc0e652"
+
 lodash@4.x, lodash@^4.0.0, lodash@^4.13.1, lodash@^4.14.0, lodash@^4.14.1, lodash@^4.16.6, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1, lodash@^4.8.0:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
@@ -5724,7 +5750,7 @@ npmlog@2.x, npmlog@^2.0.4:
     are-we-there-yet "~1.1.2"
     gauge "~1.2.5"
 
-npmlog@^4.0.2, npmlog@^4.1.2:
+npmlog@4.1.2, npmlog@^4.0.2, npmlog@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/npmlog/-/npmlog-4.1.2.tgz#08a7f2a8bf734604779a9efa4ad5cc717abb954b"
   dependencies:
@@ -6338,6 +6364,10 @@ punycode@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.0.tgz#5f863edc89b96db09074bad7947bf09056ca4e7d"
 
+q@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/q/-/q-1.4.1.tgz#55705bcd93c5f3673530c2c2cbc0c2b3addc286e"
+
 q@^1.1.2:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
@@ -6473,9 +6503,9 @@ react-native-web@0.1.14:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.3"
 
-react-native@0.50.3:
-  version "0.50.3"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.3.tgz#91282bd5356cc7d794969cdc443cc764389b9af4"
+react-native@^0.50.4:
+  version "0.50.4"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.4.tgz#194f5da4939087b3acee712a503475f4942dca7e"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
@@ -7240,7 +7270,7 @@ socket.io-client@2.0.3:
     socket.io-parser "~3.1.1"
     to-array "0.1.4"
 
-socket.io-client@~2.0.2:
+socket.io-client@2.0.4, socket.io-client@^2.0.4, socket.io-client@~2.0.2:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/socket.io-client/-/socket.io-client-2.0.4.tgz#0918a552406dc5e540b380dcd97afc4a64332f8e"
   dependencies:
@@ -7276,6 +7306,16 @@ socket.io@2.0.3:
     object-assign "~4.1.1"
     socket.io-adapter "~1.1.0"
     socket.io-client "~2.0.2"
+    socket.io-parser "~3.1.1"
+
+socket.io@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/socket.io/-/socket.io-2.0.4.tgz#c1a4590ceff87ecf13c72652f046f716b29e6014"
+  dependencies:
+    debug "~2.6.6"
+    engine.io "~3.1.0"
+    socket.io-adapter "~1.1.0"
+    socket.io-client "2.0.4"
     socket.io-parser "~3.1.1"
 
 sockjs-client@1.1.4:
@@ -7396,6 +7436,10 @@ split@~0.3.3:
   resolved "https://registry.yarnpkg.com/split/-/split-0.3.3.tgz#cd0eea5e63a211dfff7eb0f091c4133e2d0dd28f"
   dependencies:
     through "2"
+
+sprintf-js@^1.0.3:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/sprintf-js/-/sprintf-js-1.1.1.tgz#36be78320afe5801f6cea3ee78b6e5aab940ea0c"
 
 sprintf-js@~1.0.2:
   version "1.0.3"
@@ -7912,6 +7956,13 @@ unc-path-regex@^0.1.0:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/unc-path-regex/-/unc-path-regex-0.1.2.tgz#e73dd3d7b0d7c5ed86fbac6b0ae7d8c6a69d50fa"
 
+underscore.string@3.3.4:
+  version "3.3.4"
+  resolved "https://registry.yarnpkg.com/underscore.string/-/underscore.string-3.3.4.tgz#2c2a3f9f83e64762fdc45e6ceac65142864213db"
+  dependencies:
+    sprintf-js "^1.0.3"
+    util-deprecate "^1.0.2"
+
 underscore@1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.7.0.tgz#6bbaf0877500d36be34ecaa584e0db9fef035209"
@@ -7989,7 +8040,7 @@ utf7@^1.0.0:
   dependencies:
     semver "~5.3.0"
 
-util-deprecate@1.0.2, util-deprecate@~1.0.1:
+util-deprecate@1.0.2, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
@@ -8045,6 +8096,10 @@ validate-npm-package-license@^3.0.1:
 validate.js@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/validate.js/-/validate.js-0.9.0.tgz#8acf0144f1520a19835c6cc663f45e0836aa56c8"
+
+vargs@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/vargs/-/vargs-0.1.0.tgz#6b6184da6520cc3204ce1b407cac26d92609ebff"
 
 vary@~1.0.1:
   version "1.0.1"
@@ -8110,6 +8165,19 @@ wbuf@^1.1.0, wbuf@^1.7.2:
   resolved "https://registry.yarnpkg.com/wbuf/-/wbuf-1.7.2.tgz#d697b99f1f59512df2751be42769c1580b5801fe"
   dependencies:
     minimalistic-assert "^1.0.0"
+
+wd@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/wd/-/wd-1.4.1.tgz#6b1ab39aab1728ee276c1a2b6d7321da68b16e8c"
+  dependencies:
+    archiver "1.3.0"
+    async "2.0.1"
+    lodash "4.16.2"
+    mkdirp "^0.5.1"
+    q "1.4.1"
+    request "2.79.0"
+    underscore.string "3.3.4"
+    vargs "0.1.0"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

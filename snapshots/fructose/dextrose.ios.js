@@ -5,11 +5,12 @@ module.exports = {
     automationName: "XCUITest",
     platformName: "iOS",
     deviceName: "iPhone 7",
-    platformVersion: '11.1',
+    platformVersion: '10.3',
     app: path.join(
         __dirname,
         "../ios/build/Build/Products/Debug-iphonesimulator/snapshots.app"
-    )
+    ),
+    igonoredStories: []
 }
 
 

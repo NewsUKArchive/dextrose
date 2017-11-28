@@ -5,10 +5,7 @@ jest.mock("./web-snapper.js");
 
 let dextroseMock;
 let teardown;
-const config = {
-    snapPath: 'path', 
-    ignoredStories: ['ignorableComponent']
-}
+let config;
 
 describe("Snap batcher", () => {
 
@@ -23,6 +20,11 @@ describe("Snap batcher", () => {
             }
         };
         teardown = jest.fn();
+        config = {
+            snapPath: 'path', 
+            ignoredStories: ['ignorableComponent']
+        }
+        
     });
 
     it("snaps for each loaded component", async() => {
@@ -53,5 +55,11 @@ describe("Snap batcher", () => {
         config.ignoredStories = ["component2"];
         await snapBatcher(dextroseMock, config, teardown);    
         expect(dextroseMock.snapper.snap.mock.calls.length).toBe(2);
+    });
+
+    it("doesn't ignore when ignoreStories is undefined", async () => {
+        config.ignoredStories = undefined;
+        await snapBatcher(dextroseMock, config, teardown);    
+        expect(dextroseMock.snapper.snap.mock.calls.length).toBe(3);
     });
 })
