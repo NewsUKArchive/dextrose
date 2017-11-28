@@ -3,7 +3,7 @@ import log from "./logger";
 export default async(dextrose, config, teardown) => {
   try {
     const componentsLoaded = await dextrose.client.getLoadedComponents();
-    const ignoredStories = config.ignoredStories;
+    const ignoredStories = config.ignoredStories ? config.ignoredStories : [''];
 
     const filteredComponents = componentsLoaded.filter(component => ignoredStories.some(ignored => !component.includes(ignored)));
 
