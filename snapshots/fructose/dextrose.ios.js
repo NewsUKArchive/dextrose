@@ -10,7 +10,7 @@ module.exports = {
         __dirname,
         "../ios/build/Build/Products/Debug-iphonesimulator/snapshots.app"
     ),
-    igonoredStories: []
+    ignoredStories: ["IGNORE"]
 }
 
 
