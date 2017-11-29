@@ -2,7 +2,7 @@ import {Hello, Bye, Ignore} from "./testComponents";
 import React from "react";
 
 withComponent(
-    <Hello fructoseID="HELLO WORLD'S"> </Hello>,
+    <Hello fructoseID="hello world's"> </Hello>,
     "description",
     () => {}
 );
