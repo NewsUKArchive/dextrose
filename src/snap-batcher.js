@@ -1,7 +1,6 @@
 import log from "./logger";
 
 function containsIgnored(componentName, ignoredStories) {
-  //component => config.ignoredStories.some(ignored => !component.includes(ignored))
   for (story in ignoredStories) {
     if (componentName.includes(ignoredStories[story])) {
       return true;
