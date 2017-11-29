@@ -1,5 +1,15 @@
 import log from "./logger";
 
+function containsIgnored(componentName, ignoredStories) {
+  //component => config.ignoredStories.some(ignored => !component.includes(ignored))
+  for (story in ignoredStories) {
+    if (componentName.includes(ignoredStories[story])) {
+      return true;
+    }
+  }
+  return false;
+}
+
 export default async(dextrose, config, teardown) => {
   try {
     const componentsLoaded = await dextrose.client.getLoadedComponents();
@@ -9,7 +19,7 @@ export default async(dextrose, config, teardown) => {
     if (!config.ignoredStories) {
       filteredComponents = componentsLoaded;
     } else {
-      filteredComponents = componentsLoaded.filter(component => config.ignoredStories.some(ignored => !component.includes(ignored)));
+      filteredComponents = componentsLoaded.filter((componentName) => !containsIgnored(componentName, config.ignoredStories));
     }
 
     log.verbose('snapBatcher', `Found Loaded components in the App: ${componentsLoaded}`)
