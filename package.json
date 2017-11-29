@@ -1,8 +1,9 @@
 {
   "name": "dextrose",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "NewsUk",
   "license": "MIT",
+  "url": "https://github.com/L0wry/dextrose",
   "bin": "./bin/run.js",
   "scripts": {
     "prepare": "babel src --out-dir lib",
