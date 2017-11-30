@@ -1,4 +1,6 @@
 import log from "./logger";
+import util from 'util';
+const sleep = util.promisify(setTimeout);
 
 function containsIgnored(componentName, ignoredStories) {
   for (story in ignoredStories) {
@@ -26,7 +28,8 @@ export default async(dextrose, config, teardown) => {
 
     for (let i = 0; i < filteredComponents.length; i++) {
       await dextrose.client.loadComponent(filteredComponents[i]);
-      const outputName = filteredComponents[i].replace(/\s/g, "_").replace(/[\[\]\\+.,\/#!$%\^&\*;:{}=\-`'~()]/g,"");        
+      const outputName = filteredComponents[i].replace(/\s/g, "_").replace(/[\[\]\\+.,\/#!$%\^&\*;:{}=\-`'~()]/g,"");
+      await sleep(config.snapshotWait);      
       await dextrose.snapper.snap(`${config.snapPath}/${outputName}`)
 
       log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`)
