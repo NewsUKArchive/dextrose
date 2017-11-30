@@ -27,7 +27,8 @@ export default async(config) => {
             platformVersion: config.platformVersion,
             deviceName: config.deviceName,
             app: config.app,
-            automationName: config.automationName || null
+            automationName: config.automationName || null,
+            newCommandTimeout: 600000            
         },
         host,
         port
