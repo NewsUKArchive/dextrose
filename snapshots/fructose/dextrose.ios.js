@@ -5,12 +5,12 @@ module.exports = {
     automationName: "XCUITest",
     platformName: "iOS",
     deviceName: "iPhone 7",
-    platformVersion: '11.0',
+    platformVersion: '10.3',
     app: path.join(
         __dirname,
         "../ios/build/Build/Products/Debug-iphonesimulator/snapshots.app"
     ),
-    ignoredStories: ["IGNORE", "good"]
+    ignoredStories: ["IGNORE"]
 }
 
 
