@@ -1,6 +1,6 @@
-import util from 'util';
-import fs from 'fs';
-import log from './logger';
+import util from "util";
+import fs from "fs";
+import log from "./logger";
 
 const sleep = util.promisify(setTimeout);
 
@@ -27,7 +27,7 @@ export default async(dextrose, config, teardown) => {
 
     if (!fs.existsSync(config.snapPath)) {
       log.info('snapBatcher', `Snap path did not exist, creating directory: ${config.snapPath}`)
-      fs.mkdir(connfig.snapPath);
+      fs.mkdir(config.snapPath);
     }
 
     log.verbose('snapBatcher', `Found Loaded components in the App: ${componentsLoaded}`)
