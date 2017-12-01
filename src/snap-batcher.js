@@ -1,5 +1,7 @@
+import util from "util";
+import fs from "fs";
 import log from "./logger";
-import util from 'util';
+
 const sleep = util.promisify(setTimeout);
 
 function containsIgnored(componentName, ignoredStories) {
@@ -21,6 +23,11 @@ export default async(dextrose, config, teardown) => {
       filteredComponents = componentsLoaded;
     } else {
       filteredComponents = componentsLoaded.filter((componentName) => !containsIgnored(componentName, config.ignoredStories));
+    }
+
+    if (!fs.existsSync(config.snapPath)) {
+      log.info('snapBatcher', `Snap path did not exist, creating directory: ${config.snapPath}`)
+      fs.mkdir(config.snapPath);
     }
 
     log.verbose('snapBatcher', `Found Loaded components in the App: ${componentsLoaded}`)

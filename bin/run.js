@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 const program = require("commander");
-const dextrose = require("../index").default;
 const resolve = require('path').resolve
-const setupLogger = require('../lib/logger').setupLogger
+const dextrose = require("../index").default;
+const logger = require("./logger");
 
 program
   .version("0.0.1")
@@ -13,14 +13,13 @@ program
   .option("-l, --loglevel [log-level]")
   .parse(process.argv);
 
-
-if (!program.config) {
-  console.log("Please specify the dextrose config: --config [directory/config.js]");
+if (!program.config){
+  logger.error("Please specify the dextrose config: --config [directory/config.js]");
   process.exit(1);
 }
 
 process.env.LOGLEVEL = program.loglevel ? program.loglevel : undefined;
-setupLogger();
+logger.setupLogger();
 
 const path = resolve(program.config);
 const config = require(path);
