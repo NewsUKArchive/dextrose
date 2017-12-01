@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const program = require("commander");
-const dextrose = require("../index").default;
 const resolve = require('path').resolve
+const dextrose = require("../index").default;
+const logger = require("./logger");
 
 program
   .version("0.0.1")
@@ -12,12 +13,13 @@ program
 
 
 if (!program.config){
-  console.log("Please specify the dextrose config: --config [directory/config.js]");
+  logger.error("Please specify the dextrose config: --config [directory/config.js]");
   process.exit(1);
 }
-  const path = resolve(program.config);
-  const config = require(path);
-  config.snapshotWait = program.snapshotWait || 0;
-  config.newCommandTimeout = program.timeout || 600000;
-  dextrose(config);
+ 
+const path = resolve(program.config);
+const config = require(path);
+config.snapshotWait = program.snapshotWait || 0;
+config.newCommandTimeout = program.timeout || 600000;
+dextrose(config);
 
