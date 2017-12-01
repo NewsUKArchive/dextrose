@@ -10,6 +10,7 @@ program
   .option("-c, --config [dextrose-config]", "A file that exports the dextrose config for your app")
   .option("-t, --snapshotWait [snapshot-wait]", "the amount of timeout to wait between loading a component and taking the snap", parseInt)
   .option("-T, --timeout [timeout]", "the timeout applied to appium before it closes the app", parseInt)
+  .option("-l, --loglevel [log-level]")
   .parse(process.argv);
 
 
@@ -18,8 +19,9 @@ if (!program.config) {
   process.exit(1);
 }
 
-process.env.LOGLEVEL = program.loglevel ? program.loglevel : '';
+process.env.LOGLEVEL = program.loglevel ? program.loglevel : undefined;
 setupLogger();
+
 const path = resolve(program.config);
 const config = require(path);
 config.snapshotWait = program.snapshotWait || 0;

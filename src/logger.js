@@ -7,7 +7,7 @@ const setupLogger = () => {
   log.info("Dextrose Logger", `Log level is ${log.level}`);
 }
 
-module.exports =  {
+export default {
   info: (fileName, textToLog) => {
     log.stream = process.stdout;
     log.prefixStyle = { fg: "green", bg: "black" };
