@@ -1,11 +1,13 @@
 const log = require("npmlog");
 
-log.level = process.env.LOGLEVEL || "info";
-log.stream = process.stdout;
-log.enableColor();
-log.info("Dextrose Logger", `Log level is ${log.level}`);
+const setupLogger = () => {
+  log.level = process.env.LOGLEVEL || "info";
+  log.stream = process.stdout;
+  log.enableColor();
+  log.info("Dextrose Logger", `Log level is ${log.level}`);
+}
 
-module.exports = {
+export default {
   info: (fileName, textToLog) => {
     log.stream = process.stdout;
     log.prefixStyle = { fg: "green", bg: "black" };
@@ -22,3 +24,5 @@ module.exports = {
     log.error(`[${fileName}] :`, textToError);
   }
 };
+
+export { setupLogger }
