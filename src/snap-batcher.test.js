@@ -68,4 +68,10 @@ describe("Snap batcher", () => {
         await snapBatcher(dextroseMock, config, teardown);    
         expect(dextroseMock.snapper.snap.mock.calls.length).toBe(3);
     });
+
+    it("snaps for each loaded component with a timeout", async() => {
+        config.snapshotWait = 1000;
+        await snapBatcher(dextroseMock, config, teardown);
+        expect(dextroseMock.snapper.snap.mock.calls.length).toBe(3)
+    });
 })
