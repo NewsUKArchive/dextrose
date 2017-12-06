@@ -1,9 +1,10 @@
 import log from "./logger";
 import fs from "fs";
 module.exports = class WebSnapper {
-    constructor(platform, browser) {
-        this.platform = platform.toLowerCase();
+    constructor(config, browser) {
+        this.platform = config.platform.toLowerCase();
         this.browser = browser;
+        this.breakpoints = config.breakpoints;
     }
 
     snap(outputPath) {
@@ -11,18 +12,29 @@ module.exports = class WebSnapper {
             throw Error(`Output path should be a string recieved: ${outputPath}`);
         }
 
-        return new Promise((resolve, reject) => {
+        const snapWeb = () =>
+            new Promise((resolve, reject) => {
+                const outputPathWithExtension = `${outputPath}.${this.platform}.png`
+                log.verbose('web-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
+                this.browser.takeScreenshot((err, screenshot) => {
+                    if (err) {
+                        reject(err);
+                    }
 
-            const outputPathWithExtension = `${outputPath}.${this.platform}.png`
-            log.verbose('web-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
-            this.browser.takeScreenshot((err, screenshot) => {
-                if (err) {
-                    reject(err);
-                }
+                    fs.writeFileSync(outputPathWithExtension, screenshot, 'base64');
+                    resolve();
+                })
+            });
 
-                fs.writeFileSync(outputPathWithExtension, screenshot, 'base64');
-                resolve();
-            })
-        });
+        return new Promise(async(resolve, reject) => {
+            for (let i = 0; i < this.breakpoints.length; i++) {
+                await snapWeb()
+                .catch((err) => {
+                    reject(err)
+                });
+            }
+            resolve();
+        })
+
     }
 };
