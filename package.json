@@ -4,7 +4,11 @@
   "author": "NewsUk",
   "license": "MIT",
   "url": "https://github.com/L0wry/dextrose",
-  "bin": "./bin/run.js",
+  "bin": {
+    "dextrose": "./bin/run.js",
+    "dextrose-stories": "./lib/mono-repository-scripts/dextrose-stories-copy.sh",
+    "dextrose-clean": "./lib/mono-repository-scripts/dextrose-clean.sh"
+  },
   "scripts": {
     "prepare": "babel src --out-dir lib",
     "test": "jest src"
