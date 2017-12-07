@@ -40,9 +40,8 @@ export default async(dextrose, config, teardown) => {
       if (config.snapshotWait) await snooze(config.snapshotWait);
 
       await dextrose.snapper.snap(`${config.snapPath}/${outputName}`)
-      // .then(() => {
-      //   log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`)
-      // });
+      log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`)
+
     }
   } catch (err) {
     throw (err)
