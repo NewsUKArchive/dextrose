@@ -22,13 +22,12 @@ module.exports = class WebSnapper {
             try {
                 await this.browser.setWindowSize(this.breakpoints[i], browserHeight)
                 if (this.wait) await snooze(this.wait);
-                
+
                 log.verbose('web-snapper', `set browser window to: ${this.breakpoints[i]}`)
                 const outputPathWithExtension = `${outputPath}.${this.platform}.width-${this.breakpoints[i]}.png`
-                log.verbose('web-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
                 await this.browser.takeScreenshot((err, screenshot) => {
                     fs.writeFileSync(outputPathWithExtension, screenshot, 'base64');
-                    log.verbose('web-snapper', 'writing screenshot to disk')
+                    log.verbose('web-snapper', `wrote snapshot to path: ${outputPathWithExtension}`)
                 });
             } catch (err) {
                 throw err;
