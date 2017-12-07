@@ -3,7 +3,7 @@
 const program = require("commander");
 const resolve = require('path').resolve
 const dextrose = require("../index").default;
-const logger = require("./logger");
+const logger = require("../lib/logger");
 
 program
   .version("0.0.1")
