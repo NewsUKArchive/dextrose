@@ -1,6 +1,6 @@
 {
   "name": "dextrose",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "author": "NewsUk",
   "license": "MIT",
   "url": "https://github.com/L0wry/dextrose",
@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "commander": " 2.12.1",
-    "@times-components/fructose": "3.1.3",
     "babel-core": "6.26.0",
     "babel-preset-react-native": "4.0.0",
     "npmlog": "4.1.2",
@@ -24,7 +23,11 @@
     "wd": "1.4.1"
   },
   "devDependencies": {
+    "@times-components/fructose": "3.1.7",
     "babel-cli": "^6.26.0",
     "jest": "^21.2.1"
+  },
+  "peerDependecies": {
+    "@times-components/fructose": ">=3.1.7"
   }
 }

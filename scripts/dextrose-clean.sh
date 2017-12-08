@@ -1,1 +1,1 @@
-rm *dextrose.tmp*
+rm -f *dextrose.tmp*
