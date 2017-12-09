@@ -23,6 +23,7 @@
     "wd": "1.4.1"
   },
   "devDependencies": {
+    "danger":"2.1.3",
     "@times-components/fructose": "3.1.7",
     "babel-cli": "^6.26.0",
     "jest": "^21.2.1"
