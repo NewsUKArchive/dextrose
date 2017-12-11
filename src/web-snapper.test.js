@@ -5,29 +5,61 @@ jest.mock("fs");
 describe("web-snapper", () => {
 
     let snapper;
-    const fakeBrowser = {
-        takeScreenshot: null
-    }
+    let fakeBrowser;
+    let config;
 
-    it("has the ability to snap a browser", () => {
+    beforeEach(() => {
+
+        fakeBrowser = {
+            takeScreenshot: () => {},
+            setWindowSize: () => {}
+        }
+
+        config = {
+            platformName: 'web',
+            breakpoints: [1000]
+        }
+    });
+
+    it("has the ability to snap a browser", async() => {
         fakeBrowser.takeScreenshot = jest.fn(cb => cb(null, "someScreenshot"));
-        const webSnapper = new Snapper("web", fakeBrowser)
+        const webSnapper = new Snapper(config, fakeBrowser);
+        await webSnapper.snap("outputDir");
+        expect(fakeBrowser.takeScreenshot.mock.calls.length).toBe(1);
 
-        webSnapper.snap("outputDir")
-        .then(() => {
-            expect(fakeBrowser.takeScreenshot.mock.calls.length).toBe(1)
-        })
     });
 
-    it("reject when snap fails", () => {
-        const error = "stop, error time"
-        fakeBrowser.takeScreenshot = jest.fn(cb => cb(error, null));
-        const webSnapper = new Snapper("web", fakeBrowser)
-        expect(webSnapper.snap("output")).rejects.toBe(error)
+    it("throws when snap fails", () => {
+        const error = new Error("stop, error time");
+        fakeBrowser.takeScreenshot = jest.fn(() => {throw error });
+        const webSnapper = new Snapper(config, fakeBrowser);
+        expect(webSnapper.snap("output")).rejects.toBe(error);
     });
 
-    it("throws an error when path is not a string", () => {
-        const webSnapper = new Snapper("web", fakeBrowser)
-        expect(() => webSnapper.snap()).toThrow();
-    })
-})
+    it("throws an error when path is not a string", async() => {
+        const webSnapper = new Snapper(config, fakeBrowser);
+        try {
+            await webSnapper.snap();
+        } catch (err) {
+            expect(err.message).toMatch('Output path should be a string recieved');
+        }
+    });
+
+    it("loops through all specified breakpoints", async() => {
+        expect.assertions(1);
+        config.breakpoints = [1, 2, 3];
+        fakeBrowser.setWindowSize = jest.fn();
+        const webSnapper = new Snapper(config, fakeBrowser);
+
+        await webSnapper.snap("outputDir");
+        expect(fakeBrowser.setWindowSize.mock.calls.length).toBe(3);
+
+    });
+
+    it("rejects when resize fails", () => {
+        const error = new Error("stop, error time");
+        fakeBrowser.setWindowSize = jest.fn(() => { throw error});
+        const webSnapper = new Snapper(config, fakeBrowser);
+        expect(webSnapper.snap("output")).rejects.toBe(error);
+    });
+});

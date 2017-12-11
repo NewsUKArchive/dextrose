@@ -20,6 +20,7 @@ class DextroseClient {
         return new Promise(resolve => {
             this.socket.on("loaded", () => {
                 log.verbose("client", `tests recieved component loaded" ${component}`);
+                this.socket.removeListener('loaded');
                 resolve("component-loaded");
               });
 

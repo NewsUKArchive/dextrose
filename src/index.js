@@ -10,7 +10,7 @@ import log from "./logger";
 import NativeSnapper from "./native-snapper"
 import WebSnapper from "./web-snapper"
 
-const expectedFieldsWeb = ['snapPath', 'platformName']
+const expectedFieldsWeb = ['snapPath', 'platformName', 'breakpoints']
 const expectedFieldsNative = ['snapPath', 'platformName', 'platformVersion', 'deviceName', 'app']
 
 const isConfigValid = (config) => {
@@ -46,7 +46,7 @@ export default async(config) => {
     } else if (process.env.WEB) {
         log.info('Dextrose Index', 'Running Web Config 💻')
         dextrose  = await setupWeb();
-        dextrose.snapper = new WebSnapper(config.platformName, dextrose.browser)
+        dextrose.snapper = new WebSnapper(config, dextrose.browser)
         await snapBatcher(dextrose, config, tearDownWeb);
 
     } else {
