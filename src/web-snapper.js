@@ -2,6 +2,7 @@ import log from "./logger";
 import fs from "fs";
 
 const browserHeight = 1200;
+const defaultBrowserWidth = 1024;
 
 const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -9,7 +10,7 @@ module.exports = class WebSnapper {
     constructor(config, browser) {
         this.platform = config.platformName.toLowerCase();
         this.browser = browser;
-        this.breakpoints = config.breakpoints;
+        this.breakpoints = config.breakpoints || [defaultBrowserWidth];
         this.wait = config.snapshotWait;
     }
 

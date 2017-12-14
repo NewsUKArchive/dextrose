@@ -10,7 +10,7 @@ import log from "./logger";
 import NativeSnapper from "./native-snapper"
 import WebSnapper from "./web-snapper"
 
-const expectedFieldsWeb = ['snapPath', 'platformName', 'breakpoints']
+const expectedFieldsWeb = ['snapPath', 'platformName']
 const expectedFieldsNative = ['snapPath', 'platformName', 'platformVersion', 'deviceName', 'app']
 
 const isConfigValid = (config) => {
