@@ -18,7 +18,7 @@ if (!program.config){
   process.exit(1);
 }
 
-process.env.LOGLEVEL = program.loglevel ? program.loglevel : undefined;
+process.env.LOGLEVEL = program.loglevel ? program.loglevel : "info";
 logger.setupLogger();
 
 const path = resolve(program.config);
