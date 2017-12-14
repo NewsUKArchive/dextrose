@@ -31,10 +31,12 @@ export default async(dextrose, config, teardown) => {
     }
 
     log.verbose('snapBatcher', `Found Loaded components in the App:
-    ${componentsLoaded.join('\r\n')}`)
+    ${componentsLoaded.join('\r\n')}
+    `)
 
     log.info('snapBatcher', `Will Load App Components: 
-    ${filteredComponents.join('\r\n')}`)
+    ${filteredComponents.join('\r\n')}
+    `)
 
     for (let i = 0; i < filteredComponents.length; i++) {
       await dextrose.client.loadComponent(filteredComponents[i]);
