@@ -30,13 +30,18 @@ export default async(dextrose, config, teardown) => {
       fs.mkdir(config.snapPath);
     }
 
-    log.verbose('snapBatcher', `Found Loaded components in the App: ${componentsLoaded}`)
-    log.info('snapBatcher', `Will Load App Components: ${filteredComponents}`)
+    log.verbose('snapBatcher', `Found Loaded components in the App:
+    ${componentsLoaded.join('\r\n')}
+    `)
+
+    log.info('snapBatcher', `Will Load App Components: 
+    ${filteredComponents.join('\r\n')}
+    `)
 
     for (let i = 0; i < filteredComponents.length; i++) {
       await dextrose.client.loadComponent(filteredComponents[i]);
 
-      const outputName = filteredComponents[i].replace(/\s/g, "_").replace(/[\[\]\\+.,\/#!$%\^&\*;:{}=\-`'~()]/g,"");
+      const outputName = filteredComponents[i].replace(/\s/g, "_").replace(/[\[\]\\+.,\/#!$%\^&\*;:{}=\-`'~()]/g, "");
       if (config.snapshotWait) await snooze(config.snapshotWait);
 
       await dextrose.snapper.snap(`${config.snapPath}/${outputName}`)
