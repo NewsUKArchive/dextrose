@@ -17,7 +17,7 @@ module.exports = class Snapper {
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`
       log.verbose('native-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
       // TODO: need to make this reject if fails
-      execSync(`npx osnap ${this.platform} -f ${outputPathWithExtension}`);
+      execSync(`../node_modules/.bin/osnap ${this.platform} -f ${outputPathWithExtension}`);
       resolve();
     });
   }
