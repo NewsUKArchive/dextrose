@@ -18,9 +18,10 @@ module.exports = class Snapper {
     return new Promise(resolve => {
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`
       log.verbose('native-snapper', `taking snapshot at path: ${outputPathWithExtension}`)
-      
+      const osnap = path.join(__dirname, "../node_modules/.bin/osnap");
+
       // TODO: need to make this reject if fails
-      execSync(path.join(__dirname, '../node_modules/.bin/osnap ') + `${this.platform} -f ${outputPathWithExtension}`);
+      execSync(`${osnap} ${this.platform} -f ${outputPathWithExtension}`);
       resolve();
     });
   }

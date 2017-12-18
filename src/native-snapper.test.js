@@ -1,10 +1,12 @@
 import Snapper from "./native-snapper";
+import path from "path";
 
 jest.mock("child_process");
 
 describe('snapper', () => {
 
     const { execSync } = require("child_process");
+    const osnap = path.join(__dirname, "../node_modules/.bin/osnap");
 
     it("sets the platform", () => {
         const platform = "android";
@@ -20,7 +22,7 @@ describe('snapper', () => {
         await snapper.snap(outpath);
 
         expect(execSync.mock.calls[0]).toEqual(
-            [`../node_modules/.bin/osnap ${deviceType} -f ${outpath}.${deviceType}.png`]
+            [`${osnap} ${deviceType} -f ${outpath}.${deviceType}.png`]
         );
     });
 
@@ -32,7 +34,7 @@ describe('snapper', () => {
         await snapper.snap(outpath);
 
         expect(execSync.mock.calls[1]).toEqual(
-            [`../node_modules/.bin/osnap ${deviceType} -f ${outpath}.${deviceType}.png`]
+            [`${osnap} ${deviceType} -f ${outpath}.${deviceType}.png`]
         );
     });
 
