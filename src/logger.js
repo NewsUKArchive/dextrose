@@ -1,8 +1,8 @@
 const log = require("npmlog");
 
 
-const setupLogger = () => {
-  log.level = process.env.LOGLEVEL || "info";
+const setupLogger = (logLevel) => {
+  log.level = logLevel || "info";
   log.stream = process.stdout;
   log.enableColor();
   log.info("Dextrose Logger", `Log level is ${log.level}`);

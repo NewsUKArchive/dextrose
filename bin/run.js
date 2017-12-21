@@ -18,8 +18,8 @@ if (!program.config){
   process.exit(1);
 }
 
-process.env.LOGLEVEL = program.loglevel ? program.loglevel : "info";
-logger.setupLogger();
+const loglevel = program.loglevel ? program.loglevel : "info";
+logger.setupLogger(loglevel);
 
 const path = resolve(program.config);
 const config = require(path);
