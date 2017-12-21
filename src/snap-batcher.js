@@ -39,13 +39,21 @@ export default async(dextrose, config, teardown) => {
     `)
 
     for (let i = 0; i < filteredComponents.length; i++) {
-      await dextrose.client.loadComponent(filteredComponents[i]);
+      const { loaded } = await dextrose.client.loadComponent(filteredComponents[i]);
 
-      const outputName = filteredComponents[i].replace(/\s/g, "_").replace(/[\[\]\\+.,\/#!$%\^&\*;:{}=\-`'~()]/g, "");
-      if (config.snapshotWait) await snooze(config.snapshotWait);
+      if(loaded) {
+        const outputName = filteredComponents[i].replace(/\s/g, "_").replace(/[\[\]\\+.,\/#!$%\^&\*;:{}=\-`'~()]/g, "");
+        if (config.snapshotWait) await snooze(config.snapshotWait);
+  
+        await dextrose.snapper.snap(`${config.snapPath}/${outputName}`)
+        log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`)  
+      } else {
+        log.info("snapBatcher", `Did not load component: ${filteredComponents[i]}`);
+        log.info("snapBatcher", `App may have crashed. Reloading.`)
+        await global.driver.closeApp();
+        await global.driver.launchApp();
+      }
 
-      await dextrose.snapper.snap(`${config.snapPath}/${outputName}`)
-      log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`)
 
     }
   } catch (err) {
