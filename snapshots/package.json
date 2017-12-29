@@ -7,7 +7,7 @@
         "test": "jest"
     },
     "dependencies": {
-        "@times-components/fructose": "3.1.10",
+        "@times-components/fructose": "3.1.11",
         "appium": "1.7.1",
         "babel-loader": "^7.0.0",
         "chromeless": "^1.3.0",
