@@ -1,4 +1,4 @@
-import {Hello, Bye, Ignore} from "./testComponents";
+import {Hello, Bye, Ignore, LOL} from "./testComponents";
 import React from "react";
 
 withComponent(
@@ -15,6 +15,12 @@ withComponent(
 
 withComponent(
     <Ignore fructoseID="IGNORE"> </Ignore>,
+    "description",
+    () => {}
+)
+
+withComponent(
+    <LOL fructoseID="LOL"> </LOL>,
     "description",
     () => {}
 )

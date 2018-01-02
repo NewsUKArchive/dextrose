@@ -26,3 +26,7 @@ export const Bye = props => (
   </View>);
 
 export const Ignore = props => <Text>IGNORE ME WORLD</Text>;
+
+export const LOL = props => {
+  throw new Error('poo');
+} 
