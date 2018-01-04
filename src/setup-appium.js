@@ -37,8 +37,4 @@ export default async(config) => {
     global.driver = driver;
     await driver.init(options.desiredCapabilities).setImplicitWaitTimeout(300000);
     global.asserter = wd.asserters;
-    
-    } else {
-        throw new Error("Please set platformName in dextrose config")
-    }
 }
