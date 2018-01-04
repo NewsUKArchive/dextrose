@@ -5,6 +5,16 @@ class DextroseClient {
         this.socket = socketClient;
     }
 
+    waitForApp() {
+        return new Promise(resolve => {
+            log.verbose('Dextrose Client', "waitng for app to boot");
+            this.socket.on('fructose-app-loaded', () => {
+                log.info('Dextrose Client', "App Loaded 💯")
+                resolve(true);
+            });
+        });
+    }
+
     getLoadedComponents() {
         return new Promise(resolve => {
             this.socket.on('bundled-components', componentList => {

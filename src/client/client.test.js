@@ -31,6 +31,22 @@ describe("Dextrose Client", () => {
         server.close();
     });
 
+    it("waits for the app to load", () =>
+    new Promise( resolve => {
+        io.on("connection", () => {
+           io.emit("fructose-app-loaded");
+        });
+
+        server.listen(0, async () => {
+            const port = server.address().port;
+            socketClient = SocketClient(`http://localhost:${port}`);
+            dextrose = new Client(socketClient);
+            await expect(dextrose.waitForApp()).resolves.toBe(true).then(resolve)
+
+        })
+    })
+    );
+
     it(
         "can load a component",
         () =>

@@ -37,19 +37,7 @@ export default async(config) => {
     global.driver = driver;
     await driver.init(options.desiredCapabilities).setImplicitWaitTimeout(300000);
     global.asserter = wd.asserters;
-
-    if (process.env.DEVICETYPE === "ios") {
-        return global.driver.waitForElementsByAccessibilityId(
-            'fructose',
-            global.asserter.isDisplayed,
-            1800000
-        );
-    } else if (process.env.DEVICETYPE === "android") {
-        return global.driver.waitForElementsByXPath(
-            '//*[@text="Fructose"]',
-            global.asserter.isDisplayed,
-            1800000
-        );
+    
     } else {
         throw new Error("Please set platformName in dextrose config")
     }
