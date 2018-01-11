@@ -14,7 +14,7 @@
     "test": "jest src"
   },
   "dependencies": {
-    "aws-cli": "^0.0.1",
+    "aws-sdk": "^2.179.0",
     "babel-core": "6.26.0",
     "babel-preset-react-native": "4.0.0",
     "commander": " 2.12.1",
