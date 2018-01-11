@@ -1,0 +1,23 @@
+//- template.pug
+html
+  head
+    style
+      include style.css
+      
+h1(class='title') Dextrose Snaps
+
+div(class='wrapper')
+  each name, index in names
+    h4(class='story') Story: #{name}
+    div(class='abox')
+      a(class='snap' href=`${ios_pics[index]}`) 
+        img(src=ios_pics[index] class='thumbnail')
+      span ios
+    div(class='abox')
+      a(href=`${android_pics[index]}`) 
+        img(src=android_pics[index] class='thumbnail')
+      span android
+    div(class='abox')
+      a(href=`${web_pics[index]}`) 
+        img(src=web_pics[index] class='thumbnail')
+      span web

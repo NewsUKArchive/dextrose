@@ -1,0 +1,38 @@
+.thumbnail {
+  width: 18%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: darkgray;
+  border-radius: 2px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.abox {
+  position: relative;
+  text-align: center;
+  display: inline;
+}
+
+.abox span {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+}
+
+.story {
+  font-family: Courier New, Courier, monospace;
+  size: 14px;
+  font-weight: bold;
+}
+span {
+  font-family: Courier New, Courier, monospace;
+}
+.title {
+  font-family: Courier New, Courier, monospace;
+  text-align: center;
+}
+
+.wrapper {
+  text-align: center;
+}
