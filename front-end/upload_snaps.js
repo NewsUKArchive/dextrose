@@ -1,6 +1,7 @@
 const fs = require("fs");
 const AWS = require("aws-sdk");
 const path = require("path");
+const logger = require("../lib/logger");
 
 module.exports = (bucket, commitHash, snapPath, opts) => {
   AWS.config.update({ region: opts.region });
