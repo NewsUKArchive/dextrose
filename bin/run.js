@@ -19,14 +19,14 @@ program
   .option("-T, --timeout [timeout]", "the timeout applied to appium before it closes the app", parseInt)
   .option("-l, --loglevel [log-level]")
   .action( (options) => {
-    if (!program.config){
+    if (!progoptionsram.config){
       logger.error("Please specify the dextrose config: --config [directory/config.js]");
       process.exit(1);
     }
-    const path = resolve(program.config);
+    const path = resolve(options.config);
     const config = require(path);
-    config.snapshotWait = program.snapshotWait || 0;
-    config.newCommandTimeout = program.timeout || 600000;
+    config.snapshotWait = options.snapshotWait || 0;
+    config.newCommandTimeout = options.timeout || 600000;
     dextrose(config);
   });
     
