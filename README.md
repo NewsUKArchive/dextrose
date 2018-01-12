@@ -16,22 +16,56 @@ What you do with those images is up to you!
 
 ## The CLI
 
-    dextrose --config ./fructose/dextrose.ios.js
+There are three CLI commands:
 
-The Dextrose cli can be run with the following commands
-
-    --config, -c ./fructose/dextrose.ios.js
-
-    --timeout, -T
-        appium timeout in milliseconds (not applicable to web)
-
-    --snapshotWait, -t
-        the amount of time to wait between loading a component and taking the snap
-    
-    --loglevel, -l
-        default is set to info, able to set level to verbose
+    run, upload and generate-html
 
 
+
+The Dextrose run command can be run with the following commands:
+
+    dextrose run --config path-to-config
+
+        --config, -c -path-to-config
+
+        --timeout, -T
+            appium timeout in milliseconds (not applicable to web)
+
+        --snapshotWait, -t
+            the amount of time to wait between loading a component and taking the snap
+        
+        --loglevel, -l
+            default is set to info, able to set level to verbose
+
+The Dextrose upload command can be run with the following commands:
+
+    dextrose upload snapshotDir --bucket bucketname --key commit_hash
+
+        --bucket, -b
+            the name of the s3 bucket
+
+        --key, -k
+            the name of the key in the bucket
+
+        --region, -r
+            the aws region
+
+The Dextrose generate-html command can be run with the following commands:    
+
+    dextrose generate-html --upload --bucket bucketname --key commit-hash
+
+        --upload, -u
+            using this will attempt to upload the html file to s3
+
+        --bucket, -b
+            the name of the s3 bucket
+
+        --key, -k
+            the name of the key in the bucket
+
+        --region, -r
+            the aws region
+            
 
 Example config 
 
