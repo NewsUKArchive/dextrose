@@ -14,7 +14,7 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     const fileStream = fs.createReadStream(files[file]);
 
     fileStream.on("error", (err) => {
-      logger.error("File Error", err);
+      logger.error("upload snapshots", err);
     });
 
     const uploadParams = {
@@ -27,10 +27,10 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     // call S3 to retrieve upload file to specified bucket
     s3.putObject(uploadParams, (err, data) => {
       if (err) {
-        logger.error("Error", err);
+        logger.error("upload snapshots", err);
       }
       if (data) {
-        logger.info("Upload Success", data.Location);
+        logger.info("upload snapshots", data.Location);
       }
     });
   });

@@ -20,7 +20,7 @@ program
   .option("-l, --loglevel [log-level]")
   .action( (options) => {
     if (!options.config){
-      logger.error("Please specify the dextrose config: --config [directory/config.js]");
+      logger.error("run", "Please specify the dextrose config: --config [directory/config.js]");
       process.exit(1);
     }
     const path = resolve(options.config);
@@ -29,10 +29,6 @@ program
     config.newCommandTimeout = options.timeout || 600000;
     dextrose(config);
   });
-    
-  /*
-  dextrose upload snapshotDir --bucket bucketname --key commit_hash 
-  */
   
   program
     .command('upload-snaps [path]')
@@ -46,16 +42,13 @@ program
       const key = options.key;
       const region = options.region;
   
-      if (!bucket) logger.error("bucket must be defined, use -b");
-      if (!key) logger.error("key must be defined, use -k");
-      if (!path) logger.error("path must be defined");
+      if (!bucket) logger.error("upload-snaps", "bucket must be defined, use -b");
+      if (!key) logger.error("upload-snaps", "key must be defined, use -k");
+      if (!path) logger.error("upload-snaps", "path must be defined");
       if(!path || !key || !bucket) process.exit(1);
       uploadSnaps(bucket, key, path, {region: region});
     });
   
-  /*
-  dextrose generate-html --upload --bucket bucketname --key commit-hash
-  */
   program
     .command('generate-html')
     .alias('g')
@@ -70,18 +63,17 @@ program
       const key = options.key;
       const region = options.region;
       if (options.upload){
-        if (!bucket) logger.error("s3 bucket must be defined, use -b");
-        if (!key) logger.error("bucket key must be defined, use -k");
-        if (!region) logger.error("aws region must be defined, use -r");
+        if (!bucket) logger.error("generate-html" ,"s3 bucket must be defined, use -b");
+        if (!key) logger.error("generate-html", "bucket key must be defined, use -k");
+        if (!region) logger.error("generate-html", "aws region must be defined, use -r");
         if (!key || !bucket || !region) process.exit(1);
         generateHtml(bucket, key, {region: region});
       } else {
         if (!options.dir) {
-          logger.error("path to save to must be defined, -d");
+          logger.error("generate-html", "path to save to must be defined, -d");
           process.exit(1);  
         } 
       }
     });
-
 
 program.parse(process.argv);

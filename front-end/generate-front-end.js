@@ -31,7 +31,7 @@ module.exports = (bucket, commitHash, opts) => {
 
     fs.writeFile("index.html", dextrosePresentation, (err) => {
       if (err) {
-        logger.error(err);
+        logger.error("generate-front-end", err);
         return;
       }
 
@@ -40,7 +40,7 @@ module.exports = (bucket, commitHash, opts) => {
       const fileStream = fs.createReadStream(pagePath);
 
       fileStream.on("error", (err) => {
-        logger.error("File Error", err);
+        logger.error("generate-front-end", err);
       });
 
       const uploadParams = {
@@ -50,13 +50,12 @@ module.exports = (bucket, commitHash, opts) => {
         ContentType: "text/html"
       };
 
-      // call S3 to retrieve upload file to specified bucket
       s3.putObject(uploadParams, (err, data) => {
         if (err) {
-          logger.error("Error", err);
+          logger.error("generate-front-end", err);
         }
         if (data) {
-          logger.info("Uploaded index.html successfully");
+          logger.info("generate-front-end", "Uploaded index.html successfully");
         }
       });
     });
