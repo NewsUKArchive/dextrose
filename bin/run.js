@@ -6,7 +6,7 @@ const dextrose = require("../index").default;
 const logger = require("../lib/logger");
 const uploadSnaps = require('../front-end/upload_snaps');
 const generateHtml = require('../front-end/generate-front-end');
-
+const log = logger.default;
 const loglevel = program.loglevel ? program.loglevel : "info";
 logger.setupLogger(loglevel);
 
@@ -19,20 +19,16 @@ program
   .option("-T, --timeout [timeout]", "the timeout applied to appium before it closes the app", parseInt)
   .option("-l, --loglevel [log-level]")
   .action( (options) => {
-    if (!program.config){
-      logger.error("Please specify the dextrose config: --config [directory/config.js]");
+    if (!options.config){
+      log.error("run", "Please specify the dextrose config: --config [directory/config.js]");
       process.exit(1);
     }
-    const path = resolve(program.config);
+    const path = resolve(options.config);
     const config = require(path);
-    config.snapshotWait = program.snapshotWait || 0;
-    config.newCommandTimeout = program.timeout || 600000;
+    config.snapshotWait = options.snapshotWait || 0;
+    config.newCommandTimeout = options.timeout || 600000;
     dextrose(config);
   });
-    
-  /*
-  dextrose upload snapshotDir --bucket bucketname --key commit_hash 
-  */
   
   program
     .command('upload-snaps [path]')
@@ -46,16 +42,13 @@ program
       const key = options.key;
       const region = options.region;
   
-      if (!bucket) logger.error("bucket must be defined, use -b");
-      if (!key) logger.error("key must be defined, use -k");
-      if (!path) logger.error("path must be defined");
+      if (!bucket) log.error("upload-snaps", "bucket must be defined, use -b");
+      if (!key) log.error("upload-snaps", "key must be defined, use -k");
+      if (!path) log.error("upload-snaps", "path must be defined");
       if(!path || !key || !bucket) process.exit(1);
       uploadSnaps(bucket, key, path, {region: region});
     });
   
-  /*
-  dextrose generate-html --upload --bucket bucketname --key commit-hash
-  */
   program
     .command('generate-html')
     .alias('g')
@@ -70,18 +63,17 @@ program
       const key = options.key;
       const region = options.region;
       if (options.upload){
-        if (!bucket) logger.error("s3 bucket must be defined, use -b");
-        if (!key) logger.error("bucket key must be defined, use -k");
-        if (!region) logger.error("aws region must be defined, use -r");
+        if (!bucket) log.error("generate-html" ,"s3 bucket must be defined, use -b");
+        if (!key) log.error("generate-html", "bucket key must be defined, use -k");
+        if (!region) log.error("generate-html", "aws region must be defined, use -r");
         if (!key || !bucket || !region) process.exit(1);
         generateHtml(bucket, key, {region: region});
       } else {
         if (!options.dir) {
-          logger.error("path to save to must be defined, -d");
+          log.error("generate-html", "path to save to must be defined, -d");
           process.exit(1);  
         } 
       }
     });
-
 
 program.parse(process.argv);

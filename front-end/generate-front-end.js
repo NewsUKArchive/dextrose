@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const AWS = require("aws-sdk");
 const pug = require("pug");
+const log = require("../lib/logger").default;
 
 module.exports = (bucket, commitHash, opts) => {
   AWS.config.update({ region: opts.region });
@@ -16,7 +17,7 @@ module.exports = (bucket, commitHash, opts) => {
     const iosShots = s3ImagesDetails.filter(file => file.includes(".ios.png"));
     const androidShots = s3ImagesDetails.filter(file => file.includes(".android.png"));
     const shotNames = Array.from(
-      new Set(files.map(f => f.replace(/(.ios|.web|.android).png/, "")))
+      new Set(s3ImagesDetails.map(f => f.replace(/(.ios|.web|.android).png/, "")))
     );
     const templatePath = path.join(__dirname, "template.pug");
     const compileTemplate = pug.compileFile(templatePath);
@@ -28,18 +29,18 @@ module.exports = (bucket, commitHash, opts) => {
       web_pics: webShots
     });
 
-    fs.writeFile("index.html", dextrosePresentation, (err) => {
+    const pagePath = path.join(__dirname, "index.html");
+
+    fs.writeFile(pagePath, dextrosePresentation, (err) => {
       if (err) {
-        logger.error(err);
+        log.error("generate-front-end", err);
         return;
       }
-
-      const pagePath = path.join(__dirname, "index.html");
-
+      
       const fileStream = fs.createReadStream(pagePath);
 
       fileStream.on("error", (err) => {
-        logger.error("File Error", err);
+        log.error("generate-front-end", err);
       });
 
       const uploadParams = {
@@ -49,13 +50,12 @@ module.exports = (bucket, commitHash, opts) => {
         ContentType: "text/html"
       };
 
-      // call S3 to retrieve upload file to specified bucket
       s3.putObject(uploadParams, (err, data) => {
         if (err) {
-          logger.error("Error", err);
+          log.error("generate-front-end", err);
         }
         if (data) {
-          logger.info("Uploaded index.html successfully");
+          log.info("generate-front-end", "Uploaded index.html successfully");
         }
       });
     });
