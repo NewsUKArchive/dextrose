@@ -5,8 +5,8 @@ const pug = require("pug");
 
 module.exports = (bucket, commitHash, opts) => {
   AWS.config.update({ region: opts.region });
-  var s3 = new AWS.S3();
-  s3.listObjects({ Bucket: bucket, Prefix: commitHash }, function(err, data) {
+  const s3 = new AWS.S3();
+  s3.listObjects({ Bucket: bucket, Prefix: commitHash }, (err, data) => {
     const contents = data.Contents;
     const files = contents.map(obj => {
       return `${s3.endpoint.href}${bucket}/${obj.Key}`;
@@ -19,16 +19,16 @@ module.exports = (bucket, commitHash, opts) => {
       new Set(files.map(f => f.replace(/(.ios|.web|.android).png/, "")))
     );
     const templatePath = path.join(__dirname, "template.pug");
-    let compiledFunction = pug.compileFile(templatePath);
+    const compileTemplate = pug.compileFile(templatePath);
 
-    const thing = compiledFunction({
+    const dextrosePresentation = compileTemplate({
       names: Array.from(names),
       ios_pics: ios_photos,
       android_pics: android_photos,
       web_pics: web_photos
     });
 
-    fs.writeFile("index.html", thing, function(err) {
+    fs.writeFile("index.html", dextrosePresentation, (err) => {
       if (err) {
         logger.error(err);
         return;
@@ -36,13 +36,13 @@ module.exports = (bucket, commitHash, opts) => {
 
       const pagePath = path.join(__dirname, "index.html");
 
-      var fileStream = fs.createReadStream(pagePath);
+      const fileStream = fs.createReadStream(pagePath);
 
-      fileStream.on("error", function(err) {
+      fileStream.on("error", (err) => {
         logger.error("File Error", err);
       });
 
-      var uploadParams = {
+      const uploadParams = {
         Bucket: bucket,
         Key: `${commitHash}/index.html`,
         Body: fileStream,
@@ -50,7 +50,7 @@ module.exports = (bucket, commitHash, opts) => {
       };
 
       // call S3 to retrieve upload file to specified bucket
-      s3.putObject(uploadParams, function(err, data) {
+      s3.putObject(uploadParams, (err, data) => {
         if (err) {
           logger.error("Error", err);
         }

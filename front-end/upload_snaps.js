@@ -1,6 +1,6 @@
-var fs = require("fs");
-var AWS = require("aws-sdk");
-var path = require("path");
+const fs = require("fs");
+const AWS = require("aws-sdk");
+const path = require("path");
 
 module.exports = (bucket, commitHash, snapPath, opts) => {
   AWS.config.update({ region: opts.region });
@@ -9,10 +9,10 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     .readdirSync(snapPath)
     .map(f => `${path.join(__dirname, snapPath)}/${f}`);
 
-  for (file in files) {
+  files.forEach( file => {
     const fileStream = fs.createReadStream(files[file]);
 
-    fileStream.on("error", function(err) {
+    fileStream.on("error", (err) => {
       logger.error("File Error", err);
     });
 
@@ -24,7 +24,7 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     };
 
     // call S3 to retrieve upload file to specified bucket
-    s3.putObject(uploadParams, function(err, data) {
+    s3.putObject(uploadParams, (err, data) => {
       if (err) {
         logger.error("Error", err);
       }
@@ -32,5 +32,5 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
         logger.info("Upload Success", data.Location);
       }
     });
-  }
+  });
 };
