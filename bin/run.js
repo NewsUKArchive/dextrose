@@ -19,7 +19,7 @@ program
   .option("-T, --timeout [timeout]", "the timeout applied to appium before it closes the app", parseInt)
   .option("-l, --loglevel [log-level]")
   .action( (options) => {
-    if (!progoptionsram.config){
+    if (!options.config){
       logger.error("Please specify the dextrose config: --config [directory/config.js]");
       process.exit(1);
     }
