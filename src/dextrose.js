@@ -10,8 +10,8 @@ let browser;
 const setupMobile = async(config) => {
   await fructose.hooks.mobile.setup()
   client = dextroseClient(7811);
-  await setUpAppium(config);
   await client.waitForApp();
+  await setUpAppium(config);
   return { client };
 }
 
