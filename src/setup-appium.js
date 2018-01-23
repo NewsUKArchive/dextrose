@@ -38,3 +38,26 @@ export default async(config) => {
     await driver.init(options.desiredCapabilities).setImplicitWaitTimeout(300000);
     global.asserter = wd.asserters;
 }
+
+
+
+// const driver = wd.promiseChainRemote({
+//     host,
+//     port
+// });
+
+
+// let defaultCaps = {
+//     autoGrantPermissions: true,
+//     browserName: "",
+//     platformName: config.platformName,
+//     platformVersion: config.platformVersion,
+//     deviceName: config.deviceName,
+//     app: config.app,
+//     deviceName: 'Android',
+//     platformName: 'Android',
+//     automationName: 'uiautomator2'
+// };
+// let driver = new AndroidUiautomator2Driver();
+// await driver.createSession(defaultCaps);
+

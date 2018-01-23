@@ -1,9 +1,12 @@
+
 appium &
 APPIUM_PID=$!
-npx react-native start --reset-cache & 
-PACKAGER_PID=$!
-npx react-native run-ios
-npx dextrose --config ./fructose/dextrose.ios.js --timeout 600000 --snapshotWait 1000  --loglevel verbose
+xcrun simctl boot 'iPhone 7'
 
-kill -9 $APPIUM_PID
+npx react-native start --root $(pwd) --projectRoots $(pwd) &
+react-native run-ios --no-packager
+PACKAGER_PID=$!
+npx dextrose run --config ./fructose/dextrose.ios.js --snapshotWait 2000 --loglevel verbose
+
 kill -9 $PACKAGER_PID
+kill -9 $APPIUM_PID
