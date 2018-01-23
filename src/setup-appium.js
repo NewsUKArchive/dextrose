@@ -25,7 +25,7 @@ const iosAppium = async (config) => {
             deviceName: config.deviceName,
             app: config.app,
             automationName: config.automationName || null,
-            newCommandTimeout: config.newCommandTimeout            
+            newCommandTimeout: config.newCommandTimeout
         },
         host,
         port
