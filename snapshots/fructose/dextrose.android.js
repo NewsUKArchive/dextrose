@@ -9,7 +9,5 @@ module.exports = {
         __dirname,
         "../android/app/build/outputs/apk/app-debug.apk"
     ),
-    ignoredStories: [
-        "brightcove"
-    ]
+      ignoredStories: ["IGNORE"]
 }

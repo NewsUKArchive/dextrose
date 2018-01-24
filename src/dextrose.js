@@ -26,7 +26,6 @@ const setupWeb = async() => {
       browserName:'chrome'
     })
     .get("http://localhost:3000")
-
     log.verbose('Dextrose', 'Browser open')
     return { client, browser };
 }
