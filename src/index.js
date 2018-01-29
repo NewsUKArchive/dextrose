@@ -10,11 +10,9 @@ import log from "./logger";
 import NativeSnapper from "./native-snapper"
 import WebSnapper from "./web-snapper"
 
-const expectedFieldsWeb = ['snapPath', 'platformName']
-const expectedFieldsNative = ['snapPath', 'platformName', 'platformVersion', 'deviceName', 'app']
+const expectedFields = ['snapPath', 'platformName']
 
 const isConfigValid = (config) => {
-    const expectedFields = process.env.NATIVE ? expectedFieldsNative : expectedFieldsWeb;
     expectedFields.map((property) => {
         if (config.hasOwnProperty(property)) {
             return;
