@@ -2,7 +2,6 @@ import fructose from "@times-components/fructose/setup";
 import dextroseClient from "./client/index"
 import log from "./logger"
 import wd from "wd"
-import setUpAppium from "./setup-appium"
 
 let client;
 let browser;
@@ -11,7 +10,6 @@ const setupMobile = async(config) => {
   await fructose.hooks.mobile.setup()
   client = dextroseClient(7811);
   await client.waitForApp();
-  await setUpAppium(config);
   return { client };
 }
 
