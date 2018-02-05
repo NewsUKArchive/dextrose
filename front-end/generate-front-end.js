@@ -8,13 +8,12 @@ const log = require("../lib/logger").default;
 module.exports = (bucket, commitHash, opts) => {
   AWS.config.update({ region: opts.region });
   const s3 = new AWS.S3();
+
   s3.listObjects({ Bucket: bucket, Prefix: commitHash }, (err, data) => {
-    const contents = data.Contents;
-    const s3ImagesDetails = contents
-      .map(details => `${s3.endpoint.href}${bucket}/${details.Key}`)
-    // Assumes dextrose output convention
     const names = []
-    const shots = s3ImagesDetails.reduce( (collection, url) => {
+    const shots = data.Contents.reduce( (collection, details) => {
+      const url = `${s3.endpoint.href}${bucket}/${details.Key}`;
+      
       if (!url.includes(".png")) {
         return collection;
       }
@@ -31,7 +30,7 @@ module.exports = (bucket, commitHash, opts) => {
       collection[storyName][platform] = url;
 
       return collection;
-    } ,{})
+    } ,{});
 
     const templatePath = path.join(__dirname, "template.pug");
     const compileTemplate = pug.compileFile(templatePath);
