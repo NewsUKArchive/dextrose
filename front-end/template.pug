@@ -10,14 +10,14 @@ div(class='wrapper')
   each name, index in names
     h4(class='story') Story: #{name}
     div(class='abox')
-      a(class='snap' href=`${ios_pics[index]}`) 
-        img(src=ios_pics[index] class='thumbnail')
+      a(class='snap' href=`${shots[name].ios}`) 
+        img(src=shots[name].ios class='thumbnail')
       span ios
     div(class='abox')
-      a(href=`${android_pics[index]}`) 
-        img(src=android_pics[index] class='thumbnail')
+      a(href=`${shots[name].android}`) 
+        img(src=shots[name].android class='thumbnail')
       span android
     div(class='abox')
-      a(href=`${web_pics[index]}`) 
-        img(src=web_pics[index] class='thumbnail')
+      a(href=`${shots[name].web}`) 
+        img(src=shots[name].web class='thumbnail')
       span web
