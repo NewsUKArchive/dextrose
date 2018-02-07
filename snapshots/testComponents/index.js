@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     width: '100%',
     height: '100%'
-  },
+  }
 });
 
 export const Hello = props => (
@@ -23,6 +23,7 @@ export const Hello = props => (
 export const Bye = props => (
   <View style={styles.red}>
     <Text>GOODBYE WORLD</Text>
-  </View>);
+  </View>
+);
 
 export const Ignore = props => <Text>IGNORE ME WORLD</Text>;
