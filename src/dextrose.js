@@ -1,54 +1,49 @@
-import fructose from "@times-components/fructose/setup";
-import dextroseClient from "./client/index"
-import log from "./logger"
-import wd from "wd"
+import wd from 'wd';
+import fructose from '@times-components/fructose/setup'; // eslint-disable-line import/no-extraneous-dependencies
+import dextroseClient from './client/index';
+import log from './logger';
 
 let client;
 let browser;
 
-const setupMobile = async(config) => {
-  await fructose.hooks.mobile.setup()
+const setupMobile = async () => {
+  await fructose.hooks.mobile.setup();
   client = dextroseClient(7811);
   await client.waitForApp();
   return { client };
-}
+};
 
-const setupWeb = async() => {
-  log.verbose('Dextrose', 'starting web')
+const setupWeb = async () => {
+  log.verbose('Dextrose', 'starting web');
   await fructose.hooks.web.setup(3000, 10000);
-  client = dextroseClient(7811)
+  client = dextroseClient(7811);
   browser = wd.promiseChainRemote();
 
   await browser
     .init({
-      browserName:'chrome'
+      browserName: 'chrome',
     })
-    .get("http://localhost:3000")
-    log.verbose('Dextrose', 'Browser open')
-    return { client, browser };
-}
+    .get('http://localhost:3000');
+  log.verbose('Dextrose', 'Browser open');
+  return { client, browser };
+};
 
 const tearDownMobile = async () => {
-  client.disconnect()
-  log.verbose('Dextrose', 'torn down client')
+  client.disconnect();
+  log.verbose('Dextrose', 'torn down client');
 
   await fructose.hooks.mobile.cleanup();
-  log.verbose('Dextrose', 'fructose server torn down')
-}
+  log.verbose('Dextrose', 'fructose server torn down');
+};
 
 const tearDownWeb = async () => {
-  client.disconnect()
-  log.verbose('Dextrose', 'torn down client')
+  client.disconnect();
+  log.verbose('Dextrose', 'torn down client');
 
   await fructose.hooks.web.cleanup();
-  log.verbose('Dextrose', 'fructose server torn down')
+  log.verbose('Dextrose', 'fructose server torn down');
 
   await browser.quit();
-}
+};
 
-export {
-  setupMobile,
-  tearDownMobile,
-  setupWeb,
-  tearDownWeb
-}
+export { setupMobile, tearDownMobile, setupWeb, tearDownWeb };

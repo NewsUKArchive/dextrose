@@ -1,9 +1,7 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
-    snapPath: path.join(__dirname, '../snaps'),
-    platformName: "iOS",
-    ignoredStories: ["IGNORE"]
-}
-
-
+  snapPath: path.join(__dirname, '../snaps'),
+  platformName: 'iOS',
+  ignoredStories: ['IGNORE']
+};

@@ -10,6 +10,9 @@
     "dextrose-clean": "./scripts/dextrose-clean.sh"
   },
   "scripts": {
+    "check-format": "yarn is-linted",
+    "lint": "eslint -c .eslintrc.js src front-end  index.js --fix",
+    "is-linted": "eslint -c .eslintrc.js src front-end  index.js",
     "prepare": "babel src --out-dir lib",
     "test": "jest src"
   },
@@ -28,6 +31,13 @@
   "devDependencies": {
     "@times-components/fructose": "3.1.15",
     "babel-cli": "^6.26.0",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.6.1",
+    "express": "^4.16.2",
     "jest": "^21.2.1"
   },
   "peerDependecies": {
