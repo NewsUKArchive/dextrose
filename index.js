@@ -1,3 +1,3 @@
-const dextrose = require("./lib/index");
+const dextrose = require('./lib/index');
 
 module.exports = dextrose;

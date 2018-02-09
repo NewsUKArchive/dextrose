@@ -1,7 +1,7 @@
-const path = require("path");
+const path = require('path');
 
 module.exports = {
   snapPath: path.join(__dirname, '../snaps'),
-  platformName: "web",
+  platformName: 'web',
   breakpoints: [500, 1000]
-}
+};

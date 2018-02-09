@@ -1,20 +1,10 @@
-import {Hello, Bye, Ignore} from "./testComponents";
-import React from "react";
+/* global withComponent */
 
-withComponent(
-    <Hello fructoseID="hello world's"> </Hello>,
-    "description",
-    () => {}
-);
+import React from 'react';
+import { Hello, Bye, Ignore } from './testComponents';
 
-withComponent(
-    <Bye fructoseID="goodbyeWorld"> </Bye>,
-    "description",
-    () => {}
-);
+withComponent(<Hello fructoseID="hello world's" />, 'description', () => {});
 
-withComponent(
-    <Ignore fructoseID="IGNORE"> </Ignore>,
-    "description",
-    () => {}
-)
+withComponent(<Bye fructoseID="goodbyeWorld" />, 'description', () => {});
+
+withComponent(<Ignore fructoseID="IGNORE" />, 'description', () => {});
