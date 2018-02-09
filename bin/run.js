@@ -94,5 +94,4 @@ program
     cleanDextroseStories(dirPath);
   });
 
-
 program.parse(process.argv);

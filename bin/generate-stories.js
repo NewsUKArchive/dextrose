@@ -11,8 +11,7 @@ const overRideStories = (dirPath, files, stringToFind, stringToReplace) =>
         }
         if (data.includes(stringToFind)) {
           const updatedData = data.replace(stringToFind, stringToReplace);
-          const trimmedFile = file.replace('.js', '');
-          const newFilePath = trimmedFile.concat(dextroseExtension);
+          const newFilePath = file.replace('.js', dextroseExtension);
           fs.writeFileSync(`${dirPath}/${newFilePath}`, updatedData);
         }
       });
