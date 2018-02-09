@@ -1,1 +1,0 @@
-for file in *stories.js; do sed 's~@storybook/react-native~dextrose/storiesOfOverloader~' $file>${file%.*}.dextrose.tmp.js; done
