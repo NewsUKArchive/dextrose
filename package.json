@@ -5,9 +5,7 @@
   "license": "MIT",
   "url": "https://github.com/L0wry/dextrose",
   "bin": {
-    "dextrose": "./bin/run.js",
-    "dextrose-stories": "./scripts/dextrose-stories-copy.sh",
-    "dextrose-clean": "./scripts/dextrose-clean.sh"
+    "dextrose": "./bin/run.js"
   },
   "scripts": {
     "check-format": "yarn is-linted",
