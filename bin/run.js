@@ -6,6 +6,7 @@ const dextrose = require("../index").default;
 const logger = require("../lib/logger");
 const uploadSnaps = require('../front-end/upload_snaps');
 const generateHtml = require('../front-end/generate-front-end');
+const { cleanDextroseStories, generateStories } = require("./generate-stories");
 const log = logger.default;
 const loglevel = program.loglevel ? program.loglevel : "info";
 logger.setupLogger(loglevel);
@@ -48,7 +49,10 @@ program
       if(!path || !key || !bucket) process.exit(1);
       uploadSnaps(bucket, key, path, {region: region});
     });
-  
+  program
+    .command('generate-stories')
+    .alias('gs')
+    .action()
   program
     .command('generate-html')
     .alias('g')

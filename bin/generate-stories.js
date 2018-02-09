@@ -1,5 +1,4 @@
 const fs = require("fs");
-
 const dextroseExtension = '.dextrose.tmp.js';
 
 const generateStories = () => {
@@ -76,8 +75,6 @@ const overRideStories = (files, stringToFind, stringToReplace) => {
 }
 
 module.exports = {
-    findStoryFiles,
-    overRideStories,
     cleanDextroseStories,
     generateStories
 }
