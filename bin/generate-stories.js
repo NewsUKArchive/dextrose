@@ -55,7 +55,6 @@ const generateStories = dir => new Promise((resolve, reject) => {
     .catch(err => reject(err));
 });
 
-
 const cleanDextroseStories = (dir) => {
   findStoryFiles(dir, [dextroseExtension])
     .then((files) => {

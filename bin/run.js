@@ -2,7 +2,7 @@
 
 const program = require('commander');
 const { resolve } = require('path');
-const { dextrose } = require('../index');
+const dextrose = require('../index').default;
 const logger = require('../lib/logger');
 const uploadSnaps = require('../front-end/upload_snaps');
 const generateHtml = require('../front-end/generate-front-end');
