@@ -8,5 +8,5 @@ function loadStories() {
 }
 
 module.exports = {
-  loadStories
+  loadStories,
 };
