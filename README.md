@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Dextrose cli integrates into developer workflow by  providing visual snapshots of react native components described by storybook across all react native platforms.
+Dextrose cli integrates into developer workflow by providing visual snapshots of react native components described by [storybook] across all react native platforms.
 
 ## Implementation
 
@@ -16,8 +16,8 @@ Dextrose generates a temporary stories file which reuses your existing component
 
 ## Features
 - Images of components across native platforms
-- Images of components at specified breakpoints web
-- Upload to s3 Bucket
+- Images of components at specified breakpoints across web
+- Upload component images to specified s3 Bucket
 - Html presentation of images across platforms
 
 ## The CLI
@@ -36,9 +36,9 @@ The Dextrose generate-stories command should be run before the run command in fo
 
 The Dextrose run command can be run with the following commands:
 
-    dextrose run --config, -c -path-to-config
+    dextrose run --config, -c -path/to/config
 
-        --config, -c -path-to-config
+        --config, -c -path/to/config
 
         --snapshotWait, -t
             Ms to wait between loading a component and taking the snap
@@ -52,7 +52,7 @@ Example config for platforms
 Native
 
         module.exports = {
-            snapPath: path.join(__dirname, '../snaps'),    
+            snapPath: path.join(__dirname, '../snaps'),
             platformName: "iOS",
             ignoredStories: ["IGNORE"]
         }
@@ -66,7 +66,7 @@ Web
             ignoredStories: ["IGNORE"]
         }
 
-The Dextrose upload command can be run with the following commands:
+The Dextrose upload command can be run with the following commands to push component images to s3:
 
     dextrose upload snapshotDir --bucket bucketname --key commit_hash
 
@@ -79,7 +79,7 @@ The Dextrose upload command can be run with the following commands:
         --region, -r
             the aws region
 
-The Dextrose generate-html command can be run with the following commands:    
+The Dextrose generate-html command can be run with the following commands to generate component presentation:
 
     dextrose generate-html --upload --bucket bucketname --key commit-hash
 
@@ -114,3 +114,4 @@ note: please make sure you have an (emulator | simulator), and a packager runnin
 
 
 [fructose]: https://github.com/newsuk/fructose
+[storybook]: https://github.com/storybooks/storybook
