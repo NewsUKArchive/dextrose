@@ -30,7 +30,7 @@ Dextrose generates a temporary stories file which reuses your existing component
     generate-html
     clean-stories
 
-The Dextrose generate-stories command should be run before the run command in following way:
+The Dextrose generate-stories command can be used to work with [react-native-storybook-loader] to dynamically load in stories:
    
     dextrose generate-stories path/to/your/components/directory
 
@@ -115,3 +115,4 @@ note: please make sure you have an (emulator | simulator), and a packager runnin
 
 [fructose]: https://github.com/newsuk/fructose
 [storybook]: https://github.com/storybooks/storybook
+[react-native-storybook-loader]: https://github.com/elderfo/react-native-storybook-loader
