@@ -5,39 +5,68 @@
 
 ## Purpose
 
-Dextrose cli aims to provide a simple way to get visual snapshots of specified components across all react native platforms.
+Dextrose cli integrates into developer workflow by providing visual snapshots of react native components described by [storybook] across all react native platforms.
 
-## Concept
+## Implementation
 
-Dextrose extends [fructose] by creating a new client. This client has the ability to request the loaded components of a react native app wrapped with Fructose. Once it has the components it cycles through each component and creates an image dump.
+Dextrose extends the [fructose] react native wrapper app by creating a new client.
+It's purpose is to iterate through all the bundled components loaded in the app and take a screenshot of each.
 
-What you do with those images is up to you!
+Dextrose generates a temporary stories file which reuses your existing components storybook stories. This results in maintainable and seamless integration to your existing workflow.
 
+## Features
+- Images of components across native platforms
+- Images of components at specified breakpoints across web
+- Upload component images to specified s3 Bucket
+- Html presentation of images across platforms
 
 ## The CLI
 
-There are three CLI commands:
+ Dextrose supports the following commands:
 
-    run, upload and generate-html
+    run
+    generate-stories
+    upload
+    generate-html
+    clean-stories
 
-
+The Dextrose generate-stories command can be used to work with [react-native-storybook-loader] to dynamically load in stories:
+   
+    dextrose generate-stories path/to/your/components/directory
 
 The Dextrose run command can be run with the following commands:
 
-    dextrose run --config path-to-config
+    dextrose run --config, -c -path/to/config
 
-        --config, -c -path-to-config
-
-        --timeout, -T
-            appium timeout in milliseconds (not applicable to web)
+        --config, -c -path/to/config
 
         --snapshotWait, -t
-            the amount of time to wait between loading a component and taking the snap
+            Ms to wait between loading a component and taking the snap
         
         --loglevel, -l
             default is set to info, able to set level to verbose
 
-The Dextrose upload command can be run with the following commands:
+
+Example config for platforms
+
+Native
+
+        module.exports = {
+            snapPath: path.join(__dirname, '../snaps'),
+            platformName: "iOS",
+            ignoredStories: ["IGNORE"]
+        }
+
+Web
+
+        module.exports = {
+            snapPath: path.join(__dirname, '../snaps'),
+            platformName: "web",
+            breakpoints:[500, 1000],
+            ignoredStories: ["IGNORE"]
+        }
+
+The Dextrose upload command can be run with the following commands to push component images to s3:
 
     dextrose upload snapshotDir --bucket bucketname --key commit_hash
 
@@ -50,7 +79,7 @@ The Dextrose upload command can be run with the following commands:
         --region, -r
             the aws region
 
-The Dextrose generate-html command can be run with the following commands:    
+The Dextrose generate-html command can be run with the following commands to generate component presentation:
 
     dextrose generate-html --upload --bucket bucketname --key commit-hash
 
@@ -65,26 +94,11 @@ The Dextrose generate-html command can be run with the following commands:
 
         --region, -r
             the aws region
-            
 
-Example config 
+The Dextrose clean-stories command should be run in following way:
+   
+    dextrose clean-stories path/to/your/components
 
-Native
-
-        module.exports = {
-            snapPath: path.join(__dirname, '../snaps'),    
-            platformName: "iOS",
-            ignoredStories: ["IGNORE"]
-        }
-
-Web
-
-        module.exports = {
-            snapPath: path.join(__dirname, '../snaps'),
-            platformName: "web",
-            breakpoints:[500, 1000],
-            ignoredStories: ["IGNORE"]
-        }
 
 ## Running the example
 To run the the example Pull the repo
@@ -92,12 +106,13 @@ To run the the example Pull the repo
 - Run `yarn` in the snapshots folder (the snapshots folder is an example of how you would consume dextrose)
 - Run `./run-(ios | android | web).sh`
 
-note: please make sure you have an (emulator | simulator), (appium | selenium) and a packager running.
+note: please make sure you have an (emulator | simulator), and a packager running.
 
 ## Future ideas
-- Specify an S3 bucket (or some cloud storage) to dump images
-- Presentation of the images
 - Comparison of images
-- Set web breakpoints
+- Specify device orientation
+
 
 [fructose]: https://github.com/newsuk/fructose
+[storybook]: https://github.com/storybooks/storybook
+[react-native-storybook-loader]: https://github.com/elderfo/react-native-storybook-loader
