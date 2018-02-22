@@ -52,7 +52,6 @@ const multipleUserCommentsResponse = [
 
 describe('publish stories to github pull request', () => {
   it('should not pick up other comments', async () => {
-    if (!nock.isActive()) { nock.activate(); }
     nock('https://api.github.com')
       .get('/repos/newsuk/times-components/issues/1/comments')
       .reply(200, noCommentsResponse);
@@ -63,7 +62,6 @@ describe('publish stories to github pull request', () => {
   });
 
   it('should only pick comments from the specified account where there are many', async () => {
-    if (!nock.isActive()) { nock.activate(); }
     nock('https://api.github.com')
       .get('/repos/newsuk/times-components/issues/1/comments')
       .reply(200, mixedCommentsResponse);
@@ -74,7 +72,6 @@ describe('publish stories to github pull request', () => {
   });
 
   it('should pick up all comments from specified user', async () => {
-    if (!nock.isActive()) { nock.activate(); }
     nock('https://api.github.com')
       .get('/repos/newsuk/times-components/issues/1/comments')
       .reply(200, multipleUserCommentsResponse);
