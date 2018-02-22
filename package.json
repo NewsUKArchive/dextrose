@@ -12,13 +12,14 @@
     "lint": "eslint -c .eslintrc.js src front-end  index.js --fix",
     "is-linted": "eslint -c .eslintrc.js src front-end  index.js",
     "prepare": "babel src --out-dir lib",
-    "test": "jest src"
+    "test": "jest src bin"
   },
   "dependencies": {
     "aws-sdk": "^2.179.0",
     "babel-core": "6.26.0",
     "babel-preset-react-native": "4.0.0",
     "commander": " 2.12.1",
+    "nock": "^9.1.9",
     "npmlog": "4.1.2",
     "osnap": "^1.1.0",
     "pug": "^2.0.0-rc.4",
