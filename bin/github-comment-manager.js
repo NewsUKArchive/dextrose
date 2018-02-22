@@ -21,24 +21,27 @@ const existingComments = (accountName, accountKey, issueNumber) =>
     });
 });
 
-const deleteComments = (commentsToDelete, accountName, accountKey) =>
+const deleteComment = (commentId, accountName, accountKey) =>
   new Promise((resolve, reject) => {
-    commentsToDelete.forEach((commentId) => {
-      const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
-      const deleteOptions = {
-        url: `https://api.github.com/repos/newsuk/times-components/issues/comments/${commentId}`,
-        headers: {
-          Authorization: auth,
-          'User-Agent': accountName
-        }
-      };
+    const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
+    const deleteOptions = {
+      url: `https://api.github.com/repos/newsuk/times-components/issues/comments/${commentId}`,
+      headers: {
+        Authorization: auth,
+        'User-Agent': accountName
+      }
+    };
 
-      request.delete(deleteOptions, (error) => {
-        if (error) reject(error);
-      });
+    request.delete(deleteOptions, (error) => {
+      if (error) reject(error);
+      resolve('deleted');
     });
-    resolve('deleted');
   });
+
+const deleteCommentsFromList = (commentsToDelete, accountName, accountKey) => {
+  Promise.all(commentsToDelete
+    .map((commentId) => deleteComment(commentId, accountName, accountKey)));
+};
 
 const postComment = (accountName, accountKey, documentPath, issueNumber) =>
   new Promise((resolve, reject) => {
@@ -46,7 +49,7 @@ const postComment = (accountName, accountKey, documentPath, issueNumber) =>
     const postCommentOptions = {
       url: `https://api.github.com/repos/newsuk/times-components/issues/${issueNumber}/comments`,
       headers: {
-        'Authorization': auth,
+        Authorization: auth,
         'User-Agent': accountName
       },
       body: `{ "body": "Please find visual snapshots of your changed components here: ${documentPath} "}`
@@ -60,7 +63,7 @@ const postComment = (accountName, accountKey, documentPath, issueNumber) =>
 
 const publishStories = async (accountName, accountKey, documentPath, issueNumber) => {
   const commentsToDelete = await existingComments(accountName, accountKey, issueNumber);
-  await deleteComments(commentsToDelete, accountName, accountKey);
+  await deleteCommentsFromList(commentsToDelete, accountName, accountKey);
   await postComment(accountName, accountKey, documentPath, issueNumber);
 }
 
