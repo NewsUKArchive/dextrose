@@ -60,6 +60,6 @@ const postComment = (accountName, accountKey, documentPath, issueNumber) => new 
 
 module.exports = async (accountName, accountKey, documentPath, issueNumber) => {
   const commentsToDelete = await existingComments(accountName, accountKey, issueNumber);
-  await deleteComments(commentsToDelete, accountName, accountKey);
+  if (commentsToDelete.length) await deleteComments(commentsToDelete, accountName, accountKey);
   await postComment(accountName, accountKey, documentPath, issueNumber);
 };
