@@ -1,3 +1,13 @@
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/newsuk/dextrose/compare/v1.4.7...v1.5.0) (2018-02-22)
+
+
+### Features
+
+* add capability to cli for git comment publishing ([#64](https://github.com/newsuk/dextrose/issues/64)) ([63895e7](https://github.com/newsuk/dextrose/commit/63895e7))
+
+
+
 <a name="1.4.7"></a>
 ## [1.4.7](https://github.com/newsuk/dextrose/compare/v1.4.6...v1.4.7) (2018-02-20)
 
