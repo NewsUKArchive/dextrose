@@ -4,7 +4,7 @@ const githubCommentManager = require('./github-comment-manager');
 
 const accountName = 'testAccountName';
 const key = 'testKey';
-cosnt repository = 'testRepo'
+const repository = 'testRepo';
 
 const noCommentsResponse = [
   {
