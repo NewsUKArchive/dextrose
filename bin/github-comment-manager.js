@@ -1,10 +1,10 @@
 const request = require('request');
 
-const existingComments = (accountName, accountKey, issueNumber) =>
+const existingComments = (accountName, accountKey, issueNumber, repositoryName) =>
   new Promise((resolve, reject) => {
     const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
     const options = {
-      url: `https://api.github.com/repos/newsuk/times-components/issues/${issueNumber}/comments`,
+      url: `https://api.github.com/repos/${repositoryName}/issues/${issueNumber}/comments`,
       headers: {
        Authorization: auth,
        'User-Agent': accountName
@@ -21,11 +21,11 @@ const existingComments = (accountName, accountKey, issueNumber) =>
     });
 });
 
-const deleteComment = (commentId, accountName, accountKey) =>
+const deleteComment = (commentId, accountName, accountKey, repositoryName) =>
   new Promise((resolve, reject) => {
     const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
     const deleteOptions = {
-      url: `https://api.github.com/repos/newsuk/times-components/issues/comments/${commentId}`,
+      url: `https://api.github.com/repos/${repositoryName}/issues/comments/${commentId}`,
       headers: {
         Authorization: auth,
         'User-Agent': accountName
@@ -43,11 +43,11 @@ const deleteCommentsFromList = (commentsToDelete, accountName, accountKey) => {
     .map((commentId) => deleteComment(commentId, accountName, accountKey)));
 };
 
-const postComment = (accountName, accountKey, documentPath, issueNumber) =>
+const postComment = (accountName, accountKey, documentPath, issueNumber, repositoryName) =>
   new Promise((resolve, reject) => {
     const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
     const postCommentOptions = {
-      url: `https://api.github.com/repos/newsuk/times-components/issues/${issueNumber}/comments`,
+      url: `https://api.github.com/repos/${repositoryName}/issues/${issueNumber}/comments`,
       headers: {
         Authorization: auth,
         'User-Agent': accountName
@@ -61,10 +61,10 @@ const postComment = (accountName, accountKey, documentPath, issueNumber) =>
     });
 });
 
-const publishStories = async (accountName, accountKey, documentPath, issueNumber) => {
-  const commentsToDelete = await existingComments(accountName, accountKey, issueNumber);
-  await deleteCommentsFromList(commentsToDelete, accountName, accountKey);
-  await postComment(accountName, accountKey, documentPath, issueNumber);
+const publishStories = async (accountName, accountKey, documentPath, issueNumber, repositoryName) => {
+  const commentsToDelete = await existingComments(accountName, accountKey, issueNumber, repositoryName);
+  await deleteCommentsFromList(commentsToDelete, accountName, accountKey, repositoryName);
+  await postComment(accountName, accountKey, documentPath, issueNumber, repositoryName);
 }
 
 module.exports = {

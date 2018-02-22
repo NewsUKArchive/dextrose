@@ -4,6 +4,7 @@ const githubCommentManager = require('./github-comment-manager');
 
 const accountName = 'testAccountName';
 const key = 'testKey';
+cosnt repository = 'testRepo'
 
 const noCommentsResponse = [
   {
@@ -56,7 +57,7 @@ describe('publish stories to github pull request', () => {
       .get('/repos/newsuk/times-components/issues/1/comments')
       .reply(200, noCommentsResponse);
     
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1);
+    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
 
     expect(commentsToDelete).toEqual([]);
   });
@@ -66,7 +67,7 @@ describe('publish stories to github pull request', () => {
       .get('/repos/newsuk/times-components/issues/1/comments')
       .reply(200, mixedCommentsResponse);
     
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1);
+    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
 
     expect(commentsToDelete).toEqual([2]);
   });
@@ -76,7 +77,7 @@ describe('publish stories to github pull request', () => {
       .get('/repos/newsuk/times-components/issues/1/comments')
       .reply(200, multipleUserCommentsResponse);
     
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1);
+    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
 
     expect(commentsToDelete).toEqual([1, 2]);
   });

@@ -102,14 +102,16 @@ program
   .option('-a, --accountName [accountName]', 'github account name, used to publish to the pull request as a comment')
   .option('-k --key [key]', 'github account key, used to publish to the pull request as a comment')
   .option('-i --issueNumber [issueNumber]', 'github issue number for the pull request you wish to post to')
+  .option('-r --repository [repository]', 'gitbug organisation and repo e.g. newsuk/times-components')
   .action((options) => {
-    const { path, accountName, key, issueNumber } = options;
+    const { path, accountName, key, issueNumber, repository } = options;
     
     if (!path) log.error('publish-snaps', 'no output path from generate stories command, use -p');
     if (!accountName) log.error('publish-snaps', 'no github account name, use -a');
     if (!key) log.error('publish-snaps', 'no github account key, use -k');
     if (!issueNumber) log.error('publish-snaps', 'no github issue number, use -i');
-    if (!path || !accountName || !key || !issueNumber) process.exit(1);
-    gitHubCommentManager.publishStories(accountName, key, path, issueNumber);
+    if (!repository) log.error('publish-snaps', 'no git organisation and repository specified');
+    if (!path || !accountName || !key || !issueNumber || !repository) process.exit(1);
+    gitHubCommentManager.publishStories(accountName, key, path, issueNumber, repository);
   });
 program.parse(process.argv);
