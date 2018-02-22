@@ -54,7 +54,7 @@ const multipleUserCommentsResponse = [
 describe('publish stories to github pull request', () => {
   it('should not pick up other comments', async () => {
     nock('https://api.github.com')
-      .get('/repos/newsuk/times-components/issues/1/comments')
+      .get('/repos/testRepo/issues/1/comments')
       .reply(200, noCommentsResponse);
     
     const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
@@ -64,7 +64,7 @@ describe('publish stories to github pull request', () => {
 
   it('should only pick comments from the specified account where there are many', async () => {
     nock('https://api.github.com')
-      .get('/repos/newsuk/times-components/issues/1/comments')
+      .get('/repos/testRepo/issues/1/comments')
       .reply(200, mixedCommentsResponse);
     
     const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
@@ -74,7 +74,7 @@ describe('publish stories to github pull request', () => {
 
   it('should pick up all comments from specified user', async () => {
     nock('https://api.github.com')
-      .get('/repos/newsuk/times-components/issues/1/comments')
+      .get('/repos/testRepo/issues/1/comments')
       .reply(200, multipleUserCommentsResponse);
     
     const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
