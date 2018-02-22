@@ -15,7 +15,7 @@ const existingComments = (accountName, accountKey, issueNumber) => new Promise((
     request.get(options, function(error, response, body) {
         if (error) reject(error);
         JSON.parse(body).forEach((comment) => {
-          if(comment.user.login === 'times-tools') {
+          if(comment.user.login === accountName) {
             commentsToDelete.push(comment.id);
           }
         })
@@ -36,7 +36,6 @@ const deleteComments = (commentsToDelete, accountName, accountKey) => new Promis
 
     request.delete(deleteOptions, function(error, response, body) {
       if (error) reject(error);
-      console.log(body);
       resolve('deleted');
     })
   });
@@ -55,14 +54,12 @@ const postComment = (accountName, accountKey, documentPath, issueNumber) => new 
 
     request.post(postCommentOptions, function(error, response, body) {
         if (error) reject(error);
-        console.log(body)
         resolve('commented');
     });
 });
 
 module.exports = async (accountName, accountKey, documentPath, issueNumber) => {
   const commentsToDelete = await existingComments(accountName, accountKey, issueNumber);
-  console.log(commentsToDelete);
   await deleteComments(commentsToDelete, accountName, accountKey);
   await postComment(accountName, accountKey, documentPath, issueNumber);
 };
