@@ -4,11 +4,19 @@ const path = require('path');
 const log = require('../lib/logger').default;
 
 module.exports = (bucket, commitHash, snapPath, opts) => {
-  AWS.config.update({ region: opts.region });
+  log.info('upload snapshots', 'Uploading to S3');
+
+  AWS.config.update({
+    region: opts.region,
+  });
   const s3 = new AWS.S3();
   const files = fs
     .readdirSync(snapPath)
     .map(f => `${path.join(process.cwd(), snapPath)}/${f}`);
+
+  const key = commitHash || '_no-commit-hash_';
+
+  log.info('upload snapshots', `${files.length} images to be uploaded`);
 
   files.forEach((file) => {
     const fileStream = fs.createReadStream(file);
@@ -19,7 +27,7 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
 
     const uploadParams = {
       Bucket: bucket,
-      Key: `${commitHash}/${path.basename(file)}`,
+      Key: `${key}/${path.basename(file)}`,
       Body: fileStream,
       ContentType: 'image/png',
     };
@@ -27,10 +35,10 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     // call S3 to retrieve upload file to specified bucket
     s3.putObject(uploadParams, (err, data) => {
       if (err) {
-        log.error('upload snapshots', err);
+        log.error('upload snapshots', `${path.basename(file)} : ❌   Reason: ${err}`);
       }
       if (data) {
-        log.info('upload snapshots', data.Location);
+        log.info('upload snapshots', `${path.basename(file)} : ✅`);
       }
     });
   });
