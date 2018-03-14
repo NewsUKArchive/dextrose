@@ -8,16 +8,18 @@ h1(class='title') Dextrose Snaps
 
 div(class='wrapper')
   each name, index in names
-    h4(class='story') Story: #{name}
-    div(class='abox')
-      a(class='snap' href=`${shots[name].ios}`) 
-        img(src=shots[name].ios class='thumbnail')
-      span ios
-    div(class='abox')
-      a(href=`${shots[name].android}`) 
-        img(src=shots[name].android class='thumbnail')
-      span android
-    div(class='abox')
-      a(href=`${shots[name].web}`) 
-        img(src=shots[name].web class='thumbnail')
-      span web
+    - let colour = index  % 2 === 0 ? 'blue' : 'pink'
+      div(class=`box-${colour}`)
+        h4(class='story') Story: #{name}
+        div(class='shot')
+          a(class='snap' href=`${shots[name].ios}`) 
+            img(src=shots[name].ios class='thumbnail')
+          span ios
+        div(class='shot')
+          a(href=`${shots[name].android}`) 
+            img(src=shots[name].android class='thumbnail')
+          span android
+        div(class='shot')
+          a(href=`${shots[name].web}`) 
+            img(src=shots[name].web class='thumbnail')
+          span web

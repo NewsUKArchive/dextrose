@@ -1,3 +1,13 @@
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/newsuk/dextrose/compare/v1.5.0...v1.6.0) (2018-03-13)
+
+
+### Features
+
+* improved logging + index styling  ([#65](https://github.com/newsuk/dextrose/issues/65)) ([1a03e91](https://github.com/newsuk/dextrose/commit/1a03e91))
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/newsuk/dextrose/compare/v1.4.7...v1.5.0) (2018-02-22)
 
