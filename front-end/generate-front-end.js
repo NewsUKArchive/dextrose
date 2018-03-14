@@ -9,6 +9,10 @@ module.exports = (bucket, commitHash, opts) => {
   const s3 = new AWS.S3();
 
   s3.listObjects({ Bucket: bucket, Prefix: commitHash }, (s3Error, s3Data) => {
+    if (s3Error) {
+      log.error('generate-front-end', s3Error);
+    };
+  
     const names = [];
     const shots = s3Data.Contents.reduce((collection, details) => {
       const url = `${s3.endpoint.href}${bucket}/${details.Key}`;
