@@ -23,7 +23,7 @@ module.exports = class Snapper {
       const osnap = path.join(__dirname, '../node_modules/.bin/osnap');
       const spawn = spawnSync(osnap, [`${this.platform}`, '-f', `${outputPathWithExtension}`]);
 
-      if (spawn.error) {
+      if (spawn && spawn.error) {
         reject(spawn.error);
       }
       resolve();
