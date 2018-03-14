@@ -11,15 +11,19 @@ div(class='wrapper')
     - let colour = index  % 2 === 0 ? 'blue' : 'pink'
       div(class=`box-${colour}`)
         h4(class='story') Story: #{name}
-        div(class='shot')
-          a(class='snap' href=`${shots[name].ios}`) 
-            img(src=shots[name].ios class='thumbnail')
-          span ios
-        div(class='shot')
-          a(href=`${shots[name].android}`) 
-            img(src=shots[name].android class='thumbnail')
-          span android
-        div(class='shot')
-          a(href=`${shots[name].web}`) 
-            img(src=shots[name].web class='thumbnail')
-          span web
+        if shots[name].ios
+          div(class='shot')
+            a(class='snap' href=`${shots[name].ios}`) 
+              img(src=shots[name].ios class='thumbnail')
+            span ios
+        if shots[name].android
+          div(class='shot')
+            a(href=`${shots[name].android}`) 
+              img(src=shots[name].android class='thumbnail')
+            span android
+        if shots[name].web
+          each width in widths
+            div(class='shot')
+              a(href=`${shots[name].web[width]}`)
+                img(src=shots[name].web[width] class='thumbnail')
+              span= "web-" + `${width}`

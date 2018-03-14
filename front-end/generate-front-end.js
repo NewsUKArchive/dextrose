@@ -9,10 +9,6 @@ module.exports = (bucket, commitHash, opts) => {
   const s3 = new AWS.S3();
 
   s3.listObjects({ Bucket: bucket, Prefix: commitHash }, (s3Error, s3Data) => {
-    if (s3Error) {
-      log.error('generate-front-end', s3Error);
-    };
-
     const names = [];
     const shots = s3Data.Contents.reduce((collection, details) => {
       const url = `${s3.endpoint.href}${bucket}/${details.Key}`;
@@ -21,19 +17,29 @@ module.exports = (bucket, commitHash, opts) => {
         return collection;
       }
 
-      const storyDetails = url.match(/(.*)\.(.*)\.png/);
+      const storyDetails = url.match(/dextrose-test\/(.*)\.(android|ios|web).?(.*).png/);
       const storyName = storyDetails[1];
       const platform = storyDetails[2];
+      const width = storyDetails[3];
 
       if (!collection[storyName]) {
         names.push(storyName);
         collection[storyName] = {}; // eslint-disable-line no-param-reassign
       }
 
-      collection[storyName][platform] = url; // eslint-disable-line no-param-reassign
+      if (platform === "web") {
+        collection[storyName][platform] = collection[storyName][platform] ? collection[storyName][platform] : {};
+        collection[storyName][platform][width] = url;
+      } else {
+        collection[storyName][platform] = url; // eslint-disable-line no-param-reassign
+      }
 
       return collection;
     }, {});
+
+    const webWidths = Object.entries(shots)[0][1].web;
+    const widths = Object.keys(webWidths).sort((a,b) => parseInt(a.split('-')[1]) > parseInt(b.split('-')[1]));
+    console.log(widths);
 
     const templatePath = path.join(__dirname, 'template.pug');
     const compileTemplate = pug.compileFile(templatePath);
@@ -41,6 +47,7 @@ module.exports = (bucket, commitHash, opts) => {
     const dextrosePresentation = compileTemplate({
       names,
       shots,
+      widths,
     });
 
     const pagePath = path.join(__dirname, 'index.html');
