@@ -64,6 +64,7 @@ export default async (dextrose, config, teardown) => {
       log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`);
     }
   } catch (err) {
+    log.error('Error found while snapping images');
     throw err;
   } finally {
     teardown();
