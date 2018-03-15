@@ -1,6 +1,6 @@
 /* global jest describe it expect */
 import path from 'path';
-import { execSync } from 'child_process';
+import { spawnSync } from 'child_process';
 
 import Snapper from './native-snapper';
 
@@ -22,9 +22,7 @@ describe('snapper', () => {
 
     await snapper.snap(outpath);
 
-    expect(execSync.mock.calls[0]).toEqual([
-      `${osnap} ${deviceType} -f ${outpath}.${deviceType}.png`,
-    ]);
+    expect(spawnSync.mock.calls[0]).toEqual([`${osnap}`, [`${deviceType}`, '-f', `${outpath}.${deviceType}.png`]]);
   });
 
   it('snaps ios', async () => {
@@ -34,9 +32,7 @@ describe('snapper', () => {
 
     await snapper.snap(outpath);
 
-    expect(execSync.mock.calls[1]).toEqual([
-      `${osnap} ${deviceType} -f ${outpath}.${deviceType}.png`,
-    ]);
+    expect(spawnSync.mock.calls[1]).toEqual([`${osnap}`, [`${deviceType}`, '-f', `${outpath}.${deviceType}.png`]]);
   });
 
   it('throws an exception if path is not string', () => {
