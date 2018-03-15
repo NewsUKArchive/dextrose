@@ -1,3 +1,13 @@
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/newsuk/dextrose/compare/v1.6.1...v1.7.0) (2018-03-15)
+
+
+### Features
+
+* add capability to display different widths of web snaps ([#66](https://github.com/newsuk/dextrose/issues/66)) ([fc344f9](https://github.com/newsuk/dextrose/commit/fc344f9))
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/newsuk/dextrose/compare/v1.6.0...v1.6.1) (2018-03-15)
 
