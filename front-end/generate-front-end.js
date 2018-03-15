@@ -21,7 +21,7 @@ module.exports = (bucket, commitHash, opts) => {
         return collection;
       }
 
-      const storyDetails = url.match(/dextrose-test\/(.*)\.(android|ios|web).?(.*).png/);
+      const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).png/);
       const storyName = storyDetails[1];
       const platform = storyDetails[2];
       const width = storyDetails[3];
@@ -41,9 +41,13 @@ module.exports = (bucket, commitHash, opts) => {
       return collection;
     }, {});
 
-    const webWidths = Object.entries(shots)[0][1].web;
-    const widths = Object.keys(webWidths).sort((a,b) => parseInt(a.split('-')[1]) > parseInt(b.split('-')[1]));
-    console.log(widths);
+    const firstShot = Object.entries(shots)[0][1];
+    let widths = [];
+
+    if (firstShot.web) {
+      const webWidths = firstShot.web;
+      widths = Object.keys(webWidths).sort((a,b) => parseInt(a.split('-')[1]) > parseInt(b.split('-')[1]));
+    }
 
     const templatePath = path.join(__dirname, 'template.pug');
     const compileTemplate = pug.compileFile(templatePath);
