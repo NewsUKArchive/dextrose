@@ -38,9 +38,9 @@ const deleteComment = (commentId, accountName, accountKey, repositoryName) =>
     });
   });
 
-const deleteCommentsFromList = (commentsToDelete, accountName, accountKey) => {
+const deleteCommentsFromList = (commentsToDelete, accountName, accountKey, repositoryName) => {
   Promise.all(commentsToDelete
-    .map((commentId) => deleteComment(commentId, accountName, accountKey)));
+    .map((commentId) => deleteComment(commentId, accountName, accountKey, repositoryName)));
 };
 
 const postComment = (accountName, accountKey, documentPath, issueNumber, repositoryName) =>
