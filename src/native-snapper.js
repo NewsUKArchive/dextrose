@@ -18,19 +18,17 @@ module.exports = class Snapper {
         `taking snapshot at path: ${outputPathWithExtension}`,
       );
 
-      let proc;
+      const nativeScreenshotCommand = this.platform === 'ios' ?
+        `xcrun simctl io booted screenshot ${outputPathWithExtension}` :
+        `adb shell screencap -p ${outputPathWithExtension}`;
 
-      if (this.platform === 'ios') {
-        proc = shell.exec(`xcrun simctl io booted screenshot ${outputPathWithExtension}`);
-      } else {
-        proc = shell.exec(`adb shell screencap -p ${outputPathWithExtension}`);
-      }
+      const screenshotResult = shell.exec(nativeScreenshotCommand);
 
-      if (proc.code === 0) {
+      if (screenshotResult.code === 0) {
         resolve();
+      } else {
+        reject(screenshotResult.stderr);
       }
-
-      reject(proc.stderr);
     });
   }
 };
