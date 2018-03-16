@@ -1,8 +1,13 @@
 import path from 'path';
+import shell  from 'shelljs';
 import log from './logger';
 
-const { spawnSync } = require('child_process');
 
+const handleExec = (code, stdout, stderr) => {
+  if (code !== 0) {
+    reject(stderr);
+  }
+}
 module.exports = class Snapper {
   constructor(platform) {
     this.platform = platform.toLowerCase();
@@ -20,13 +25,16 @@ module.exports = class Snapper {
         `taking snapshot at path: ${outputPathWithExtension}`,
       );
 
-      const osnap = path.join(__dirname, '../node_modules/.bin/osnap');
-      const spawn = spawnSync(osnap, [`${this.platform}`, '-f', `${outputPathWithExtension}`]);
+      let proc;
 
-      if (spawn && spawn.error) {
-        reject(spawn.error);
+      if (this.platform === 'ios') {
+        proc = shell.exec(`xcrun simctl io booted ${outputPathWithExtension}`);
+      } else {
+        proc = shell.exec(`adb shell screencap -p ${outputPathWithExtension}`);
       }
-      resolve();
+
+      proc.code === 0 ? resolve() : reject(proc.stderr) 
+
     });
   }
 };
