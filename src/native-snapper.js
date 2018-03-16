@@ -1,13 +1,6 @@
-import path from 'path';
-import shell  from 'shelljs';
+import shell from 'shelljs';
 import log from './logger';
 
-
-const handleExec = (code, stdout, stderr) => {
-  if (code !== 0) {
-    reject(stderr);
-  }
-}
 module.exports = class Snapper {
   constructor(platform) {
     this.platform = platform.toLowerCase();
@@ -28,13 +21,16 @@ module.exports = class Snapper {
       let proc;
 
       if (this.platform === 'ios') {
-        proc = shell.exec(`xcrun simctl io booted ${outputPathWithExtension}`);
+        proc = shell.exec(`xcrun simctl io booted screenshot ${outputPathWithExtension}`);
       } else {
         proc = shell.exec(`adb shell screencap -p ${outputPathWithExtension}`);
       }
 
-      proc.code === 0 ? resolve() : reject(proc.stderr) 
+      if (proc.code === 0) {
+        resolve();
+      }
 
+      reject(proc.stderr);
     });
   }
 };

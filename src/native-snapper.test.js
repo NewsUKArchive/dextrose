@@ -33,7 +33,7 @@ describe('snapper', () => {
 
     await snapper.snap(outpath);
 
-    expect(shell.exec.mock.calls[1]).toEqual([`xcrun simctl io booted ${outpath}.${deviceType}.png`]);
+    expect(shell.exec.mock.calls[1]).toEqual([`xcrun simctl io booted screenshot ${outpath}.${deviceType}.png`]);
   });
 
   it('rejects on non 0 exit code', async () => {
