@@ -1,3 +1,13 @@
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/newsuk/dextrose/compare/v1.7.0...v1.7.1) (2018-03-16)
+
+
+### Bug Fixes
+
+* adding missing parameter in the delete comments from list method ([#68](https://github.com/newsuk/dextrose/issues/68)) ([ab80164](https://github.com/newsuk/dextrose/commit/ab80164))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/newsuk/dextrose/compare/v1.6.1...v1.7.0) (2018-03-15)
 
