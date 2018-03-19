@@ -11,7 +11,7 @@ module.exports = class Snapper {
       throw Error(`Output path should be a string recieved: ${outputPath}`);
     }
     return new Promise((resolve, reject) => {
-      const outputPathWithExtension = `${outputPath}.${this.platform}.png`;
+      const outputPathWithExtension = `${outputPath}.${this.platform}.jpeg`;
       log.verbose(
         'native-snapper',
         `taking snapshot at path: ${outputPathWithExtension}`,
