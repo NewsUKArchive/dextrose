@@ -11,13 +11,11 @@ module.exports = class Snapper {
     if (typeof outputPath !== 'string') {
       throw Error(`Output path should be a string recieved: ${outputPath}`);
     }
-
-
-    if (!fs.existsSync(outputPath)) {
-      fs.mkdirSync(outputPath);
-    }
-
     return new Promise((resolve, reject) => {
+      if (!fs.existsSync(outputPath)) {
+        fs.mkdirSync(outputPath);
+      }
+
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`;
       log.verbose(
         'native-snapper',
