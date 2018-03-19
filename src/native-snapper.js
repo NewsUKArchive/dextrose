@@ -19,8 +19,7 @@ module.exports = class Snapper {
 
       const nativeScreenshotCommand = this.platform === 'ios' ?
         `xcrun simctl io booted screenshot ${outputPathWithExtension}` :
-        `adb shell screencap -p /sdcard/${outputPathWithExtension} &&
-        adb pull /sdcard/${outputPathWithExtension} ${outputPathWithExtension}`;
+        `adb exec-out screencap -p > ${outputPathWithExtension}`;
 
       const screenshotResult = shell.exec(nativeScreenshotCommand);
 
