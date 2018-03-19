@@ -23,7 +23,7 @@ describe('snapper', () => {
 
     await snapper.snap(outpath);
 
-    expect(shell.exec.mock.calls[0]).toEqual([`adb shell screencap -p ${outpath}.${deviceType}.png`]);
+    expect(shell.exec.mock.calls[0]).toEqual([`adb exec-out screencap -p > ${outpath}.${deviceType}.png`]);
   });
 
   it('snaps ios', async () => {
