@@ -1,4 +1,3 @@
-import fs from 'fs';
 import shell from 'shelljs';
 import log from './logger';
 
@@ -12,10 +11,6 @@ module.exports = class Snapper {
       throw Error(`Output path should be a string recieved: ${outputPath}`);
     }
     return new Promise((resolve, reject) => {
-      if (!fs.existsSync(outputPath)) {
-        fs.mkdirSync(outputPath);
-      }
-
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`;
       log.verbose(
         'native-snapper',
