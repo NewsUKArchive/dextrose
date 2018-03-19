@@ -1,3 +1,4 @@
+import fs from 'fs';
 import shell from 'shelljs';
 import log from './logger';
 
@@ -9,6 +10,11 @@ module.exports = class Snapper {
   snap(outputPath) {
     if (typeof outputPath !== 'string') {
       throw Error(`Output path should be a string recieved: ${outputPath}`);
+    }
+
+
+    if (!fs.existsSync(outputPath)) {
+      fs.mkdirSync(outputPath);
     }
 
     return new Promise((resolve, reject) => {
