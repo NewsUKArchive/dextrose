@@ -17,11 +17,11 @@ module.exports = (bucket, commitHash, opts) => {
     const shots = s3Data.Contents.reduce((collection, details) => {
       const url = `${s3.endpoint.href}${bucket}/${details.Key}`;
 
-      if (!url.includes('.png')) {
+      if (!url.match(/.*(\.png|\.jpeg)/)) {
         return collection;
       }
 
-      const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).png/);
+      const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).(png|jpeg)/);
       const storyName = storyDetails[1];
       const platform = storyDetails[2];
       const width = storyDetails[3];
