@@ -12,16 +12,16 @@ module.exports = (bucket, commitHash, opts) => {
     if (s3Error) {
       log.error('generate-front-end', s3Error);
     };
-  
+
     const names = [];
     const shots = s3Data.Contents.reduce((collection, details) => {
       const url = `${s3.endpoint.href}${bucket}/${details.Key}`;
 
-      if (!url.match(/.*(\.png|\.jpeg)/)) {
+      if (!url.includes('.png')) {
         return collection;
       }
 
-      const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).(png|jpeg)/);
+      const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).png/);
       const storyName = storyDetails[1];
       const platform = storyDetails[2];
       const width = storyDetails[3];
