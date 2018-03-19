@@ -43,6 +43,11 @@ export default async (dextrose, config, teardown) => {
 
     log.info(
       'snapBatcher',
+      `Found ${componentsLoaded.length} components loaded in app, will only load ${filteredComponents.length} due to filtering`,
+    );
+
+    log.info(
+      'snapBatcher',
       `Will Load App Components: 
     ${filteredComponents.join('\r\n')}
     `,

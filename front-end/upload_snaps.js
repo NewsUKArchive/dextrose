@@ -14,9 +14,10 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     .readdirSync(snapPath)
     .map(f => `${path.join(process.cwd(), snapPath)}/${f}`);
 
-  const key = commitHash || '_no-commit-hash_';
+  const key = commitHash || 'no-commit-hash';
 
   log.info('upload snapshots', `${files.length} images to be uploaded`);
+  log.info('upload snapshots', `Images to be sent to bucket key: ${key}`);
 
   files.forEach((file) => {
     const fileStream = fs.createReadStream(file);

@@ -1,14 +1,15 @@
 /* global jest describe it expect */
 import path from 'path';
-import { spawnSync } from 'child_process';
+import shell from 'shelljs';
 
 import Snapper from './native-snapper';
 
-jest.mock('child_process');
+let mockExec = {
+  code: 0,
+}
+shell.exec = jest.fn(() => mockExec);
 
 describe('snapper', () => {
-  const osnap = path.join(__dirname, '../node_modules/.bin/osnap');
-
   it('sets the platform', () => {
     const platform = 'android';
     const snapper = new Snapper(platform);
@@ -22,7 +23,7 @@ describe('snapper', () => {
 
     await snapper.snap(outpath);
 
-    expect(spawnSync.mock.calls[0]).toEqual([`${osnap}`, [`${deviceType}`, '-f', `${outpath}.${deviceType}.png`]]);
+    expect(shell.exec.mock.calls[0]).toEqual([`adb exec-out screencap -p > ${outpath}.${deviceType}.png`]);
   });
 
   it('snaps ios', async () => {
@@ -32,7 +33,20 @@ describe('snapper', () => {
 
     await snapper.snap(outpath);
 
-    expect(spawnSync.mock.calls[1]).toEqual([`${osnap}`, [`${deviceType}`, '-f', `${outpath}.${deviceType}.png`]]);
+    expect(shell.exec.mock.calls[1]).toEqual([`xcrun simctl io booted screenshot ${outpath}.${deviceType}.png`]);
+  });
+
+  it('rejects on non 0 exit code', async () => {
+    const outpath = `${__dirname}-test`;
+    const deviceType = 'ios';
+    const snapper = new Snapper(deviceType);
+
+    mockExec = {
+      code: 1,
+      stderr: 'err',
+    };
+
+    expect(snapper.snap(outpath)).rejects.toBe('err');
   });
 
   it('throws an exception if path is not string', () => {

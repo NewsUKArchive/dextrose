@@ -12,7 +12,7 @@ module.exports = (bucket, commitHash, opts) => {
     if (s3Error) {
       log.error('generate-front-end', s3Error);
     };
-  
+
     const names = [];
     const shots = s3Data.Contents.reduce((collection, details) => {
       const url = `${s3.endpoint.href}${bucket}/${details.Key}`;

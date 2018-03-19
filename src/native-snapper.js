@@ -1,7 +1,5 @@
-import path from 'path';
+import shell from 'shelljs';
 import log from './logger';
-
-const { spawnSync } = require('child_process');
 
 module.exports = class Snapper {
   constructor(platform) {
@@ -12,7 +10,6 @@ module.exports = class Snapper {
     if (typeof outputPath !== 'string') {
       throw Error(`Output path should be a string recieved: ${outputPath}`);
     }
-
     return new Promise((resolve, reject) => {
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`;
       log.verbose(
@@ -20,13 +17,17 @@ module.exports = class Snapper {
         `taking snapshot at path: ${outputPathWithExtension}`,
       );
 
-      const osnap = path.join(__dirname, '../node_modules/.bin/osnap');
-      const spawn = spawnSync(osnap, [`${this.platform}`, '-f', `${outputPathWithExtension}`]);
+      const nativeScreenshotCommand = this.platform === 'ios' ?
+        `xcrun simctl io booted screenshot ${outputPathWithExtension}` :
+        `adb exec-out screencap -p > ${outputPathWithExtension}`;
 
-      if (spawn && spawn.error) {
-        reject(spawn.error);
+      const screenshotResult = shell.exec(nativeScreenshotCommand);
+
+      if (screenshotResult.code === 0) {
+        resolve();
+      } else {
+        reject(screenshotResult.stderr);
       }
-      resolve();
     });
   }
 };
