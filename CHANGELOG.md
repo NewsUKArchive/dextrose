@@ -1,3 +1,13 @@
+<a name="1.7.4"></a>
+## [1.7.4](https://github.com/newsuk/dextrose/compare/v1.7.3...v1.7.4) (2018-03-20)
+
+
+### Bug Fixes
+
+* logger ([#71](https://github.com/newsuk/dextrose/issues/71)) ([130a14f](https://github.com/newsuk/dextrose/commit/130a14f))
+
+
+
 <a name="1.7.3"></a>
 ## [1.7.3](https://github.com/newsuk/dextrose/compare/v1.7.2...v1.7.3) (2018-03-20)
 
