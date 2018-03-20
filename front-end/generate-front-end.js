@@ -22,7 +22,8 @@ module.exports = (bucket, commitHash, opts) => {
       }
 
       const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).png/);
-      const storyName = storyDetails[1];
+      const storyURL = storyDetails[1].split('/');
+      const storyName = storyURL[storyURL.length - 1];
       const platform = storyDetails[2];
       const width = storyDetails[3];
 
