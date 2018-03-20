@@ -10,8 +10,6 @@ const { cleanDextroseStories, generateStories } = require('./generate-stories');
 const gitHubCommentManager = require('./github-comment-manager');
 
 const log = logger.default;
-const loglevel = program.loglevel ? program.loglevel : 'info';
-logger.setupLogger(loglevel);
 
 program
   .version('0.0.1')
@@ -26,6 +24,10 @@ program
       log.error('run', 'Please specify the dextrose config: --config [directory/config.js]');
       process.exit(1);
     }
+
+    const loglevel = options.loglevel ? options.loglevel : 'info';
+    logger.setupLogger(loglevel);
+
     const path = resolve(options.config);
     const config = require(path);
     config.snapshotWait = options.snapshotWait || 0;
