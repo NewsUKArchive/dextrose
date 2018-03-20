@@ -1,3 +1,13 @@
+<a name="1.7.3"></a>
+## [1.7.3](https://github.com/newsuk/dextrose/compare/v1.7.2...v1.7.3) (2018-03-20)
+
+
+### Bug Fixes
+
+* remove url out of story name ([#70](https://github.com/newsuk/dextrose/issues/70)) ([88c7b4e](https://github.com/newsuk/dextrose/commit/88c7b4e))
+
+
+
 <a name="1.7.2"></a>
 ## [1.7.2](https://github.com/newsuk/dextrose/compare/v1.7.1...v1.7.2) (2018-03-19)
 
