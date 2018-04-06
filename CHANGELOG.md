@@ -1,3 +1,13 @@
+<a name="1.7.6"></a>
+## [1.7.6](https://github.com/newsuk/dextrose/compare/v1.7.5...v1.7.6) (2018-04-06)
+
+
+### Bug Fixes
+
+* dont upload to s3 if no files ([#72](https://github.com/newsuk/dextrose/issues/72)) ([5254447](https://github.com/newsuk/dextrose/commit/5254447))
+
+
+
 <a name="1.7.5"></a>
 ## [1.7.5](https://github.com/newsuk/dextrose/compare/v1.7.4...v1.7.5) (2018-03-21)
 
