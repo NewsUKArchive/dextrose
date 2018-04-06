@@ -14,6 +14,11 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     .readdirSync(snapPath)
     .map(f => `${path.join(process.cwd(), snapPath)}/${f}`);
 
+  if(files.length == 0) {
+    log.info('no snapshots found', 'No snapshots found');
+    return;
+  }
+
   const key = commitHash || 'no-commit-hash';
 
   log.info('upload snapshots', `${files.length} images to be uploaded`);
