@@ -14,8 +14,8 @@ module.exports = (bucket, commitHash, snapPath, opts) => {
     .readdirSync(snapPath)
     .map(f => `${path.join(process.cwd(), snapPath)}/${f}`);
 
-  if(files.length == 0) {
-    log.info('no snapshots found', 'No snapshots found');
+  if(files.length === 0) {
+    log.info('front-end', 'No snapshots found');
     return;
   }
 
