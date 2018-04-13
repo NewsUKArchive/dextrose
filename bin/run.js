@@ -88,14 +88,29 @@ program
   });
 
 program
-  .command('clean-stories [path]')
-  .alias('cs')
+  .command('clean-dextrose-temp [path]')
+  .alias('cdt')
   .action((dirPath) => {
     if (!dirPath) log.error('run', 'no directory path found ');
 
-    log.info('run', 'cleaning Dextrose stories');
+    log.info('run', 'cleaning Dextrose temp files');
     cleanDextroseStories(dirPath);
   });
+
+
+program
+.command('generate-showcase-files [dirPath]')
+.alias('gsf')
+.action((dirPath) => {
+  if (!dirPath) log.error('run', 'no directory path found ');
+
+  log.info('run', 'Generating Dextrose showcase files');
+  generateStories(dirPath)
+    .then(() => {
+      log.info('run', 'Dextrose showcase files generated');
+    })
+    .catch(err => log.error(err));
+});
 
 program
   .command('publish-snaps')
