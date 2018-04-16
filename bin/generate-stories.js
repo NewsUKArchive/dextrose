@@ -42,7 +42,7 @@ const findStoryFiles = (dir, matchers) => new Promise((resolve, reject) => {
 });
 
 const generateStories = dir => new Promise((resolve, reject) => {
-  const storyExtensionFilesToFind = ['.stories.js', 'stories.web', 'stories.native'];
+  const storyExtensionFilesToFind = ['.showcase.js'];
 
   findStoryFiles(dir, storyExtensionFilesToFind)
     .then((storyFiles) => {
