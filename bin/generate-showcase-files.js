@@ -4,32 +4,45 @@ const pretty = require('js-object-pretty-print').pretty
 const dextroseExtension = '.dextrose.tmp.js';
 const showcaseExtensionFilesToFind = '.showcase.js';
 
-const createDextroseTmp = (dirPath, files) =>
+
+const generateFileData = (dirPath, file, showcaseObject) => 
+  new Promise((resolve, reject) => {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) reject(err);
+
+      const showcaseComponentImports = data.split('export')[0];
+      const indentSpacing = 4;
+      const showcaseComponentAsString = pretty(showcaseObject, indentSpacing, 'PRINT', true);
+      const fileData = `${showcaseComponentImports}export default  ${showcaseComponentAsString}`;
+      const fileName = generateFilePathFor(dirPath, file);
+      
+      resolve({
+        fileName,
+        fileData
+      });
+    });
+  })
+
+const generateFilePathFor = (dirPath, file) => {
+  const fileName = file.split('.js')[0];
+  dirPath = dirPath.split('lib')[0];
+  return `${dirPath}/${fileName}${dextroseExtension}`;
+};
+
+const createDextroseTmpFiles = (dirPath, files) =>
   new Promise((resolve, reject) => {
     files.forEach((file) => {
       const showcaseObject = require(path.resolve(dirPath, file)).default
       showcaseObject.children = showcaseObject.children.filter(currentValue => currentValue.type.includes('story')); 
       
-      fs.readFile(file, 'utf8', (err, data) => {
-        if (err) throw err;
+      generateFileData(dirPath, file, showcaseObject)
+        .then(({ fileName, fileData }) => {
+          fs.writeFile(fileName, fileData, (err) => {
+            if (err) reject(err);
 
-        const showcaseComponentImports = data.split('export')[0];
-        const indentSpacing = 4;
-        const showCaseCompoentObjectString = pretty(showcaseObject, indentSpacing, 'PRINT', true);
-
-        const fileToWrite = `${showcaseComponentImports}export default  ${showCaseCompoentObjectString}`;
-
-        const fileName = file.split('.js')[0];
-        dirPath = dirPath.split('lib')[0];
-        const newFileName = `${dirPath}/${fileName}${dextroseExtension}`;
-
-        fs.writeFile(newFileName, fileToWrite, (err,) => {
-          if (err) throw err
+            resolve();
+          });
         });
-
-        resolve();
-      })    
-                
     });
   });
 
@@ -41,27 +54,20 @@ const findShowcaseFiles = dir =>
       if (!files) {
         reject(Error(`No files in ${dir} found`));
       } else {
-        const storyFiles = files.filter(file => {
+        const showcaseFiles = files.filter(file => {
           if (file.includes(showcaseExtensionFilesToFind)) {
             return file
           }
         });
 
-        resolve(storyFiles);
+        resolve(showcaseFiles);
       }
     });
   });
 
-const generateShowcaseFiles = dir => new Promise((resolve, reject) => {
+const generateShowcaseFiles = dir =>
   findShowcaseFiles(dir)
-    .then((showcaseFiles) => {
-      createDextroseTmp(dir, showcaseFiles);
+    .then(showcaseFiles => createDextroseTmpFiles(dir, showcaseFiles))
 
-      resolve();
-    })
-    .catch(err => reject(err));
-});
+module.exports = generateShowcaseFiles;
 
-module.exports = {
-  generateShowcaseFiles
-};

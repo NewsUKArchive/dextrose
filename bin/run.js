@@ -7,7 +7,7 @@ const logger = require('../lib/logger');
 const uploadSnaps = require('../front-end/upload_snaps');
 const generateHtml = require('../front-end/generate-front-end');
 const { cleanDextroseStories, generateStories } = require('./generate-stories');
-const { generateShowcaseFiles } = require('./generate-showcase-files');
+const generateShowcaseFiles = require('./generate-showcase-files');
 const gitHubCommentManager = require('./github-comment-manager');
 
 const log = logger.default;
