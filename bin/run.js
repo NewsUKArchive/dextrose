@@ -7,6 +7,7 @@ const logger = require('../lib/logger');
 const uploadSnaps = require('../front-end/upload_snaps');
 const generateHtml = require('../front-end/generate-front-end');
 const { cleanDextroseStories, generateStories } = require('./generate-stories');
+const { generateShowcaseFiles } = require('./generate-showcase-files');
 const gitHubCommentManager = require('./github-comment-manager');
 
 const log = logger.default;
@@ -105,7 +106,7 @@ program
   if (!dirPath) log.error('run', 'no directory path found ');
 
   log.info('run', 'Generating Dextrose showcase files');
-  generateStories(dirPath)
+  generateShowcaseFiles(dirPath)
     .then(() => {
       log.info('run', 'Dextrose showcase files generated');
     })
