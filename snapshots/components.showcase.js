@@ -31,7 +31,7 @@ const Ignore = () => <Text>IGNORE ME WORLD</Text>;
 
 
 export default {
-    name: "ExampleTests",
+    name: "snaps",
     children: [
       {
         type: "story",
@@ -41,12 +41,12 @@ export default {
       {
         type: "story",
         name: "goodbye",
-        component: () => <Text style={styles.aqua}> The Chamber of Secrets</Text>
+        component: () => <Bye/>
       },
       {
         type: "story",
         name: "ignore",
-        component: () => <Text style={styles.blue}> The Prisoner of Azkaban</Text>
+        component: () => <Ignore/>
       }
     ]
   };
