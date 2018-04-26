@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
@@ -28,7 +27,6 @@ const Bye = () => (
 );
 
 const Ignore = () => <Text>IGNORE ME WORLD</Text>;
-
 
 export default {
     name: "snaps",
