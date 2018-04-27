@@ -1,3 +1,13 @@
+<a name="3.0.0"></a>
+# [3.0.0](https://github.com/newsuk/dextrose/compare/v1.7.6...v3.0.0) (2018-04-27)
+
+
+### Features
+
+* showcase support - BREAKING CHANGE ([90b30ba](https://github.com/newsuk/dextrose/commit/90b30ba))
+
+
+
 <a name="1.7.6"></a>
 ## [1.7.6](https://github.com/newsuk/dextrose/compare/v1.7.5...v1.7.6) (2018-04-06)
 
