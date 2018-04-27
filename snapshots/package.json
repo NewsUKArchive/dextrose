@@ -10,6 +10,7 @@
         "@times-components/fructose": "^3.3.0",
         "babel-loader": "7.1.4",
         "chromeless": "^1.3.0",
+        "html-webpack-plugin": "^3.2.0",
         "react": "16.3.1",
         "react-dom": "16.3.1",
         "react-native": "0.54.2",

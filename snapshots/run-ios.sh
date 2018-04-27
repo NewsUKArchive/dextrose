@@ -1,7 +1,6 @@
 xcrun simctl boot 'iPhone 7'
 
-rm snaps/hello_worlds.ios.png || echo "hello_worlds.ios.png does not exist"
-rm snaps/goodbyeWorld.ios.png || echo "goodbyeWorld.ios.png does not exist"
+rm snaps/*
 
 ./node_modules/.bin/react-native start --root $(pwd) --projectRoots $(pwd) --reset-cache &
 PACKAGER_PID=$!

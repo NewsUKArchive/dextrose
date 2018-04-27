@@ -49,3 +49,6 @@ sandbox
 lib/
 dist/
 snapshots/dist/
+
+#misc
+seleniumlog.txt
