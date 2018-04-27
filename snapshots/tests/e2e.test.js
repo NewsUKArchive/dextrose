@@ -9,14 +9,14 @@ test.before(t => {
   execFileSync(path.join(__dirname, '../run-ios.sh'), [], { stdio: 'inherit' });
 });
 
-test('dextrose generates a snapshello.ios.png', t => {
-  t.true(fileExists('../snaps/snapshello.ios.png'));
+test('dextrose generates a hello_worlds.ios.png', t => {
+  t.true(fileExists('../snaps/hello_worlds.ios.png'));
 });
 
-test('dextrose generates a snapsgoodbye.ios.png', t => {
-  t.true(fileExists('../snaps/snapsgoodbye.ios.png'));
+test('dextrose generates a goodbyeWorld.ios.png', t => {
+  t.true(fileExists('../snaps/goodbyeWorld.ios.png'));
 });
 
-test('dextrose does not generate a snapsignore.ios.png', t => {
-  t.false(fileExists('../snaps/snapsignore.ios.png'));
+test('dextrose does not generate a IGNORE.ios.png', t => {
+  t.false(fileExists('../snaps/IGNORE.ios.png'));
 });

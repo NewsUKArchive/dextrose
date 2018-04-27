@@ -6,6 +6,8 @@ const dextrose = require('../index').default;
 const logger = require('../lib/logger');
 const uploadSnaps = require('../front-end/upload_snaps');
 const generateHtml = require('../front-end/generate-front-end');
+const { cleanDextroseStories, generateStories } = require('./generate-stories');
+const generateShowcaseFiles = require('./generate-showcase-files');
 const gitHubCommentManager = require('./github-comment-manager');
 
 const log = logger.default;
@@ -71,6 +73,45 @@ program
       process.exit(1);
     }
   });
+
+program
+  .command('generate-stories [dirPath]')
+  .alias('gs')
+  .action((dirPath) => {
+    if (!dirPath) log.error('run', 'no directory path found ');
+
+    log.info('run', 'Generating Dextrose stories');
+    generateStories(dirPath)
+      .then(() => {
+        log.info('run', 'Dextrose stories generated');
+      })
+      .catch(err => log.error(err));
+  });
+
+program
+  .command('clean-dextrose-temp [path]')
+  .alias('cdt')
+  .action((dirPath) => {
+    if (!dirPath) log.error('run', 'no directory path found ');
+
+    log.info('run', 'cleaning Dextrose temp files');
+    cleanDextroseStories(dirPath);
+  });
+
+
+program
+.command('generate-showcase-files [dirPath]')
+.alias('gsf')
+.action((dirPath) => {
+  if (!dirPath) log.error('run', 'no directory path found ');
+
+  log.info('run', 'Generating Dextrose showcase files');
+  generateShowcaseFiles(dirPath)
+    .then(() => {
+      log.info('run', 'Dextrose showcase files generated');
+    })
+    .catch(err => log.error(err));
+});
 
 program
   .command('publish-snaps')
