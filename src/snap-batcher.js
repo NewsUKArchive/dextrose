@@ -36,8 +36,7 @@ export default async (dextrose, config, teardown) => {
 
     log.verbose(
       'snapBatcher',
-      `Found Loaded components in the App:
-    ${componentsLoaded.join('\r\n')}
+      `Found Loaded components in the App:\r\n${componentsLoaded.join('\r\n')}
     `,
     );
 
@@ -48,9 +47,8 @@ export default async (dextrose, config, teardown) => {
 
     log.info(
       'snapBatcher',
-      `Will Load App Components: 
-    ${filteredComponents.join('\r\n')}
-    `,
+      `Will Load App Components:\r\n${filteredComponents.join('\r\n')}
+  `,
     );
 
     for (let i = 0; i < filteredComponents.length; i += 1) {

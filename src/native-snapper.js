@@ -12,10 +12,6 @@ module.exports = class Snapper {
     }
     return new Promise((resolve, reject) => {
       const outputPathWithExtension = `${outputPath}.${this.platform}.png`;
-      log.verbose(
-        'native-snapper',
-        `taking snapshot at path: ${outputPathWithExtension}`,
-      );
 
       const nativeScreenshotCommand = this.platform === 'ios' ?
         `xcrun simctl io booted screenshot ${outputPathWithExtension}` :

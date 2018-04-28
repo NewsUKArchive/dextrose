@@ -4,7 +4,10 @@
     "private": true,
     "scripts": {
         "start": "node node_modules/react-native/local-cli/cli.js start",
-        "test": "ava tests"
+        "test": "ava tests",
+        "dextrose:ios": "./run-ios.sh",
+        "dextrose:android": "./run-android.sh",
+        "dextrose:web": "./run-web.sh"
     },
     "dependencies": {
         "@times-components/fructose": "^3.3.0",

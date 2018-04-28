@@ -51,4 +51,5 @@ dist/
 snapshots/dist/
 
 #misc
-seleniumlog.txt
+snapshots/selenium.log
+snapshots/webpack.log
