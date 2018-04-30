@@ -1,15 +1,12 @@
 import wd from 'wd';
 import fructose from '@times-components/fructose/setup'; // eslint-disable-line import/no-extraneous-dependencies
-import dextroseClient from './client/index';
 import log from './logger';
 
 let client;
 let browser;
 
 const setupMobile = async () => {
-  await fructose.hooks.mobile.setup();
-  client = dextroseClient(7811);
-  await client.waitForApp();
+  const client = await fructose.hooks.mobile.setup();
   return { client };
 };
 
@@ -29,9 +26,6 @@ const setupWeb = async () => {
 };
 
 const tearDownMobile = async () => {
-  client.disconnect();
-  log.verbose('Dextrose', 'torn down client');
-
   await fructose.hooks.mobile.cleanup();
   log.verbose('Dextrose', 'fructose server torn down');
 };

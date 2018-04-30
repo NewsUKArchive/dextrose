@@ -454,15 +454,16 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@times-components/fructose@^3.3.0":
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/@times-components/fructose/-/fructose-3.3.0.tgz#6e555f07752921004b4f06a3cdcc31371c6497ed"
+"@times-components/fructose@^3.5.2":
+  version "3.5.2"
+  resolved "https://registry.yarnpkg.com/@times-components/fructose/-/fructose-3.5.2.tgz#ee544a697801e1e872561bd48a53ce0607ee0d0a"
   dependencies:
     babel-polyfill "^6.26.0"
     callsite "^1.0.0"
     chromeless "^1.3.0"
     commander "^2.12.2"
     express "^4.16.2"
+    html-webpack-plugin "^2.28.0"
     jimp "^0.2.28"
     ngrok "^2.2.24"
     npmlog "^4.1.2"
@@ -1675,7 +1676,7 @@ block-stream@*:
   dependencies:
     inherits "~2.0.0"
 
-bluebird@^3.0.0, bluebird@^3.5.1:
+bluebird@^3.0.0, bluebird@^3.4.7, bluebird@^3.5.1:
   version "3.5.1"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.1.tgz#d9551f9de98f1fcda1e683d17ee91a0602ee2eb9"
 
@@ -3989,6 +3990,17 @@ html-minifier@^3.2.3:
     param-case "2.1.x"
     relateurl "0.2.x"
     uglify-js "3.3.x"
+
+html-webpack-plugin@^2.28.0:
+  version "2.30.1"
+  resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.30.1.tgz#7f9c421b7ea91ec460f56527d78df484ee7537d5"
+  dependencies:
+    bluebird "^3.4.7"
+    html-minifier "^3.2.3"
+    loader-utils "^0.2.16"
+    lodash "^4.17.3"
+    pretty-error "^2.0.2"
+    toposort "^1.0.0"
 
 html-webpack-plugin@^3.2.0:
   version "3.2.0"

@@ -16,6 +16,7 @@ export default async (dextrose, config, teardown) => {
   const notIgnored = componentName =>
     !containsIgnored(componentName, config.ignoredStories);
   try {
+    log.info('here')
     const componentsLoaded = await dextrose.client.getLoadedComponents();
 
     let filteredComponents;
