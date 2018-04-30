@@ -5,5 +5,5 @@ adb reverse tcp:8081 tcp:8081
 adb reverse tcp:7811 tcp:7811
 adb reverse tcp:4723 tcp:4723
 
-./node_modules/.bin/react-native run-android --variant=release --config $(pwd)/rn-cli.config.js
-./node_modules/.bin/dextrose run --config ./fructose/dextrose.android.js --snapshotWait 2000 --loglevel verbose
+./node_modules/.bin/react-native run-android --variant=release --no-packager
+node "../bin/run" run --config ./fructose/dextrose.android.js --snapshotWait 2000 --loglevel verbose

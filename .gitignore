@@ -49,3 +49,7 @@ sandbox
 lib/
 dist/
 snapshots/dist/
+
+#misc
+snapshots/selenium.log
+snapshots/webpack.log
