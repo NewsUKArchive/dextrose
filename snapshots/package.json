@@ -4,10 +4,10 @@
     "private": true,
     "scripts": {
         "start": "node node_modules/react-native/local-cli/cli.js start",
-        "test": "ava tests",
-        "dextrose:ios": "./run-ios.sh",
-        "dextrose:android": "./run-android.sh",
-        "dextrose:web": "./run-web.sh"
+        "test": "yarn test:android && yarn test:ios && yarn test:web",
+        "test:android": "ava tests/e2e.android.test.js",
+        "test:web": "ava tests/e2e.web.test.js",
+        "test:ios": "ava tests/e2e.ios.test.js"
     },
     "dependencies": {
         "@times-components/fructose": "^3.3.0",
