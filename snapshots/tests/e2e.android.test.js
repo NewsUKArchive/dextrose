@@ -9,7 +9,7 @@ test.before(t => {
   execFileSync(path.join(__dirname, '../run-android.sh'), [], { stdio: 'inherit' });
 });
 
-test.only('dextrose generates a snapshello.android.png', t => {
+test('dextrose generates a snapshello.android.png', t => {
   t.true(fileExists('../snaps/snapshello.android.png'));
 });
 
