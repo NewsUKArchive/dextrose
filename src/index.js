@@ -15,7 +15,7 @@ const isConfigValid = (config) => {
 };
 
 export default async (config) => {
-  let dextrose;
+  const dextrose = {};
 
   if (
     config.platformName.toLowerCase() === 'ios' ||
@@ -32,12 +32,12 @@ export default async (config) => {
 
   if (process.env.NATIVE) {
     log.info('Dextrose Index', 'Running Native Config 📱');
-    dextrose = await setupMobile(config);
+    dextrose.client = await setupMobile(config);
     dextrose.snapper = new NativeSnapper(config.platformName);
     await snapBatcher(dextrose, config, tearDownMobile);
   } else if (process.env.WEB) {
     log.info('Dextrose Index', 'Running Web Config 💻');
-    dextrose = await setupWeb();
+    dextrose.client = await setupWeb();
     dextrose.snapper = new WebSnapper(config, dextrose.browser);
     await snapBatcher(dextrose, config, tearDownWeb);
   } else {

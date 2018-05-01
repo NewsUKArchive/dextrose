@@ -11,11 +11,8 @@ const setupMobile = async () => {
 };
 
 const setupWeb = async () => {
-  log.verbose('Dextrose', 'starting web');
-  await fructose.hooks.web.setup(3000, 10000);
-  client = dextroseClient(7811);
+  client = await fructose.hooks.web.setup(3000, 10000);
   browser = wd.promiseChainRemote();
-
   await browser
     .init({
       browserName: 'chrome',
@@ -27,16 +24,10 @@ const setupWeb = async () => {
 
 const tearDownMobile = async () => {
   await fructose.hooks.mobile.cleanup();
-  log.verbose('Dextrose', 'fructose server torn down');
 };
 
 const tearDownWeb = async () => {
-  client.disconnect();
-  log.verbose('Dextrose', 'torn down client');
-
   await fructose.hooks.web.cleanup();
-  log.verbose('Dextrose', 'fructose server torn down');
-
   await browser.quit();
 };
 
