@@ -403,9 +403,9 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@times-components/fructose@^3.5.6":
-  version "3.5.6"
-  resolved "https://registry.yarnpkg.com/@times-components/fructose/-/fructose-3.5.6.tgz#6a80136bbae3b57332c217aa47d9acb55f60eec8"
+"@times-components/fructose@^3.5.8":
+  version "3.5.8"
+  resolved "https://registry.yarnpkg.com/@times-components/fructose/-/fructose-3.5.8.tgz#769978152d3ca269b608c75e4905a104cf1c4c64"
   dependencies:
     babel-polyfill "^6.26.0"
     callsite "^1.0.0"
