@@ -65,7 +65,6 @@ export default async ({client, snapper }, config, teardown) => {
 
       // eslint-disable-next-line no-await-in-loop
       await snapper.snap(`${config.snapPath}/${outputName}`);
-      log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`);
     }
   } catch (err) {
     log.error('snapBatcher', 'Error found while snapping images');

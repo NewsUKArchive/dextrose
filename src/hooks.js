@@ -3,7 +3,8 @@ import fructose from '@times-components/fructose/setup'; // eslint-disable-line 
 import log from './logger';
 
 const setupMobile = async () => {
-  return { client } = await fructose.hooks.mobile.setup();
+  const client  = await fructose.hooks.mobile.setup();
+  return { client }
 };
 
 const setupWeb = async () => {

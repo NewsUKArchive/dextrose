@@ -20,6 +20,10 @@ module.exports = class Snapper {
       const screenshotResult = shell.exec(nativeScreenshotCommand);
 
       if (screenshotResult.code === 0) {
+        log.verbose(
+          'native-snapper',
+          `wrote snapshot to path: ${outputPathWithExtension}`,
+        );
         resolve();
       } else {
         reject(screenshotResult.stderr);
