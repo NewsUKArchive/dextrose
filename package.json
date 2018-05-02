@@ -26,8 +26,7 @@
     "request": "^2.83.0",
     "shelljs": "^0.8.1",
     "socket.io": "^2.0.4",
-    "socket.io-client": "^2.0.4",
-    "wd": "1.4.1"
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
     "@times-components/fructose": "^3.5.8",
