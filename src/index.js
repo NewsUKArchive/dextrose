@@ -16,11 +16,7 @@ const isConfigValid = (config) => {
 
 export default async (config) => {
   let dextrose;
-
-  if (
-    config.platformName.toLowerCase() === 'ios' ||
-    config.platformName.toLowerCase() === 'android'
-  ) {
+  if ( config.platformName.toLowerCase() === 'ios' || config.platformName.toLowerCase() === 'android') {
     process.env.NATIVE = true;
   } else if (config.platformName === 'web') {
     process.env.WEB = true;

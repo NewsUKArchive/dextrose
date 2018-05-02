@@ -12,12 +12,11 @@ function containsIgnored(componentName, ignoredStories) {
   return false;
 }
 
-export default async ({client, snapper }, config) => {
+export default async ({client, snapper }, config, teardown) => {
   const notIgnored = componentName =>
     !containsIgnored(componentName, config.ignoredStories);
   try {
 
-    log.info('', client)
     const componentsLoaded = await client.getLoadedComponents();
 
     let filteredComponents;
