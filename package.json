@@ -26,11 +26,10 @@
     "request": "^2.83.0",
     "shelljs": "^0.8.1",
     "socket.io": "^2.0.4",
-    "socket.io-client": "^2.0.4",
-    "wd": "1.4.1"
+    "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
-    "@times-components/fructose": "^3.3.0",
+    "@times-components/fructose": "^3.5.8",
     "babel-cli": "^6.26.0",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -42,6 +41,6 @@
     "jest": "^21.2.1"
   },
   "peerDependecies": {
-    "@times-components/fructose": "3.1.15"
+    "@times-components/fructose": "3.5.8"
   }
 }

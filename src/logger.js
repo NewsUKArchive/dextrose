@@ -7,27 +7,21 @@ const setupLogger = (logLevel) => {
   log.info('Dextrose Logger', `Log level is ${log.level}`);
 };
 
-const getDate = () =>
-  new Date()
-    .toISOString()
-    .replace(/z|t/gi, ' ')
-    .trim();
-
 export default {
   info: (fileName, textToLog) => {
     log.stream = process.stdout;
     log.prefixStyle = { fg: 'green', bg: 'black' };
-    log.info(`${getDate()} [${fileName}] :`, textToLog);
+    log.info(`[${fileName}] :`, textToLog);
   },
   verbose: (fileName, textToLog) => {
     log.stream = process.stdout;
     log.prefixStyle = { fg: 'blue' };
-    log.verbose(`${getDate()} [${fileName}] :`, textToLog);
+    log.verbose(`[${fileName}] :`, textToLog);
   },
   error: (fileName, textToError) => {
     log.stream = process.stderr;
     log.prefixStyle = { fg: 'red' };
-    log.error(`${getDate()} [${fileName}] :`, textToError);
+    log.error(`[${fileName}] :`, textToError);
   },
 };
 
