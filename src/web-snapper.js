@@ -38,7 +38,7 @@ module.exports = class WebSnapper {
         }.png`;
         
         // eslint-disable-next-line no-await-in-loop
-         await chromeless.screenshot({ filePath: outputPathWithExtension })
+         await this.chromeless.screenshot({ filePath: outputPathWithExtension })
          log.verbose(
           'web-snapper',
           `wrote snapshot to path: ${outputPathWithExtension}`,
