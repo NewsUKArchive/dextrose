@@ -1,4 +1,4 @@
-import { setupMobile, setupWeb, tearDownMobile, tearDownWeb } from './dextrose';
+import { setupMobile, setupWeb, tearDownMobile, tearDownWeb } from './hooks';
 import snapBatcher from './snap-batcher';
 import log from './logger';
 import NativeSnapper from './native-snapper';
@@ -16,11 +16,7 @@ const isConfigValid = (config) => {
 
 export default async (config) => {
   let dextrose;
-
-  if (
-    config.platformName.toLowerCase() === 'ios' ||
-    config.platformName.toLowerCase() === 'android'
-  ) {
+  if ( config.platformName.toLowerCase() === 'ios' || config.platformName.toLowerCase() === 'android') {
     process.env.NATIVE = true;
   } else if (config.platformName === 'web') {
     process.env.WEB = true;
@@ -35,10 +31,11 @@ export default async (config) => {
     dextrose = await setupMobile(config);
     dextrose.snapper = new NativeSnapper(config.platformName);
     await snapBatcher(dextrose, config, tearDownMobile);
+
   } else if (process.env.WEB) {
     log.info('Dextrose Index', 'Running Web Config 💻');
     dextrose = await setupWeb();
-    dextrose.snapper = new WebSnapper(config, dextrose.browser);
+    dextrose.snapper = new WebSnapper(config, dextrose.chromeless);
     await snapBatcher(dextrose, config, tearDownWeb);
   } else {
     throw new Error('Please set a valid platformName "Web | Android | iOS"');

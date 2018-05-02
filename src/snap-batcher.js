@@ -12,11 +12,12 @@ function containsIgnored(componentName, ignoredStories) {
   return false;
 }
 
-export default async (dextrose, config, teardown) => {
+export default async ({client, snapper }, config, teardown) => {
   const notIgnored = componentName =>
     !containsIgnored(componentName, config.ignoredStories);
   try {
-    const componentsLoaded = await dextrose.client.getLoadedComponents();
+
+    const componentsLoaded = await client.getLoadedComponents();
 
     let filteredComponents;
 
@@ -53,7 +54,7 @@ export default async (dextrose, config, teardown) => {
 
     for (let i = 0; i < filteredComponents.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await dextrose.client.loadComponent(filteredComponents[i]);
+      await client.loadComponent(filteredComponents[i]);
 
       const outputName = filteredComponents[i]
         .replace(/\s/g, '_')
@@ -63,7 +64,7 @@ export default async (dextrose, config, teardown) => {
       if (config.snapshotWait) await snooze(config.snapshotWait);
 
       // eslint-disable-next-line no-await-in-loop
-      await dextrose.snapper.snap(`${config.snapPath}/${outputName}`);
+      await snapper.snap(`${config.snapPath}/${outputName}`);
       log.info('snapBatcher', `Snapped component: ${filteredComponents[i]}`);
     }
   } catch (err) {
