@@ -2,17 +2,32 @@
 
 # Dextrose
 
+## Brought to you by The Times Tooling team  🛠
 
-## Purpose
+Dextrose is a testing library that enables the screen shots of components across all react-native platforms
 
-Dextrose cli integrates into developer workflow by providing visual snapshots of react native components described by [storybook] across all react native platforms.
+This has been made possible using [fructose] to load components.
+<p align="center">
+  <img src="https://imgur.com/XYNWGol.gif" style="width: 200px;">
+</p>
+
+<p align="center">iOS loading in components and taking screenshots</p>
+
+# Overview
+
 
 ## Implementation
 
-Dextrose extends the [fructose] react native wrapper app by creating a new client.
-It's purpose is to iterate through all the bundled components loaded in the app and take a screenshot of each.
+Dextrose's purpose is to iterate through all the bundled components defined by showcases and take a screenshot of each.
 
-Dextrose generates a temporary stories file which reuses your existing components storybook stories. This results in maintainable and seamless integration to your existing workflow.
+The `.showcase` file is a description of how a component should be rendered.
+`Showcase` files came around because originally [fructose] consumed `storybook` files. This eventually resulted in numerous issues so we created an abstraction layer which decouples components from storybook.
+You can see a working example of how showcase to storybook works here.
+
+[Times-Components-storybook]
+
+[react-native-showcase-loader] can be used to dynamically generate a component file with all your defined components.
+
 
 ## Features
 - Images of components across native platforms
@@ -25,14 +40,8 @@ Dextrose generates a temporary stories file which reuses your existing component
  Dextrose supports the following commands:
 
     run
-    generate-stories
     upload
     generate-html
-    clean-stories
-
-The Dextrose generate-stories command can be used to work with [react-native-storybook-loader] to dynamically load in stories:
-   
-    dextrose generate-stories path/to/your/components/directory
 
 The Dextrose run command can be run with the following commands:
 
@@ -95,9 +104,6 @@ The Dextrose generate-html command can be run with the following commands to gen
         --region, -r
             the aws region
 
-The Dextrose clean-stories command should be run in following way:
-   
-    dextrose clean-stories path/to/your/components
 
 
 ## Running the example
@@ -115,4 +121,5 @@ note: please make sure you have an (emulator | simulator), and a packager runnin
 
 [fructose]: https://github.com/newsuk/fructose
 [storybook]: https://github.com/storybooks/storybook
-[react-native-storybook-loader]: https://github.com/elderfo/react-native-storybook-loader
+[react-native-showcase-loader]: https://github.com/milesillsley/react-native-showcase-loader
+[times-components-storybook]: https://github.com/newsuk/times-components/tree/master/packages/storybook
