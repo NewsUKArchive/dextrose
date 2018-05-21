@@ -15,7 +15,7 @@ const existingComments = (accountName, accountKey, issueNumber, repositoryName) 
       if (error) reject(error);
       const ids = JSON.parse(data)
         .filter(({ user }) => user.login === accountName)
-        .filter(({ body }) => body.includes('Please find visual snapshots'))
+        .filter(({ body }) => !body.includes('Expo'))
         .map(({ id }) => id);
       
       resolve(ids);
