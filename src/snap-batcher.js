@@ -3,25 +3,25 @@ import log from './logger';
 
 const snooze = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-function containsIgnored(componentName, ignoredStories) {
-  for (let i = 0; i < ignoredStories.length; i += 1) {
-    if (componentName.includes(ignoredStories[i])) {
+function containsIgnored(componentName, ignoredShowcases) {
+  for (let i = 0; i < ignoredShowcases.length; i += 1) {
+    if (componentName.includes(ignoredShowcases[i])) {
       return true;
     }
   }
   return false;
 }
 
-export default async ({client, snapper }, config, teardown) => {
+export default async ({ client, snapper }, config, teardown) => {
   const notIgnored = componentName =>
-    !containsIgnored(componentName, config.ignoredStories);
+    !containsIgnored(componentName, config.ignoredShowcases);
   try {
 
     const componentsLoaded = await client.getLoadedComponents();
 
     let filteredComponents;
 
-    if (!config.ignoredStories) {
+    if (!config.ignoredShowcases) {
       filteredComponents = componentsLoaded;
     } else {
       filteredComponents = componentsLoaded.filter(notIgnored);

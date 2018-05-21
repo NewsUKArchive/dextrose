@@ -63,7 +63,7 @@ Native
         module.exports = {
             snapPath: path.join(__dirname, '../snaps'),
             platformName: "iOS",
-            ignoredStories: ["IGNORE"]
+            ignoredShowcases: ["IGNORE"]
         }
 
 Web
@@ -72,7 +72,7 @@ Web
             snapPath: path.join(__dirname, '../snaps'),
             platformName: "web",
             breakpoints:[500, 1000],
-            ignoredStories: ["IGNORE"]
+            ignoredShowcases: ["IGNORE"]
         }
 
 The Dextrose upload command can be run with the following commands to push component images to s3:

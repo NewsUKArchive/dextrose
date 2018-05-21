@@ -4,5 +4,5 @@ module.exports = {
   snapPath: path.join(__dirname, '../snaps'),
   platformName: 'web',
   breakpoints: [500],
-  ignoredStories: ['ignore']
+  ignoredShowcases: ['ignore']
 };
