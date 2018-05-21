@@ -11,10 +11,11 @@ const existingComments = (accountName, accountKey, issueNumber, repositoryName) 
       }
     };
 
-    request.get(options, (error, response, body) => {
+    request.get(options, (error, response, data) => {
       if (error) reject(error);
-      const ids = JSON.parse(body)
+      const ids = JSON.parse(data)
         .filter(({ user }) => user.login === accountName)
+        .filter(({ body }) => !body.includes('Expo'))
         .map(({ id }) => id);
       
       resolve(ids);
