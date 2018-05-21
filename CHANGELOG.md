@@ -1,3 +1,13 @@
+<a name="4.0.1"></a>
+## [4.0.1](https://github.com/newsuk/dextrose/compare/v4.0.0...v4.0.1) (2018-05-21)
+
+
+### Bug Fixes
+
+* only deletes dextrose related comments ([#82](https://github.com/newsuk/dextrose/issues/82)) ([5266622](https://github.com/newsuk/dextrose/commit/5266622))
+
+
+
 <a name="4.0.0"></a>
 # [4.0.0](https://github.com/newsuk/dextrose/compare/v3.0.5...v4.0.0) (2018-05-21)
 
