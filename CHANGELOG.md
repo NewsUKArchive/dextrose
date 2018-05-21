@@ -1,3 +1,8 @@
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/newsuk/dextrose/compare/v3.0.5...v4.0.0) (2018-05-21)
+
+
+
 <a name="3.0.5"></a>
 ## [3.0.5](https://github.com/newsuk/dextrose/compare/v3.0.4...v3.0.5) (2018-05-21)
 
