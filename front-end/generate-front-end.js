@@ -42,6 +42,11 @@ module.exports = (bucket, commitHash, opts) => {
       return collection;
     }, {});
 
+    if (!Object.entries(shots)[0]) { 
+      log.info('generate-front-end', 'no shots exist - skipping.');
+      return 
+    }
+
     const firstShot = Object.entries(shots)[0][1];
     let widths = [];
 
