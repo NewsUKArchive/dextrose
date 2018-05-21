@@ -24,7 +24,7 @@ describe('Snap batcher', () => {
     teardown = jest.fn();
     config = {
       snapPath: 'path',
-      ignoredStories: ['ignorableComponent'],
+      ignoredShowcases: ['ignorableComponent'],
     };
   });
 
@@ -53,19 +53,19 @@ describe('Snap batcher', () => {
   });
 
   it('ignores single component defined in config', async () => {
-    config.ignoredStories = ['component2'];
+    config.ignoredShowcases = ['component2'];
     await snapBatcher(dextroseMock, config, teardown);
     expect(dextroseMock.snapper.snap.mock.calls.length).toBe(2);
   });
 
   it('ignores multiple components defined in config', async () => {
-    config.ignoredStories = ['component2', 'component1'];
+    config.ignoredShowcases = ['component2', 'component1'];
     await snapBatcher(dextroseMock, config, teardown);
     expect(dextroseMock.snapper.snap.mock.calls.length).toBe(1);
   });
 
   it("doesn't ignore when ignoreStories is undefined", async () => {
-    config.ignoredStories = undefined;
+    config.ignoredShowcases = undefined;
     await snapBatcher(dextroseMock, config, teardown);
     expect(dextroseMock.snapper.snap.mock.calls.length).toBe(3);
   });
