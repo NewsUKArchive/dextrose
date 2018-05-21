@@ -5,10 +5,15 @@ const pug = require('pug');
 const log = require('../lib/logger').default;
 
 module.exports = (bucket, commitHash, opts) => {
-  AWS.config.update({ region: opts.region });
+  AWS.config.update({
+    region: opts.region
+  });
   const s3 = new AWS.S3();
 
-  s3.listObjects({ Bucket: bucket, Prefix: commitHash }, (s3Error, s3Data) => {
+  s3.listObjects({
+    Bucket: bucket,
+    Prefix: commitHash
+  }, (s3Error, s3Data) => {
     if (s3Error) {
       log.error('generate-front-end', s3Error);
     };
@@ -21,7 +26,8 @@ module.exports = (bucket, commitHash, opts) => {
         return collection;
       }
 
-      const storyDetails = url.match(/(.*)\.(android|ios|web).?(.*).png/);
+      const storyDetails = url.match(
+        /(.*)\.(android|ios|web).?(.*).png/);
       const storyURL = storyDetails[1].split('/');
       const storyName = storyURL[storyURL.length - 1];
       const platform = storyDetails[2];
@@ -33,7 +39,9 @@ module.exports = (bucket, commitHash, opts) => {
       }
 
       if (platform === "web") {
-        collection[storyName][platform] = collection[storyName][platform] ? collection[storyName][platform] : {};
+        collection[storyName][platform] = collection[storyName][
+          platform
+        ] ? collection[storyName][platform] : {};
         collection[storyName][platform][width] = url;
       } else {
         collection[storyName][platform] = url; // eslint-disable-line no-param-reassign
@@ -42,27 +50,35 @@ module.exports = (bucket, commitHash, opts) => {
       return collection;
     }, {});
 
-    if (!Object.entries(shots)[0]) { 
-      log.info('generate-front-end', 'no shots exist - skipping.');
-      return 
+    let dextrosePresentation;
+
+
+    if (!Object.entries(shots)[0]) {
+      log.info('generate-front-end', 'no shots exist');
+      const templatePath = path.join(__dirname, 'no-snap-template.pug');
+      const compileTemplate = pug.compileFile(templatePath);
+      dextrosePresentation = compileTemplate();
+
+    } else {
+
+      const firstShot = Object.entries(shots)[0][1];
+      let widths = [];
+
+      if (firstShot.web) {
+        const webWidths = firstShot.web;
+        widths = Object.keys(webWidths).sort((a, b) => parseInt(a.split(
+          '-')[1]) > parseInt(b.split('-')[1]));
+      }
+
+      const templatePath = path.join(__dirname, 'snap-template.pug');
+      const compileTemplate = pug.compileFile(templatePath);
+
+      dextrosePresentation = compileTemplate({
+        names,
+        shots,
+        widths,
+      });
     }
-
-    const firstShot = Object.entries(shots)[0][1];
-    let widths = [];
-
-    if (firstShot.web) {
-      const webWidths = firstShot.web;
-      widths = Object.keys(webWidths).sort((a,b) => parseInt(a.split('-')[1]) > parseInt(b.split('-')[1]));
-    }
-
-    const templatePath = path.join(__dirname, 'template.pug');
-    const compileTemplate = pug.compileFile(templatePath);
-
-    const dextrosePresentation = compileTemplate({
-      names,
-      shots,
-      widths,
-    });
 
     const pagePath = path.join(__dirname, 'index.html');
 
@@ -90,7 +106,8 @@ module.exports = (bucket, commitHash, opts) => {
           log.error('generate-front-end', uploadErr);
         }
         if (uploadData) {
-          log.info('generate-front-end', 'Uploaded index.html successfully');
+          log.info('generate-front-end',
+            'Uploaded index.html successfully');
         }
       });
     });
