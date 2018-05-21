@@ -1,3 +1,13 @@
+<a name="3.0.5"></a>
+## [3.0.5](https://github.com/newsuk/dextrose/compare/v3.0.4...v3.0.5) (2018-05-21)
+
+
+### Bug Fixes
+
+* defensive upload ([6571032](https://github.com/newsuk/dextrose/commit/6571032))
+
+
+
 <a name="3.0.4"></a>
 ## [3.0.4](https://github.com/newsuk/dextrose/compare/v3.0.3...v3.0.4) (2018-05-21)
 
