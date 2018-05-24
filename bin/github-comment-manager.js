@@ -1,74 +1,48 @@
-const request = require('request');
+import { read, remove, create } from 'github-comment-manager';
 
-const existingComments = (accountName, accountKey, issueNumber, repositoryName) =>
-  new Promise((resolve, reject) => {
-    const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
-    const options = {
-      url: `https://api.github.com/repos/${repositoryName}/issues/${issueNumber}/comments`,
-      headers: {
-       Authorization: auth,
-       'User-Agent': accountName
-      }
-    };
+const filterVisualSnapshotComments = (comments, account) =>
+  JSON.parse(comments)
+    .filter(({ user }) => user.login === account)
+    .filter(({ body }) =>
+      body.includes('Please find visual snapshots of your changed components here'))
+    .map(({ id }) => id);
 
-    request.get(options, (error, response, data) => {
-      if (error) reject(error);
-      const ids = JSON.parse(data)
-        .filter(({ user }) => user.login === accountName)
-        .filter(({ body }) => !body.includes('Expo'))
-        .map(({ id }) => id);
-      
-      resolve(ids);
-    });
-});
+const getVisualSnapshotComments = (account, token, pullRequest, repository) =>
+  read
+    .comments({
+      account,
+      token,
+      pullRequest,
+      repository,
+    })
+    .then(comments => filterVisualSnapshotComments(comments, account));
 
-const deleteComment = (commentId, accountName, accountKey, repositoryName) =>
-  new Promise((resolve, reject) => {
-    const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
-    const deleteOptions = {
-      url: `https://api.github.com/repos/${repositoryName}/issues/comments/${commentId}`,
-      headers: {
-        Authorization: auth,
-        'User-Agent': accountName
-      }
-    };
-
-    request.delete(deleteOptions, (error) => {
-      if (error) reject(error);
-      resolve('deleted');
-    });
+const deleteComment = (commentId, account, token, repository) =>
+  remove.comment({
+    account,
+    token,
+    repository,
+    commentId,
   });
 
-const deleteCommentsFromList = (commentsToDelete, accountName, accountKey, repositoryName) => {
-  Promise.all(commentsToDelete
-    .map((commentId) => deleteComment(commentId, accountName, accountKey, repositoryName)));
+const deleteCommentsFromList = (comments, account, token, repository) =>
+  Promise.all(comments.map(commentId => deleteComment(commentId, account, token, repository))).then(() => comments.length);
+
+const deleteAllVisualSnapshotComments = async (account, token, pullRequest, repository) => {
+  const comments = await getVisualSnapshotComments(account, token, pullRequest, repository);
+  return deleteCommentsFromList(comments, account, token, repository);
 };
 
-const postComment = (accountName, accountKey, documentPath, issueNumber, repositoryName) =>
-  new Promise((resolve, reject) => {
-    const auth = 'Basic ' + new Buffer(accountName + ':' + accountKey).toString('base64');
-    const postCommentOptions = {
-      url: `https://api.github.com/repos/${repositoryName}/issues/${issueNumber}/comments`,
-      headers: {
-        Authorization: auth,
-        'User-Agent': accountName
-      },
-      body: `{ "body": "Please find visual snapshots of your changed components here: ${documentPath} "}`
-    };
-
-    request.post(postCommentOptions, (error) => {
-      if (error) reject(error);
-      resolve('commented');
-    });
-});
-
-const publishStories = async (accountName, accountKey, documentPath, issueNumber, repositoryName) => {
-  const commentsToDelete = await existingComments(accountName, accountKey, issueNumber, repositoryName);
-  await deleteCommentsFromList(commentsToDelete, accountName, accountKey, repositoryName);
-  await postComment(accountName, accountKey, documentPath, issueNumber, repositoryName);
-}
+const createNewVisualSnapshotComment = (account, token, documentPath, pullRequest, repository) =>
+  create.comment({
+    account,
+    token,
+    repository,
+    comment: `Please find visual snapshots of your changed components here: ${documentPath}`,
+    pullRequest,
+  });
 
 module.exports = {
-  publishStories,
-  existingComments
+  deleteAllVisualSnapshotComments,
+  createNewVisualSnapshotComment,
 };

@@ -80,7 +80,7 @@ program
   .option('-k --key [key]', 'github account key, used to publish to the pull request as a comment')
   .option('-i --issueNumber [issueNumber]', 'github issue number for the pull request you wish to post to')
   .option('-r --repository [repository]', 'gitbug organisation and repo e.g. newsuk/times-components')
-  .action((options) => {
+  .action(async (options) => {
     const { path, accountName, key, issueNumber, repository } = options;
     
     if (!path) log.error('publish-snaps', 'no output path from generate stories command, use -p');
@@ -89,6 +89,7 @@ program
     if (!issueNumber) log.error('publish-snaps', 'no github issue number, use -i');
     if (!repository) log.error('publish-snaps', 'no git organisation and repository specified');
     if (!path || !accountName || !key || !issueNumber || !repository) process.exit(1);
-    gitHubCommentManager.publishStories(accountName, key, path, issueNumber, repository);
+    await gitHubCommentManager.deleteAllVisualSnapshotComments(accountName, key, issueNumber, repository);
+    await gitHubCommentManager.createNewVisualSnapshotComment(accountName, key, path, issueNumber, repository);
   });
 program.parse(process.argv);

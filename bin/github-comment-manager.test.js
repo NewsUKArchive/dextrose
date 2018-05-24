@@ -2,115 +2,173 @@
 const nock = require('nock');
 const githubCommentManager = require('./github-comment-manager');
 
-const accountName = 'testAccountName';
-const key = 'testKey';
+const account = 'testAccountName';
+const token = 'testKey';
 const repository = 'testRepo';
+const pullRequest = 1;
 
 const noCommentsResponse = [
   {
     id: 1,
     user: {
-      login: 'not test account name'
-    }
-  }
+      login: 'not test account name',
+    },
+  },
 ];
 
 const mixedCommentsResponse = [
   {
     id: 1,
-    body: "Please find visual snapshots of your changed components here:",    
+    body: 'Please find visual snapshots of your changed components here:',
     user: {
-      login: 'not test account name'
-    }
+      login: 'not test account name',
+    },
   },
   {
     id: 2,
-    body: "Please find visual snapshots of your changed components here:",    
+    body: 'Please find visual snapshots of your changed components here:',
     user: {
-      login: 'testAccountName'
-    }
+      login: account,
+    },
   },
   {
     id: 3,
-    body: "Please find visual snapshots of your changed components here:",    
+    body: 'Please find visual snapshots of your changed components here:',
     user: {
-      login: 'a different non test account name'
-    }
-  }
+      login: 'a different non test account name',
+    },
+  },
 ];
 
 const multipleUserCommentsResponse = [
   {
     id: 1,
-    body: "Please find visual snapshots of your changed components here:",    
+    body: 'Please find visual snapshots of your changed components here:',
     user: {
-      login: 'testAccountName'
-    }
+      login: account,
+    },
   },
   {
     id: 2,
-    body: "Please find visual snapshots of your changed components here:",    
+    body: 'Please find visual snapshots of your changed components here:',
     user: {
-      login: 'testAccountName'
-    }
-  }
+      login: account,
+    },
+  },
 ];
 
 const sameUserCommentsResponse = [
   {
     id: 1,
-    body: "Please find visual snapshots of your changed components here:",
+    body: 'Please find visual snapshots of your changed components here:',
     user: {
-      login: 'testAccountName'
-    }
+      login: account,
+    },
   },
   {
     id: 2,
-    body: "If you use Expo, view our components by scanning this qr code:",    
+    body: 'If you use Expo, view our components by scanning this qr code:',
     user: {
-      login: 'testAccountName'
-    }
-  }
+      login: account,
+    },
+  },
 ];
 
-describe('publish stories to github pull request', () => {
-  it('should not pick up other comments', async () => {
+describe('deleteAllVisualSnapshotComments', () => {
+  it('should delete multiple visual snapshot comments', async () => {
     nock('https://api.github.com')
-      .get('/repos/testRepo/issues/1/comments')
-      .reply(200, noCommentsResponse);
-    
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
-
-    expect(commentsToDelete).toEqual([]);
-  });
-
-  it('should only pick comments from the specified account where there are many', async () => {
-    nock('https://api.github.com')
-      .get('/repos/testRepo/issues/1/comments')
-      .reply(200, mixedCommentsResponse);
-    
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
-
-    expect(commentsToDelete).toEqual([2]);
-  });
-
-  it('should pick up all comments from specified user', async () => {
-    nock('https://api.github.com')
-      .get('/repos/testRepo/issues/1/comments')
+      .get(`/repos/${account}/${repository}/issues/${pullRequest}/comments`)
       .reply(200, multipleUserCommentsResponse);
-    
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
 
-    expect(commentsToDelete).toEqual([1, 2]);
+    nock('https://api.github.com')
+      .delete(`/repos/${account}/${repository}/issues/comments/1`)
+      .reply(200);
+    nock('https://api.github.com')
+      .delete(`/repos/${account}/${repository}/issues/comments/2`)
+      .reply(200);
+
+    const deletedCount = await githubCommentManager.deleteAllVisualSnapshotComments(
+      account,
+      token,
+      pullRequest,
+      repository,
+    );
+
+    expect(deletedCount).toEqual(2);
   });
 
-  it('should only delete comments about dextrose', async () => {
-    nock('https://api.github.com')   
-      .get('/repos/testRepo/issues/1/comments')
+  it('should not delete any comments', async () => {
+    nock('https://api.github.com')
+      .get(`/repos/${account}/${repository}/issues/${pullRequest}/comments`)
+      .reply(200, noCommentsResponse);
+
+    const deletedCount = await githubCommentManager.deleteAllVisualSnapshotComments(
+      account,
+      token,
+      pullRequest,
+      repository,
+    );
+
+    expect(deletedCount).toEqual(0);
+  });
+
+  it('should only delete comments from specific user', async () => {
+    nock('https://api.github.com')
+      .get(`/repos/${account}/${repository}/issues/${pullRequest}/comments`)
+      .reply(200, mixedCommentsResponse);
+
+    nock('https://api.github.com')
+      .delete(`/repos/${account}/${repository}/issues/comments/2`)
+      .reply(200);
+
+    const deletedCount = await githubCommentManager.deleteAllVisualSnapshotComments(
+      account,
+      token,
+      pullRequest,
+      repository,
+    );
+
+    expect(deletedCount).toEqual(1);
+  });
+
+  it('should only delete visual snapshot comments', async () => {
+    nock('https://api.github.com')
+      .get(`/repos/${account}/${repository}/issues/${pullRequest}/comments`)
       .reply(200, sameUserCommentsResponse);
 
-    const commentsToDelete = await githubCommentManager.existingComments(accountName, key, 1, repository);
+    nock('https://api.github.com')
+      .delete(`/repos/${account}/${repository}/issues/comments/1`)
+      .reply(200);
 
-    expect(commentsToDelete).toEqual([1]);
-  })
+    const deletedCount = await githubCommentManager.deleteAllVisualSnapshotComments(
+      account,
+      token,
+      pullRequest,
+      repository,
+    );
+
+    expect(deletedCount).toEqual(1);
+  });
+});
+
+describe('createNewVisualSnapshotComment', () => {
+  it('should create a visual snapshot comment', async () => {
+    nock('https://api.github.com')
+      .post(
+        `/repos/${account}/${repository}/issues/${pullRequest}/comments`,
+        '{"body": "Please find visual snapshots of your changed components here: index.html"}',
+      )
+      .reply(200);
+
+    const documentPath = 'index.html';
+    const successful = await githubCommentManager
+      .createNewVisualSnapshotComment(account, token, documentPath, pullRequest, repository)
+      .then(() => true)
+      .catch((error) => {
+        console.log(error);
+        return false;
+      });
+
+    expect(successful).toEqual(true);
+  });
 });
