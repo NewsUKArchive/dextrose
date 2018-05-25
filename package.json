@@ -5,14 +5,14 @@
   "license": "MIT",
   "url": "https://github.com/L0wry/dextrose",
   "bin": {
-    "dextrose": "./bin/run.js"
+    "dextrose": "./lib/bin/run.js"
   },
   "scripts": {
     "check-format": "yarn is-linted",
     "lint": "eslint -c .eslintrc.js src front-end  index.js --fix",
     "is-linted": "eslint -c .eslintrc.js src front-end  index.js",
     "prepare": "babel src --out-dir lib",
-    "test": "jest src bin"
+    "test": "jest src"
   },
   "dependencies": {
     "aws-sdk": "^2.179.0",
