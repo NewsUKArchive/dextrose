@@ -3,4 +3,4 @@
 ./node_modules/.bin/react-native start --reset-cache &
 ./node_modules/.bin/fructose-web -d $(pwd)/fructose >> webpack.log &
 
-node "../bin/run" run --config ./fructose/dextrose.web.js -t 2000 --loglevel verbose
+node "../lib/bin/run" run --config ./fructose/dextrose.web.js -t 2000 --loglevel verbose
