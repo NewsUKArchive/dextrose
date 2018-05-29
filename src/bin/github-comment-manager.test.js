@@ -100,7 +100,7 @@ describe('deleteAllVisualSnapshotComments', () => {
     expect(deletedCount).toEqual(2);
   });
 
-  it('should not delete any comments', async () => {
+  it('should not delete any comments as there are no comments made by the specified account', async () => {
     nock('https://api.github.com')
       .get(`/repos/${account}/${repository}/issues/${pullRequest}/comments`)
       .reply(200, noCommentsResponse);
