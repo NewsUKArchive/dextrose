@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 
+import logger, { setupLogger } from '../../lib/logger';
 import gitHubCommentManager from './github-comment-manager';
+import dextrose from '../index';
 
 const program = require('commander');
 const { resolve } = require('path');
-const dextrose = require('../index').default;
-const logger = require('../../lib/logger');
 const uploadSnaps = require('../../front-end/upload_snaps');
 const generateHtml = require('../../front-end/generate-front-end');
 
-const log = logger.default;
 
 program
   .version('0.0.1')
@@ -21,12 +20,12 @@ program
   .option('-l, --loglevel [log-level]')
   .action((options) => {
     if (!options.config) {
-      log.error('run', 'Please specify the dextrose config: --config [directory/config.js]');
+      logger.error('run', 'Please specify the dextrose config: --config [directory/config.js]');
       process.exit(1);
     }
 
     const loglevel = options.loglevel ? options.loglevel : 'info';
-    logger.setupLogger(loglevel);
+    setupLogger(loglevel);
 
     const path = resolve(options.config);
     const config = require(path);
@@ -44,9 +43,9 @@ program
   .action((path, options) => {
     const { bucket, key, region } = options;
 
-    if (!bucket) log.error('upload-snaps', 'bucket must be defined, use -b');
-    if (!key) log.error('upload-snaps', 'key must be defined, use -k');
-    if (!path) log.error('upload-snaps', 'path must be defined');
+    if (!bucket) logger.error('upload-snaps', 'bucket must be defined, use -b');
+    if (!key) logger.error('upload-snaps', 'key must be defined, use -k');
+    if (!path) logger.error('upload-snaps', 'path must be defined');
     if (!path || !key || !bucket) process.exit(1);
     uploadSnaps(bucket, key, path, { region });
   });
@@ -62,13 +61,13 @@ program
     const { bucket, key, region } = options;
 
     if (options.upload) {
-      if (!bucket) log.error('generate-html', 's3 bucket must be defined, use -b');
-      if (!key) log.error('generate-html', 'bucket key must be defined, use -k');
-      if (!region) log.error('generate-html', 'aws region must be defined, use -r');
+      if (!bucket) logger.error('generate-html', 's3 bucket must be defined, use -b');
+      if (!key) logger.error('generate-html', 'bucket key must be defined, use -k');
+      if (!region) logger.error('generate-html', 'aws region must be defined, use -r');
       if (!key || !bucket || !region) process.exit(1);
       generateHtml(bucket, key, { region });
     } else if (!options.dir) {
-      log.error('generate-html', 'path to save to must be defined, -d');
+      logger.error('generate-html', 'path to save to must be defined, -d');
       process.exit(1);
     }
   });
@@ -84,11 +83,11 @@ program
   .action(async (options) => {
     const { path, accountName, key, issueNumber, repository } = options;
     
-    if (!path) log.error('publish-snaps', 'no output path from generate stories command, use -p');
-    if (!accountName) log.error('publish-snaps', 'no github account name, use -a');
-    if (!key) log.error('publish-snaps', 'no github account key, use -k');
-    if (!issueNumber) log.error('publish-snaps', 'no github issue number, use -i');
-    if (!repository) log.error('publish-snaps', 'no git organisation and repository specified');
+    if (!path) logger.error('publish-snaps', 'no output path from generate stories command, use -p');
+    if (!accountName) logger.error('publish-snaps', 'no github account name, use -a');
+    if (!key) logger.error('publish-snaps', 'no github account key, use -k');
+    if (!issueNumber) logger.error('publish-snaps', 'no github issue number, use -i');
+    if (!repository) logger.error('publish-snaps', 'no git organisation and repository specified');
     if (!path || !accountName || !key || !issueNumber || !repository) process.exit(1);
     await gitHubCommentManager.deleteAllVisualSnapshotComments(accountName, key, issueNumber, repository);
     await gitHubCommentManager.createNewVisualSnapshotComment(accountName, key, path, issueNumber, repository);
