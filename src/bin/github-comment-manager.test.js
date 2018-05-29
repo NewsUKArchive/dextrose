@@ -1,11 +1,14 @@
 /* global describe it expect */
+
+import githubCommentManager from './github-comment-manager';
+
 const nock = require('nock');
-const githubCommentManager = require('./github-comment-manager');
 
 const account = 'testAccountName';
 const token = 'testKey';
 const repository = 'testRepo';
 const pullRequest = 1;
+const documentPath = 'index.html';
 
 const noCommentsResponse = [
   {
@@ -156,11 +159,10 @@ describe('createNewVisualSnapshotComment', () => {
     nock('https://api.github.com')
       .post(
         `/repos/${account}/${repository}/issues/${pullRequest}/comments`,
-        '{"body": "Please find visual snapshots of your changed components here: index.html"}',
+        `{"body": "Please find visual snapshots of your changed components here: ${documentPath}"}`,
       )
       .reply(200);
 
-    const documentPath = 'index.html';
     const successful = await githubCommentManager
       .createNewVisualSnapshotComment(account, token, documentPath, pullRequest, repository)
       .then(() => true)

@@ -42,7 +42,7 @@ const createNewVisualSnapshotComment = (account, token, documentPath, pullReques
     pullRequest,
   });
 
-module.exports = {
+export default {
   deleteAllVisualSnapshotComments,
   createNewVisualSnapshotComment,
 };

@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const program = require('commander');
-const { resolve } = require('path');
-const dextrose = require('../index').default;
-const logger = require('../lib/logger');
-const uploadSnaps = require('../front-end/upload_snaps');
-const generateHtml = require('../front-end/generate-front-end');
-const gitHubCommentManager = require('./github-comment-manager');
+import program from 'commander';
+import { resolve } from 'path';
+import dextrose from '../index';
+import logger from '../lib/logger';
+import uploadSnaps from '../front-end/upload_snaps';
+import generateHtml from '../front-end/generate-front-end';
+import gitHubCommentManager from './github-comment-manager';
 
 const log = logger.default;
 
