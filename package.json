@@ -30,7 +30,7 @@
     "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
-    "@times-components/fructose": "^3.6.3",
+    "@times-components/fructose": "3.7.0",
     "babel-cli": "^6.26.0",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
