@@ -3,7 +3,7 @@
 import program from 'commander';
 import { resolve } from 'path';
 import dextrose from '../index';
-import { logger } from '../../lib/logger';
+import logger from '../../lib/logger';
 import uploadSnaps from '../../front-end/upload_snaps';
 import generateHtml from '../../front-end/generate-front-end';
 import gitHubCommentManager from './github-comment-manager';
