@@ -5,20 +5,21 @@
   "license": "MIT",
   "url": "https://github.com/L0wry/dextrose",
   "bin": {
-    "dextrose": "./bin/run.js"
+    "dextrose": "./lib/bin/run.js"
   },
   "scripts": {
     "check-format": "yarn is-linted",
     "lint": "eslint -c .eslintrc.js src front-end  index.js --fix",
     "is-linted": "eslint -c .eslintrc.js src front-end  index.js",
     "prepare": "babel src --out-dir lib",
-    "test": "jest src bin"
+    "test": "jest src"
   },
   "dependencies": {
     "aws-sdk": "^2.179.0",
     "babel-core": "6.26.0",
     "babel-preset-react-native": "4.0.0",
     "commander": " 2.12.1",
+    "github-comment-manager": "1.1.2",
     "js-object-pretty-print": "^0.3.0",
     "nock": "^9.1.9",
     "npmlog": "4.1.2",
@@ -29,7 +30,7 @@
     "socket.io-client": "^2.0.4"
   },
   "devDependencies": {
-    "@times-components/fructose": "^3.6.3",
+    "@times-components/fructose": "3.7.0",
     "babel-cli": "^6.26.0",
     "eslint": "^4.17.0",
     "eslint-config-airbnb": "^16.1.0",
