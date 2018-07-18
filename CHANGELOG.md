@@ -1,3 +1,13 @@
+<a name="4.0.4"></a>
+## [4.0.4](https://github.com/newsuk/dextrose/compare/v4.0.3...v4.0.4) (2018-07-18)
+
+
+### Bug Fixes
+
+* using mkdir as a function ([#86](https://github.com/newsuk/dextrose/issues/86)) ([99fc11b](https://github.com/newsuk/dextrose/commit/99fc11b))
+
+
+
 <a name="4.0.3"></a>
 ## [4.0.3](https://github.com/newsuk/dextrose/compare/v4.0.2...v4.0.3) (2018-05-31)
 
