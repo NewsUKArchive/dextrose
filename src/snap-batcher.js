@@ -32,7 +32,7 @@ export default async ({ client, snapper }, config, teardown) => {
         'snapBatcher',
         `Snap path did not exist, creating directory: ${config.snapPath}`,
       );
-      fs.mkdir(config.snapPath);
+      fs.mkdirSync(config.snapPath,);
     }
 
     log.verbose(
