@@ -89,7 +89,7 @@ program
     if (!issueNumber) logger.error('publish-snaps', 'no github issue number, use -i');
     if (!repository) logger.error('publish-snaps', 'no git organisation and repository specified');
     if (!path || !accountName || !key || !issueNumber || !repository) process.exit(1);
-    await gitHubCommentManager.deleteAllVisualSnapshotComments(accountName, key, issueNumber, repository);
-    await gitHubCommentManager.createNewVisualSnapshotComment(accountName, key, path, issueNumber, repository);
+    await gitHubCommentManager.deleteAllVisualSnapshotComments(accountName, key, issueNumber, repository).catch(err => logger.error('run', err));
+    await gitHubCommentManager.createNewVisualSnapshotComment(accountName, key, path, issueNumber, repository).catch(err => logger.error('run', err));
   });
 program.parse(process.argv);
