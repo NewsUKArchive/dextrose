@@ -1,3 +1,13 @@
+<a name="4.0.6"></a>
+## [4.0.6](https://github.com/newsuk/dextrose/compare/v4.0.5...v4.0.6) (2018-08-03)
+
+
+### Bug Fixes
+
+* upload snaps to s3 ([31a4604](https://github.com/newsuk/dextrose/commit/31a4604))
+
+
+
 <a name="4.0.5"></a>
 ## [4.0.5](https://github.com/newsuk/dextrose/compare/v4.0.4...v4.0.5) (2018-07-23)
 
