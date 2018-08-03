@@ -1,3 +1,13 @@
+<a name="4.0.7"></a>
+## [4.0.7](https://github.com/newsuk/dextrose/compare/v4.0.6...v4.0.7) (2018-08-03)
+
+
+### Bug Fixes
+
+* adding catches to run post to github ([8374cf6](https://github.com/newsuk/dextrose/commit/8374cf6))
+
+
+
 <a name="4.0.6"></a>
 ## [4.0.6](https://github.com/newsuk/dextrose/compare/v4.0.5...v4.0.6) (2018-08-03)
 
