@@ -18,7 +18,7 @@ This has been made possible using [fructose] to load components.
   <img src="https://media.giphy.com/media/1g37cvjYjJeLpOsfip/giphy.gif" style="width: 200px;">
 </p>
 
-<p align="center">Get an overview of your components across devices before you merge</p>
+<p align="center">Get an overview of your components across devices before you merge in the html report</p>
 
 # Overview
 
