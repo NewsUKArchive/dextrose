@@ -13,6 +13,13 @@ This has been made possible using [fructose] to load components.
 
 <p align="center">iOS loading in components and taking screenshots</p>
 
+
+<p align="center">
+  <img src="https://media.giphy.com/media/1g37cvjYjJeLpOsfip/giphy.gif" style="width: 200px;">
+</p>
+
+<p align="center">Get an overview of your components across devices before you merge</p>
+
 # Overview
 
 
