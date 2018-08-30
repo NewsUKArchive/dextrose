@@ -1,4 +1,4 @@
-[![Build Status](https://www.bitrise.io/app/6dbd09bf795284e8/status.svg?token=cPPMxR4jerIruWOfSt-_6g&branch=master)](https://www.bitrise.io/app/6dbd09bf795284e8)
+[![Build Status](https://app.bitrise.io/app/6dbd09bf795284e8/status.svg?token=cPPMxR4jerIruWOfSt-_6g)](https://app.bitrise.io/app/6dbd09bf795284e8)
 
 # Dextrose
 
